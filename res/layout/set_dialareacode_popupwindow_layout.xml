@@ -24,7 +24,7 @@
                 android:layout_height="40dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
-                android:text="@string/set_dialcountry_code"
+                android:text="@string/set_dialarea_code"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
         </LinearLayout>
@@ -32,9 +32,9 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:orientation="vertical" >
+            android:paddingRight="10dp" >
 
             <TextView
                 android:layout_width="fill_parent"
@@ -43,7 +43,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center_vertical|left"
-                android:text="@string/dialcountry_country_code_inform"
+                android:text="@string/dialarea_area_code_inform"
                 android:textColor="@color/red"
                 android:textSize="16sp" />
 
@@ -66,9 +66,32 @@
                     android:gravity="left|center_vertical"
                     android:paddingLeft="10dp"
                     android:paddingRight="5dp"
-                    android:textColor="@drawable/select_country_btn_fg"
                     android:text=""
-                    android:textSize="17dp" />
+                    android:textColor="@drawable/select_country_btn_fg"
+                    android:textSize="17sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/set_dial_areaCode_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="15dp"
+                    android:gravity="center"
+                    android:text="@string/set_dialarea_areacode_textview_text" />
+
+                <EditText
+                    android:id="@+id/set_dial_areaCode_editText"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/textfield_selector"
+                    android:ems="4"
+                    android:inputType="phone" >
+
+                    <requestFocus />
+                </EditText>
             </LinearLayout>
         </LinearLayout>
 

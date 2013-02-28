@@ -70,7 +70,7 @@ public abstract class BaseSipServices implements ISipServices {
 	private Boolean _mIsSipVoiceCallUsingLoudspeaker;
 
 	private boolean sipRegisterCalled;
-	
+
 	public BaseSipServices() {
 		super();
 
@@ -80,22 +80,23 @@ public abstract class BaseSipServices implements ISipServices {
 		// init audio manager
 		_mAudioManager = (AudioManager) _appContext
 				.getSystemService(Context.AUDIO_SERVICE);
-		
+
 		sipRegisterCalled = false;
 	}
-	
+
 	protected void setSipRegisterCalled(boolean flag) {
 		sipRegisterCalled = flag;
 	}
 
 	/**
 	 * whether the sip service registration method has been called
+	 * 
 	 * @return
 	 */
 	public boolean isSipRegisterCalled() {
 		return sipRegisterCalled;
 	}
-	
+
 	// make direct dial sip voice call
 	public abstract boolean makeDirectDialSipVoiceCall(String calleeName,
 			String calleePhone);
@@ -127,12 +128,23 @@ public abstract class BaseSipServices implements ISipServices {
 								.length());
 					}
 				}
-				if (calleePhone
-						.matches("(^[0]\\d{2,3}\\d{7,8})|(^[1][\\d]{10})|(\\d{9})")) {
+				// get default country code
+				String _defaultCountryCode = CTApplication.getContext()
+						.getResources()
+						.getString(R.string.default_country_code);
+				if (calleePhone.matches("\\d{7,8}")) {
 					UserBean telUser = UserManager.getInstance().getUser();
-					checkedCalleePhone = (String) telUser
-							.getValue(TelUser.dialCountryCode.name())
-							+ calleePhone;
+					checkedCalleePhone = _defaultCountryCode
+							+ (String) telUser.getValue(TelUser.local_area_code
+									.name()) + calleePhone;
+				}
+				if (calleePhone
+						.matches("(^[0]\\d{2,3}\\d{7,8})|(^[1][\\d]{10})")) {
+					checkedCalleePhone = _defaultCountryCode + calleePhone;
+					// UserBean telUser = UserManager.getInstance().getUser();
+					// checkedCalleePhone = (String) telUser
+					// .getValue(TelUser.dialCountryCode.name())
+					// + calleePhone;
 				}
 
 				switch (callMode) {

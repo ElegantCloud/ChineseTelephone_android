@@ -251,9 +251,11 @@ public class AccountSettingActivity extends Activity {
 				.getText().toString().trim();
 		String psw = ((EditText) (findViewById(R.id.account_psw_edittext)))
 				.getText().toString().trim();
-		String countrycode = countryCodeManager
-				.getCountryCode(((Button) findViewById(R.id.account_choose_country_btn))
-						.getText().toString().trim());
+		String countrycode = /*
+							 * countryCodeManager .getCountryCode(((Button)
+							 * findViewById(R.id.account_choose_country_btn))
+							 * .getText().toString().trim())
+							 */getString(R.string.default_country_code);
 
 		boolean isRemember = ((CheckBox) (findViewById(R.id.account_remember_psw_cbtn)))
 				.isChecked();

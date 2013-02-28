@@ -38,7 +38,8 @@
                 android:padding="10dp"
                 android:text="@string/pls_select_country"
                 android:textColor="@drawable/select_country_btn_fg"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="gone" />
 
             <LinearLayout
                 android:layout_width="fill_parent"

@@ -5,28 +5,27 @@ import java.util.HashMap;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
 import com.richitec.chinesetelephone.R;
 import com.richitec.chinesetelephone.utils.AppDataSaveRestoreUtil;
 import com.richitec.chinesetelephone.utils.CountryCodeManager;
-import com.richitec.commontoolkit.user.UserManager;
 import com.richitec.commontoolkit.utils.HttpUtils;
 import com.richitec.commontoolkit.utils.HttpUtils.HttpRequestType;
 import com.richitec.commontoolkit.utils.HttpUtils.HttpResponseResult;
 import com.richitec.commontoolkit.utils.HttpUtils.OnHttpRequestListener;
 import com.richitec.commontoolkit.utils.HttpUtils.PostRequestFormat;
 import com.richitec.commontoolkit.utils.MyToast;
-import android.os.Bundle;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 public class AccountForgetPSWActivity extends Activity {
 	private AlertDialog chooseCountryDialog;
@@ -86,9 +85,11 @@ public class AccountForgetPSWActivity extends Activity {
 		hideSoftKeyboard();
 
 		EditText phoneEdit = (EditText) findViewById(R.id.get_phone_editText);
-		String countryCode = countryCodeManager
-				.getCountryCode(((Button) findViewById(R.id.getpsw_choose_country_btn))
-						.getText().toString().trim());
+		String countryCode = /*
+							 * countryCodeManager .getCountryCode(((Button)
+							 * findViewById(R.id.getpsw_choose_country_btn))
+							 * .getText().toString().trim())
+							 */getString(R.string.default_country_code);
 
 		if (countryCode == null) {
 			MyToast.show(this, R.string.pls_select_country, Toast.LENGTH_SHORT);
@@ -149,19 +150,20 @@ public class AccountForgetPSWActivity extends Activity {
 							.setPositiveButton(R.string.Ensure, null).show();
 				} else if ("send_failed".equals(result)) {
 					MyToast.show(AccountForgetPSWActivity.this,
-							R.string.pwd_reset_mail_send_failed, Toast.LENGTH_SHORT);
+							R.string.pwd_reset_mail_send_failed,
+							Toast.LENGTH_SHORT);
 				} else if ("email_not_set".equals(result)) {
 					MyToast.show(AccountForgetPSWActivity.this,
 							R.string.you_havnt_bind_email, Toast.LENGTH_SHORT);
 				} else if ("email_unverify".equals(result)) {
 					String email = data.getString("email");
 					new AlertDialog.Builder(AccountForgetPSWActivity.this)
-					.setTitle(R.string.alert_title)
-					.setMessage(
-							String.format(
-									getString(R.string.you_havnt_verify_email),
-									email))
-					.setPositiveButton(R.string.Ensure, null).show();
+							.setTitle(R.string.alert_title)
+							.setMessage(
+									String.format(
+											getString(R.string.you_havnt_verify_email),
+											email))
+							.setPositiveButton(R.string.Ensure, null).show();
 				} else if ("user_not_found".equals(result)) {
 					MyToast.show(AccountForgetPSWActivity.this,
 							R.string.user_not_found, Toast.LENGTH_SHORT);

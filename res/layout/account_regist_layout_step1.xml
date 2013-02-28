@@ -38,7 +38,8 @@
                 android:onClick="chooseCountry"
                 android:padding="10dp"
                 android:text="@string/pls_select_country"
-                android:textSize="18sp" >
+                android:textSize="18sp"
+                android:visibility="gone" >
             </Button>
 
             <RelativeLayout
