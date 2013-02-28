@@ -60,7 +60,8 @@ public class InviteFriendActivity extends NavigationActivity {
 				TextView descTV = (TextView) findViewById(R.id.invite_reg_descirption_tv);
 				String desc = data.getString("reg_gift_desc_text");
 				descTV.setText(desc);
-				descTV.setVisibility(View.VISIBLE);
+				descTV.setVisibility(View.GONE); // modify by ares,
+													// descTV.setVisibility(View.VISIBLE);
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}

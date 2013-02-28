@@ -2,22 +2,22 @@
 <resources>
 
     <!-- Chinese telephone project -->
-    <string name="app_name">安中通</string>
+    <string name="app_name">UU-Talk</string>
 
     <!-- About -->
-    <string name="about_nav_title_text">关于我们</string>
-    <string name="product_description">简单强大便宜的电话软件</string>
-    <string name="website">网址</string>
-    <string name="website_url">http://www.00244dh.com</string>
-    <string name="service_qq_desc">客服QQ</string>
+    <string name="about_nav_title_text">About</string>
+    <string name="product_description">Simple Powerful and more Cheaper</string>
+    <string name="website">Website</string>
+    <string name="website_url">http://www.uu-talk.com</string>
+    <string name="service_qq_desc">Customer service QQ</string>
     <string name="service_qq">1622122511</string>
-    <string name="product_version">版本号:</string>
-    <string name="programming_design">程序设计</string>
-    <string name="programming_authors">翟绍虎\t\t路辉\t\t王星</string>
+    <string name="product_version">Version:</string>
+    <string name="programming_design">Programming</string>
+    <string name="programming_authors">Chelsea Zhai\t\tHui Lu\t\tStar King</string>
     <string name="copyright">Copyright</string>
-    <string name="copyright_ownership">（香港）寰宇通科技有限公司</string>
-    <string name="acknowledgement">鸣谢</string>
-    <string name="acknowledgement_organizations">合肥优云信息技术有限公司</string>
+    <string name="copyright_ownership">（HongKong）HuanYuTong Tech Ltd.</string>
+    <string name="acknowledgement">Acknowledgement</string>
+    <string name="acknowledgement_organizations">Hefei Youyun Info Tech Ltd.</string>
     <!-- Chinese telephone tab activity -->
 
     <string name="title_activity_chinese_telephone_tab">ChineseTelephoneTabActivity</string>
@@ -28,307 +28,307 @@
 
     <!-- call record history list activity -->
     <string name="title_activity_call_record_history_list_tab_content">CallRecordHistoryListActivity</string>
-    <string name="call_record_history_list_tab_title">最近通话</string>
-    <string name="call_record_history_list_nav_title">最近通话</string>
+    <string name="call_record_history_list_tab_title">Recents</string>
+    <string name="call_record_history_list_nav_title">Call Records</string>
     <string name="outgoingCall_imageView_content_description">outgoing call image view</string>
     <string name="recordDetail_imageButton_content_description">call record detail info image button</string>
     <string name="callRecord_callType_imageView_content_description">call type image view</string>
-    <string name="yesterdayCallRecord_callDate">昨天</string>
+    <string name="yesterdayCallRecord_callDate">Yesterday</string>
 
     <string-array name="callRecord_callDate_daysOfWeek">
-        <item>星期日</item>
-        <item>星期一</item>
-        <item>星期二</item>
-        <item>星期三</item>
-        <item>星期四</item>
-        <item>星期五</item>
-        <item>星期六</item>
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
     </string-array>
 
     <string name="callRecord_detailInfo_imageButton_content_description">call record detail info image button</string>
-    <string name="callRecord_unknownCalleePhone_alertDialog_message">未知号码，不能拨号</string>
-    <string name="callRecord_unknownCalleePhone_alertDialog_reselectBtn_title">重选</string>
+    <string name="callRecord_unknownCalleePhone_alertDialog_message">Unknown phone, can\'t dial</string>
+    <string name="callRecord_unknownCalleePhone_alertDialog_reselectBtn_title">Reselect</string>
 
     <!-- call record detail info activity -->
     <string name="title_activity_call_record_detail_info">CallRecordDetailInfoActivity</string>
-    <string name="call_record_detailinfo_title">详细记录</string>
+    <string name="call_record_detailinfo_title">Detail Info</string>
     <string name="callRecord_detailInfo_contact_avatar_imageView_content_description">call record contact avatar image view</string>
-    <string name="callRecord_detailInfo_outgoingCall_callType">呼出电话</string>
-    <string name="callRecord_detailInfo_incomingCall_callType">呼入电话</string>
-    <string name="callRecord_detailInfo_initiateTime_year">年</string>
-    <string name="callRecord_detailInfo_initiateTime_month">月</string>
-    <string name="callRecord_detailInfo_initiateTime_day">日</string>
-    <string name="callRecord_detailInfo_duration_seconds">秒</string>
-    <string name="callRecord_detailInfo_duration_minutes">分钟</string>
-    <string name="callRecord_detailInfo_missed_incomingCall">未接听</string>
-    <string name="callRecord_detailInfo_cancel_outgoingCall">呼叫取消</string>
-    <string name="callRecord_detailInfo_failed_outgoingCall">呼叫失败</string>
-    <string name="callRecord_detailInfo_operation4directdial">直拨</string>
-    <string name="callRecord_detailInfo_operation4callback">回拨</string>
-    <string name="callRecord_detailInfo_operation4sms">短信</string>
-    <string name="callRecord_detailInfo_callbackRequest_outgoingCall">回拨请求</string>
+    <string name="callRecord_detailInfo_outgoingCall_callType">Outgoing Call</string>
+    <string name="callRecord_detailInfo_incomingCall_callType">Incoming Call</string>
+    <string name="callRecord_detailInfo_initiateTime_year">-</string>
+    <string name="callRecord_detailInfo_initiateTime_month">-</string>
+    <string name="callRecord_detailInfo_initiateTime_day"></string>
+    <string name="callRecord_detailInfo_duration_seconds">seconds</string>
+    <string name="callRecord_detailInfo_duration_minutes">minutes</string>
+    <string name="callRecord_detailInfo_missed_incomingCall">missed incoming call</string>
+    <string name="callRecord_detailInfo_cancel_outgoingCall">call canceled</string>
+    <string name="callRecord_detailInfo_failed_outgoingCall">call failed</string>
+    <string name="callRecord_detailInfo_operation4directdial">Direct Dial</string>
+    <string name="callRecord_detailInfo_operation4callback">Callback</string>
+    <string name="callRecord_detailInfo_operation4sms">Send Message</string>
+    <string name="callRecord_detailInfo_callbackRequest_outgoingCall">callback request</string>
 
     <!-- dial tab content activity -->
     <string name="title_activity_dial_tab_content">DialTabContentActivity</string>
-    <string name="dial_tab_title">拨号</string>
+    <string name="dial_tab_title">Keypad</string>
     <string name="dialBtn_imageView_content_description">dial button image view</string>
     <string name="dialBtn_imageButton_content_description">dial button image button</string>
-    <string name="dial_phone_callee_unknown">未知联系人</string>
-    <string name="insertPhone2Contact_modeSelectPopupWindow_titleTextView_text">将号码***添加到哪里？</string>
-    <string name="insertPhone2Contact_modeSelectPopupWindow_insert2NewContact">添加到新建联系人</string>
-    <string name="insertPhone2Contact_modeSelectPopupWindow_insert2ExistedContact">添加到已有联系人</string>
-    <string name="insertPhone2Contact_modeSelectPopupWindow_cancelBtn_title">取消</string>
+    <string name="dial_phone_callee_unknown">Unknown</string>
+    <string name="insertPhone2Contact_modeSelectPopupWindow_titleTextView_text">Select contact added mode for phone ***</string>
+    <string name="insertPhone2Contact_modeSelectPopupWindow_insert2NewContact">Add to new contact</string>
+    <string name="insertPhone2Contact_modeSelectPopupWindow_insert2ExistedContact">Add to existed contact</string>
+    <string name="insertPhone2Contact_modeSelectPopupWindow_cancelBtn_title">Cancel</string>
 
     <!-- contact list tab content activity -->
     <string name="title_activity_contact_list_tab_content">ContactListTabContentActivity</string>
-    <string name="contact_search_editText_hint">查找联系人</string>
-    <string name="contact_list_tab7nav_title">联系人</string>
+    <string name="contact_search_editText_hint">Search contacts with phone number, character and short character</string>
+    <string name="contact_list_tab7nav_title">Contacts</string>
     <string name="addressBook_contact_avatar_imageView_content_description">contact avatar image view</string>
-    <string name="contact_hasNoPhone_alertDialog_title">此联系人没有号码</string>
-    <string name="contact_hasNoPhone_alertDialog_reselectBtn_title">重新选择</string>
-    <string name="contactPhone_dialMode_selectPopupWindow_titleTextView_text">请选择拨打模式以联系 ***</string>
-    <string name="contactPhone_dialMode_selectPopupWindow_directdialBtn_title">直拨</string>
-    <string name="contactPhone_dialMode_selectPopupWindow_callbackBtn_title">回拨</string>
-    <string name="contactPhone_dialMode_selectPopupWindow_cancelBtn_title">取 消</string>
-    <string name="contactPhone_dialMode_selectPopupWindow_contactPhones_4select">个号码供选择</string>
-    <string name="contactPhones_selectPopupWindow_titleTextView_text">选择 ***的电话</string>
-    <string name="contactPhones_selectPopupWindow_4directdial">直拨</string>
-    <string name="contactPhones_selectPopupWindow_4callback">回拨</string>
-    <string name="contactPhones_selectPopupWindow_cancelBtn_title">取 消</string>
-    <string name="contactPhone_dialMode_selectPopupWindow_informTextView_text">直拨：网速快时选用，在家一般用直拨，拨号快接通率高资费省</string>
-    <string name="contactPhone_dialMode_selectPopupWindow_callback_informTextView_text">回拨：网速慢直播声音断续时选用，出门一般用回拨，通话质量好且省流量</string>
+    <string name="contact_hasNoPhone_alertDialog_title">Contact has no phone</string>
+    <string name="contact_hasNoPhone_alertDialog_reselectBtn_title">Reselect</string>
+    <string name="contactPhone_dialMode_selectPopupWindow_titleTextView_text">Select dial mode for connecting ***</string>
+    <string name="contactPhone_dialMode_selectPopupWindow_directdialBtn_title">Direct Dial</string>
+    <string name="contactPhone_dialMode_selectPopupWindow_callbackBtn_title">Callback</string>
+    <string name="contactPhone_dialMode_selectPopupWindow_cancelBtn_title">Cancel</string>
+    <string name="contactPhone_dialMode_selectPopupWindow_contactPhones_4select">phones for selecting</string>
+    <string name="contactPhones_selectPopupWindow_titleTextView_text">Select ***\'s phone to</string>
+    <string name="contactPhones_selectPopupWindow_4directdial">direct dial</string>
+    <string name="contactPhones_selectPopupWindow_4callback">callback</string>
+    <string name="contactPhones_selectPopupWindow_cancelBtn_title">Cancel</string>
+    <string name="contactPhone_dialMode_selectPopupWindow_informTextView_text">Direct Dial: With WIFI connection we highly recommend you use Direct Dial with high successful connection and cheaper call fees</string>
+    <string name="contactPhone_dialMode_selectPopupWindow_callback_informTextView_text">Callback: With low network speed to use, with extraordinary talking experience and save network traffic</string>
 
     <!-- more activity -->
     <string name="title_activity_more_tab_content">MoreTabContentActivity</string>
-    <string name="more_tab7nav_title">更多</string>
+    <string name="more_tab7nav_title">More</string>
 
     <!-- outgoing call activity -->
     <string name="title_activity_outgoing_call">OutgoingCallActivity</string>
     <string name="outgoingCallBG_imageView_content_description">outgoing call background image view</string>
-    <string name="outgoing_call_unknownState">未知</string>
-    <string name="outgoing_call_trying">正在呼叫中  &#8230;</string>
-    <string name="outgoing_call_earlyMedia7RemoteRing">等待对方接听 &#8230;</string>
-    <string name="outgoing_call_failed">拨打失败</string>
-    <string name="end_outgoing_call">正在结束通话</string>
-    <string name="outgoing_call_ended">通话已结束</string>
+    <string name="outgoing_call_unknownState">Unknown</string>
+    <string name="outgoing_call_trying">calling, please waiting  &#8230;</string>
+    <string name="outgoing_call_earlyMedia7RemoteRing">ringing &#8230;</string>
+    <string name="outgoing_call_failed">call failed</string>
+    <string name="end_outgoing_call">call ending</string>
+    <string name="outgoing_call_ended">call ended</string>
     <string name="callControllerItem_imageView_content_description">call controller image view</string>
-    <string name="callController_contactItem_text">联系人</string>
-    <string name="callController_handfreeItem_text">扬声器</string>
-    <string name="callController_muteItem_text">静  音</string>
-    <string name="callController_keyboardItem_text">键  盘</string>
+    <string name="callController_contactItem_text">Contacts</string>
+    <string name="callController_handfreeItem_text">Speaker</string>
+    <string name="callController_muteItem_text">Mute</string>
+    <string name="callController_keyboardItem_text">Keypad</string>
     <string name="endCall_imageView_content_description">end call image button</string>
     <string name="contactslist_slidingDrawer_handleBtn_text">contacts list sliding drawer handle button text</string>
-    <string name="hidecontactslist_button_text">返回</string>
+    <string name="hidecontactslist_button_text">Back</string>
     <string name="hideKeyboard_imageView_content_description">hide keyboard image button</string>
-    <string name="sending_request">正在发送请求</string>
+    <string name="sending_request">sending callback request, please waiting  &#8230;</string>
     <string name="callbackWaiting_imageView_content_description">callback waiting image view</string>
-    <string name="send_callbackCallRequest_succeed">回拨请求已提交</string>
-    <string name="send_callbackCallRequest_failed">回拨请求失败</string>
-    <string name="callbackWaiting_textView_succeed" formatted="false">回拨请求提交成功，您的号码(%s)稍后将接到回拨电话，接听后系统将为您接通%s。</string>
-    <string name="callbackWaiting_textView_failed">回拨请求提交失败。</string>
-    <string name="no_enough_money">您的余额不足，请尽快充值。</string>
+    <string name="send_callbackCallRequest_succeed">callback request submit</string>
+    <string name="send_callbackCallRequest_failed">callback failed</string>
+    <string name="callbackWaiting_textView_succeed" formatted="false">callback request submit succeed, your telephone(%s)will be ring later, please accept first and then system will connect %s for you</string>
+    <string name="callbackWaiting_textView_failed">callback request submit failed, please try again later</string>
+    <string name="no_enough_money">Insufficient account balance, please refill it.</string>
     <string name="back4waitingCallbackCall_imageButton_content_description">back for waiting callback call image button</string>
     <string name="endCall_imageButton_content_description">end call image button</string>
     <string name="keyboardBtn_imageButton_content_description">keyboard image button</string>
 
     <!-- version upgrade -->
-    <string name="detect_new_version" formatted="false">发现新版本%s，\n是否升级？\n本次更新说明：\n%s</string>
-    <string name="upgrade">升级</string>
+    <string name="detect_new_version" formatted="false">There is an new version%s,\nupdate immediately?\nUpdate description:\n%s</string>
+    <string name="upgrade">Update</string>
 
     <!-- setting -->
-    <string name="menu_settings">更多设置</string>
-    <string name="notice_center">消息中心</string>
-    <string name="view_notice">查看消息</string>
-    <string name="account">账户</string>
-    <string name="account_invite_friend_item">分享赚话费</string>
-    <string name="account_setting_item">切换账户</string>
-    <string name="account_changePSW_item">修改密码</string>
-    <string name="account_getPSW_item">找回密码</string>
-    <string name="account_charge_item">账户充值</string>
-    <string name="my_suites_item">我的套餐</string>
-    <string name="search">查询</string>
-    <string name="fee_query_item">费率查询</string>
-    <string name="setting">设置</string>
-    <string name="back">返回</string>
-    <string name="setting_dial_item">拨打设置</string>
-    <string name="setting_areacode_item">本地区号设置</string>
-    <string name="setting_countrycode_item">默认国家号设置</string>
-    <string name="setting_setup_item">启动设置</string>
-    <string name="setting_set_auth_number">回拨号码设置</string>
-    <string name="setting_logout_item">注销登录并退出</string>
-    <string name="help">帮助</string>
-    <string name="help_item">系统帮助及资费查询</string>
-    <string name="help_update_item">软件升级</string>
-    <string name="help_about_item">关于我们</string>
-    <string name="change_account_title">切换账户</string>
-    <string name="set_dialcountry_code">默认国家号设置</string>
-    <string name="dialcountry_country_code_inform">提示：当您在拨打电话时未加国家号码，将会自动在您拨打的号码前添加默认国家号。</string>
-    <string name="bind_number_inform">提示：通过设置回拨号码，使用回拨功能时将会回拨绑定的号码</string>
-    <string name="is_auto_launch">是否开机启动?</string>
-    <string name="yes">是</string>
-    <string name="no">否</string>
-    <string name="is_auto_login">登录设置</string>
-    <string name="auto_login_rbtn_title">自动登录</string>
-    <string name="manual_login_rbtn_title">手动登录</string>
-    <string name="logout_messge">点击确定注销登录并退出</string>
-    <string name="exit">确定要退出程序？</string>
-    <string name="add_contact">添加联系人</string>
-    <string name="add_new_contact_item">添加新联系人</string>
-    <string name="add_exist_contact_item">添加现有联系人</string>
-    <string name="no_sms_number">无号码，请重新选择</string>
+    <string name="menu_settings">More Setting</string>
+    <string name="notice_center">Notice Center</string>
+    <string name="view_notice">View notice</string>
+    <string name="account">Account</string>
+    <string name="account_invite_friend_item">Share to win call fees</string>
+    <string name="account_setting_item">Change account</string>
+    <string name="account_changePSW_item">Change password</string>
+    <string name="account_getPSW_item">Find your password</string>
+    <string name="account_charge_item">Recharge your account</string>
+    <string name="my_suites_item">My suites</string>
+    <string name="search">Query</string>
+    <string name="fee_query_item">Rates query</string>
+    <string name="setting">Setting</string>
+    <string name="back">Back</string>
+    <string name="setting_dial_item">Dial setting</string>
+    <string name="setting_areacode_item">local area code setting</string>
+    <string name="setting_countrycode_item">Default country code setting</string>
+    <string name="setting_setup_item">Startup setting</string>
+    <string name="setting_set_auth_number">Callback phone setting</string>
+    <string name="setting_logout_item">Sign out and exit</string>
+    <string name="help">Help</string>
+    <string name="help_item">FAQ</string>
+    <string name="help_update_item">Update</string>
+    <string name="help_about_item">About</string>
+    <string name="change_account_title">Change account</string>
+    <string name="set_dialcountry_code">Default country code setting</string>
+    <string name="dialcountry_country_code_inform">Tip:The system will add default country code as the prefix of your dial phone if you not set the country code before dial</string>
+    <string name="bind_number_inform">Tip:Through setting callback phone number, the system will call the binded phone when you use callback dial method</string>
+    <string name="is_auto_launch">Run application when starting up?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="is_auto_login">Login setting</string>
+    <string name="auto_login_rbtn_title">Auto</string>
+    <string name="manual_login_rbtn_title">Manual</string>
+    <string name="logout_messge">Click confirm to sign out and exit</string>
+    <string name="exit">Are you sure to exit?</string>
+    <string name="add_contact">Add Contact</string>
+    <string name="add_new_contact_item">Add to new contact</string>
+    <string name="add_exist_contact_item">Add to existed contact</string>
+    <string name="no_sms_number">No phone, please reselect</string>
     <string name="invite_message">使用安中通直拨中国，最低只要3分钱每分钟,点击 *** 下载安装</string>
-    <string name="choose_sms_number">请选择号码</string>
-    <string name="pls_input_phone">请输入电话号码</string>
-    <string name="set_bind_number_title">设置回拨号码</string>
-    <string name="set_bind_number_message">回拨号码：</string>
-    <string name="set_bind_number_success">回拨号码设置成功！</string>
-    <string name="get_bind_country_message">国家号：</string>
-    <string name="setup_popwin_title">启动方式设置</string>
-    <string name="invite_friend_title">分享</string>
-    <string name="select_phone_to_invite">请选择***的号码：</string>
-    <string name="pls_choose_invite_people">请选择分享给哪个好友</string>
-    <string name="no_new_version">当前版本为***，已经是最新版本</string>
-    <string name="phone_not_null">手机号不能为空</string>
-    <string name="no_user_shared_reg">现在还没有成功推荐好友注册，赶快分享吧！</string>
-    <string name="current_user_shared_reg_count">您已成功推荐%s个好友使用安中通</string>
-    <string name="invite_pattern_title">请选择分享方式</string>
-    <string name="sms_invite_pattern">短信分享</string>
-    <string name="get_bindphone_failed">因网络原因，无法获取回拨号码</string>
+    <string name="choose_sms_number">Select phone number for sending message</string>
+    <string name="pls_input_phone">Please input a phone number</string>
+    <string name="set_bind_number_title">Set callback phone</string>
+    <string name="set_bind_number_message">Callback phone:</string>
+    <string name="set_bind_number_success">Callback phone number setted succeed!</string>
+    <string name="get_bind_country_message">Country Code:</string>
+    <string name="setup_popwin_title">Startup method setting</string>
+    <string name="invite_friend_title">Share</string>
+    <string name="select_phone_to_invite">Select ***\'s phone number</string>
+    <string name="pls_choose_invite_people">Please select a friend to share first</string>
+    <string name="no_new_version">Current version***, it\'s the latest version</string>
+    <string name="phone_not_null">No null phone number</string>
+    <string name="no_user_shared_reg">There is no friend successful invited from you to register and use UU-Talk, share it now!</string>
+    <string name="current_user_shared_reg_count">You had successful invited %s friends to use UU-Talk</string>
+    <string name="invite_pattern_title">Please select the share method</string>
+    <string name="sms_invite_pattern">Invite by SMS</string>
+    <string name="get_bindphone_failed">Can\'t get callback phone, please check your network and try again later</string>
 
     <!-- fee query activity -->
-    <string name="fee_loading_textView_textHeader">正在加载&#8230;，</string>
+    <string name="fee_loading_textView_textHeader">loading &#8230;，</string>
     <string name="fee_loading_progressBar_max">100</string>
     <string name="loading_progressBar_max">100</string>
 
     <!-- dial preference -->
-    <string name="dia_preference_title">拨号方式设置</string>
-    <string name="choose_direct_dial">固定选择直拨</string>
-    <string name="choose_back_dial">固定选择回拨</string>
-    <string name="manual_choose_dial">手动选择直拨或回拨</string>
-    <string name="auto_select_call_mode">3G默认为回拨，WIFI时默认直拨</string>
-    <string name="back_call_preference">回拨自动接听设置</string>
-    <string name="back_call_auto">自动接听</string>
-    <string name="back_call_manual">手动接听</string>
+    <string name="dia_preference_title">Dial method setting</string>
+    <string name="choose_direct_dial">Direct dial by default</string>
+    <string name="choose_back_dial">Callback by default</string>
+    <string name="manual_choose_dial">Manual select each time</string>
+    <string name="auto_select_call_mode">Auto:callback for 3G and direct when WIFI</string>
+    <string name="back_call_preference">Callback auto answer setting</string>
+    <string name="back_call_auto">Auto</string>
+    <string name="back_call_manual">Manual</string>
     <!-- change psw -->
-    <string name="old_psw">原有密码：</string>
-    <string name="new_psw">新的密码：</string>
-    <string name="confirm_psw">确认密码：</string>
-    <string name="modify_btn_title">修   改</string>
-    <string name="old_psw_not_equal">输入的原有密码与账号原有密码不一致，请检查</string>
-    <string name="new_confirm_not_equal">新的密码与确认密码不一致，请检查</string>
-    <string name="modify_success">密码修改成功，将返回登录界面重新登录</string>
-    <string name="old_psw_not_null">请输入原有密码</string>
-    <string name="new_confirm_not_null">请输入新的密码或确认密码</string>
-    <string name="auth_not_pass">原有密码输入错误</string>
-    <string name="new_psw_error">新密码为空，或者两次输入不一致</string>
-    <string name="server_error">服务器出错，请重试</string>
-    <string name="cannot_connet_server">无法连接服务器，网络连接可能不可用。</string>
-    <string name="change_psw_success">修改密码成功</string>
+    <string name="old_psw">Old pwd:</string>
+    <string name="new_psw">New pwd:</string>
+    <string name="confirm_psw">Confirm pwd:</string>
+    <string name="modify_btn_title">Confirm</string>
+    <string name="old_psw_not_equal">The input old password not matched with the account password, please check it</string>
+    <string name="new_confirm_not_equal">The new password not matched with the confirmed one, please check it</string>
+    <string name="modify_success">Password changed succeed then will return to login activity and login again</string>
+    <string name="old_psw_not_null">Please input the old password</string>
+    <string name="new_confirm_not_null">Please input the new password and corfirmed one</string>
+    <string name="auth_not_pass">Your old password verified failed</string>
+    <string name="new_psw_error">Neither the new password is null nor not matched with confirmed one</string>
+    <string name="server_error">Server internal error, please try again</string>
+    <string name="cannot_connet_server">Can\'t connect to server, please check your network and try again later</string>
+    <string name="change_psw_success">Change password succeed</string>
     <!-- get remain money -->
-    <string name="account_info">余额查询</string>
-    <string name="get_balance_error">查询出错，请重试</string>
-    <string name="remain_balance_textfield">账户余额：</string>
-    <string name="yuan">元</string>
-    <string name="minute">分钟</string>
-    <string name="charge_history">充值记录</string>
+    <string name="account_info">Balance query</string>
+    <string name="get_balance_error">Query error, please try again</string>
+    <string name="remain_balance_textfield">Balance:</string>
+    <string name="yuan"></string>
+    <string name="minute">minutes</string>
+    <string name="charge_history">Recharge records</string>
     <!-- alipay -->
-    <string name="confirm_install_hint">"安装提示"</string>
-    <string name="confirm_install">"为保证您的交易安全，需要您安装支付宝安全支付服务，才能进行付款。\n\n点击确定，立即安装。"</string>
-    <string name="confirm_update_hint">"更新提示"</string>
-    <string name="confirm_update">"为保证您的交易安全，请您更新支付宝安全支付服务，让您的交易更加安全。\n\n点击确定，立即安装。"</string>
-    <string name="Ensure">确定</string>
-    <string name="Cancel">取消</string>
-    <string name="check_sign_failed">您的订单信息已被非法篡改。</string>
-    <string name="ensure_charge_title">充值确认</string>
-    <string name="charge_alipay_hint">您将充值***元\n点击确定进入支付宝完成充值。</string>
-    <string name="charge_title_popwin">充值</string>
-    <string name="charge_textfield_popwin">充值金额：</string>
-    <string name="charge_pattern_title">请选择充值方式</string>
-    <string name="alipay_pattern">支付宝</string>
-    <string name="card_charge">安中通充值卡</string>
-    <string name="charge_back">其他充值方式</string>
-    <string name="input_card_number">请输入充值卡卡号</string>
-    <string name="input_card_pwd">请输入充值卡密码</string>
-    <string name="charge">充值</string>
-    <string name="charging_now">正在完成充值…</string>
-    <string name="charge_successfully">充值成功！</string>
-    <string name="charge_failed_no_account_exist">充值失败，账户不存在！</string>
-    <string name="charge_failed_invalid_card_number">充值失败，卡号或密码不正确！</string>
-    <string name="card_already_used">对不起，充值卡已被使用！</string>
-    <string name="charge_failed">充值操作失败，请稍后重试！</string>
-    <string name="input_valid_charge_money">请输入正确充值金额</string>
-    <string name="process_charge_pls_wait">正在进行交易，请稍等</string>
-    <string name="is_charging">正在支付</string>
-    <string name="get_alipay_info_from_server_failed">获取支付宝信息失败，请重试</string>
-    <string name="alipay_info_check_failed">支付宝信息验证失败，请稍后重试！</string>
+    <string name="confirm_install_hint">"Installation notes"</string>
+    <string name="confirm_install">"In order to ensure your transaction security, please install alipay and pay.\n\nClick OK, install immediately."</string>
+    <string name="confirm_update_hint">"Update notes"</string>
+    <string name="confirm_update">"In order to ensure your transaction security, please update alipay and protect your transaction.\n\nClick OK, update immediately."</string>
+    <string name="Ensure">Confirm</string>
+    <string name="Cancel">Cancel</string>
+    <string name="check_sign_failed">Your order has been illegally tampered</string>
+    <string name="ensure_charge_title">Recharge confirm</string>
+    <string name="charge_alipay_hint">You will refill***$\nClick confirm button and then goto alipay to complete recharge</string>
+    <string name="charge_title_popwin">Recharge</string>
+    <string name="charge_textfield_popwin">Recharge amount:</string>
+    <string name="charge_pattern_title">Select recharge method</string>
+    <string name="alipay_pattern">Alipay</string>
+    <string name="card_charge">Credit card</string>
+    <string name="charge_back">Other recharge method</string>
+    <string name="input_card_number">Please input the credit card number</string>
+    <string name="input_card_pwd">Please input the credit card password</string>
+    <string name="charge">Recharge</string>
+    <string name="charging_now">Complete recharging &#8230;</string>
+    <string name="charge_successfully">Recharge succeed!</string>
+    <string name="charge_failed_no_account_exist">Recharge failed, the account not existed!</string>
+    <string name="charge_failed_invalid_card_number">Recharge failed, card number or password not correct!</string>
+    <string name="card_already_used">Sorry, invalid credit card!</string>
+    <string name="charge_failed">Recharge failed, please try again later!</string>
+    <string name="input_valid_charge_money">Please input the correct recharge amount</string>
+    <string name="process_charge_pls_wait">Trading, waiting &#8230;</string>
+    <string name="is_charging">Paying &#8230;</string>
+    <string name="get_alipay_info_from_server_failed">Get alipay information failed, please try again!</string>
+    <string name="alipay_info_check_failed">Alipay information verify failed, please try again later!</string>
     <!-- account setting -->
-    <string name="forget_psw"><u>忘记密码</u></string>
-    <string name="welcome">安中通欢迎您登录</string>
-    <string name="country_code">国家代码：</string>
-    <string name="account_name">手机号：</string>
-    <string name="account_psw">密   码：</string>
-    <string name="account_name_hint">请输入手机号</string>
-    <string name="account_psw_hint">请输入密码</string>
-    <string name="remember_psw">记住密码</string>
-    <string name="regist_btn_title">新用户注册</string>
-    <string name="login_btn_title">登   录</string>
-	<string name="getpsw">找回密码</string> 
-    <string name="getpsw_phone">手机号：</string>
-    <string name="getpsw_phone_hint">请输入手机号</string>
-    <string name="pls_select_country">请选择您所在的国家</string>
-    <string name="cancel">取   消</string>
-    <string name="ok">确   定</string>
-    <string name="countrycode_list">国家代码列表</string>
-    <string name="number_cannot_be_null">请输入手机号</string>
-	<string name="phone_number_cannot_start_with_countrycode">请直接输入手机号码，不要以国家代码开头！</string>
-    <string name="psw_cannot_be_null">请输入密码</string>
-    <string name="phone_wrong_format">号码格式有误，请检查</string>
-    <string name="logining">正在登录</string>
-    <string name="login_error">登录出错，请稍后重试！</string>
-    <string name="login_failed">用户名或密码错误！</string>
+    <string name="forget_psw"><u>Forget pwd</u></string>
+    <string name="welcome">Welcome to use UU-Talk</string>
+    <string name="country_code">Country code:</string>
+    <string name="account_name">Phone:</string>
+    <string name="account_psw">Pwd:</string>
+    <string name="account_name_hint">Your register phone</string>
+    <string name="account_psw_hint">Your register pwd</string>
+    <string name="remember_psw">Remember pwd</string>
+    <string name="regist_btn_title">Register</string>
+    <string name="login_btn_title">Login in</string>
+    <string name="getpsw">Find password</string>
+    <string name="getpsw_phone">Phone:</string>
+    <string name="getpsw_phone_hint">Your register phone</string>
+    <string name="pls_select_country">Select your country code</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">Confirm</string>
+    <string name="countrycode_list">Country codes list</string>
+    <string name="number_cannot_be_null">Please input the phone number for find its password</string>
+    <string name="phone_number_cannot_start_with_countrycode">Please input the phone number without country code!</string>
+    <string name="psw_cannot_be_null">Please input the password</string>
+    <string name="phone_wrong_format">Phone number format error, please check it</string>
+    <string name="logining">Logining &#8230;</string>
+    <string name="login_error">Login failed, please try again later!</string>
+    <string name="login_failed">Account name or password not correct</string>
 
     <!-- account regist -->
-    <string name="account_regist">用户注册</string>
-    <string name="step1">第一步</string>
-    <string name="get_auth_code_inform">输入手机号，获取验证码</string>
-    <string name="regist_step1_hint">输入注册手机号</string>
-    <string name="get_auth_code_btn">获取验证码</string>
-    <string name="step1_info">（您的手机仅用于身份验证，我们不会向您发送垃圾短信</string>
-    <string name="invalid_phone_number">手机号码无效！</string>
-    <string name="existed_phone_number">手机号码已存在！</string>
-    <string name="error_in_retrieve_auth_code">获取验证码出错，请重试！</string>
-    <string name="register">注册</string>
+    <string name="account_regist">Account register</string>
+    <string name="step1">Step1</string>
+    <string name="get_auth_code_inform">Input phone number to retrive verification code</string>
+    <string name="regist_step1_hint">Phone number for registering</string>
+    <string name="get_auth_code_btn">Get verification code</string>
+    <string name="step1_info">(Your phone number is used for authentication only, we assure that we won\'t send junk message to you.)</string>
+    <string name="invalid_phone_number">Invalid phone number!</string>
+    <string name="existed_phone_number">The phone number had been registered!</string>
+    <string name="error_in_retrieve_auth_code">Get verification code error, please try again!</string>
+    <string name="register">Register</string>
     <!-- step2 -->
-    <string name="step2">第二步</string>
-    <string name="input_auth_code_inform">输入验证码，点击下一步注册</string>
-    <string name="regist_step2_hint">输入验证码</string>
-    <string name="auth_code">验证码：</string>
-    <string name="next">下一步</string>
-    <string name="auth_code_cannot_be_null">请输入验证码</string>
-    <string name="verifying_auth_code">正在验证…</string>
-    <string name="wrong_auth_code">验证码错误, 请重新输入！</string>
-    <string name="auth_code_timeout">验证码过期，请重新获取！</string>
-    <string name="auth_error">验证出错，请重试！</string>
-    <string name="authcode_wrong_format">验证码格式有误</string>
+    <string name="step2">Step2</string>
+    <string name="input_auth_code_inform">Input verification code and press \'Next\' to verify</string>
+    <string name="regist_step2_hint">Input verification code</string>
+    <string name="auth_code">verification code:</string>
+    <string name="next">Next</string>
+    <string name="auth_code_cannot_be_null">Please input the verification code</string>
+    <string name="verifying_auth_code">Verifying &#8230;</string>
+    <string name="wrong_auth_code">Verification code verify failed, please input again!</string>
+    <string name="auth_code_timeout">Verification code timeout, please retrive it again!</string>
+    <string name="auth_error">Verify failed, please try again!</string>
+    <string name="authcode_wrong_format">Verification code format error</string>
 
     <!-- step3 -->
-    <string name="step3">第三步</string>
-    <string name="pls_input_pwd">请输入密码</string>
-    <string name="pls_input_confirm_pwd">请输入确认密码</string>
-    <string name="pwd1_is_different_from_pwd2">两次密码不一致</string>
-    <string name="finish">完成注册</string>
-    <string name="verify_psw">确   认：</string>
-    <string name="verify_psw_hint">确认密码</string>
-    <string name="finishing_register">正在完成注册…</string>
-    <string name="register_ok">账户注册成功，请在账户设置界面登录</string>
-    <string name="register_timeout">此次注册操作已过期，请重新开始</string>
-    <string name="error_in_regsiter">注册过程出错，请重试！</string>
-    <string name="alert_title">友情提醒</string>
+    <string name="step3">Step3</string>
+    <string name="pls_input_pwd">Input password</string>
+    <string name="pls_input_confirm_pwd">Input confirmation password</string>
+    <string name="pwd1_is_different_from_pwd2">The password not matched with confirmation password</string>
+    <string name="finish">Finish Register</string>
+    <string name="verify_psw">Confirm:</string>
+    <string name="verify_psw_hint">Password confirm</string>
+    <string name="finishing_register">Complete registering &#8230;</string>
+    <string name="register_ok">Account register succeed, please return to login activity and login again</string>
+    <string name="register_timeout">Register progress timeout, please go back and try again!</string>
+    <string name="error_in_regsiter">Register progress exception, please try again!</string>
+    <string name="alert_title">Friendly reminder</string>
 
     <!-- get psw -->
-    <string name="phone_number_not_exist">手机号码不存在！</string>
-    <string name="get_psw_error">操作出错，请重试</string>
-    <string name="get_psw_finish">你的密码将会通过短信发送给您，现在将返回登录界面，请通过新密码登录，登录后请自行修改密码</string>
+    <string name="phone_number_not_exist">The phone number not existed in system!</string>
+    <string name="get_psw_error">Operate exception, please try again</string>
+    <string name="get_psw_finish">Your account password will send to your register phone with short message later, now return to login activity and login with the received password, then change the password yourself</string>
     <string name="title_activity_remain_money">RemainMoneyActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_invite_friend">InviteFriendActivity</string>
@@ -361,55 +361,55 @@
     <string name="unsubscribe_suite_success">套餐退订成功，下月起将不再扣除您的套餐费</string>
 
     <!-- notice center -->
-    <string name="notice_time">发布时间：</string>
-    <string name="notice_op">请选择操作</string>
-    <string name="delete_notice">删除</string>
+    <string name="notice_time">Publish time:</string>
+    <string name="notice_op">Select the operation</string>
+    <string name="delete_notice">Delete</string>
     <!-- other -->
-    <string name="currency_sign">￥</string>
-	<string name="online">%s(在线)</string>
-	<string name="offline">%s(离线)</string>
-	<string name="registering">%s(正在登录…)</string>
-	
-	<!-- email setting -->
-	<string name="email_setting_desc" formatted="false">现在绑定您的电子邮箱，即刻领取%.2f元话费，可直拨中国%d分钟！</string>
-	<string name="wanna_bind_email">现在绑定您的电子邮箱吗？可供日后找回您的密码。</string>
-	<string name="input_ur_email">输入您的电子邮箱地址</string>
-	<string name="u_havent_got_ur_money_yet">您还未领取系统赠送的%.2f元话费！进入您绑定的电子邮箱查看话费领取邮件。</string>
-	<string name="bind_email">绑定邮箱</string>
-	<string name="email_setting_title">邮箱绑定</string>
-	<string name="pls_input_valid_email_address">请输入有效的邮箱地址！</string>
-	<string name="binding_email_address">正在绑定电子邮箱…</string>
-	<string name="bind_email_failed">邮箱绑定失败，请稍后重试！</string>
-	<string name="bind_email_success">邮箱绑定成功！</string>
-	<string name="money_get_mail_send_ok_check_ur_mail">话费领取邮件已发送到您的绑定邮箱，现在赶紧去邮箱查收吧！部分邮箱可能会将邮件放入垃圾箱。</string>
-	<string name="verify_mail_send_ok">邮箱绑定成功，请到您的邮箱里查收验证邮件，验证后绑定邮箱才能生效！部分邮箱可能会将邮件放入垃圾箱。</string>
-	<string name="email_already_binded">该邮箱已被绑定！请换一个邮箱绑定。</string>
-	<string name="email_modify_desc">如果您更改了邮箱地址，您需要对邮箱地址重新进行验证。</string>
-	<string name="save">保存</string>
-	<string name="modify_email">修改邮箱</string>
-	<string name="send_money_gain_mail">发送领取话费邮件</string>
-	<string name="failed_to_get_email_info">获取绑定邮箱失败！</string>
-	<string name="getting_binded_email">正在获取绑定的邮箱信息</string>
-	<string name="you_havent_binded_email_now_you_can_gain_money" formatted="false">您现在尚未绑定电子邮箱，现在绑定电子邮箱，可领取%.2f元话费，可直拨中国%d分钟！</string>
-	<string name="you_havent_binded_email_wanna_bind">您现在尚未绑定电子邮箱，绑定后可供日后找回您的密码！</string>
-	<string name="click_send_money_gain_to_send_mail">您还未领取系统赠送的%.2f元话费，进入您绑定的电子邮箱查看话费领取邮件吧。点击发送领取话费邮件按钮可重新发送。</string>
-	<string name="you_have_money_to_get_after_set_email">您现在还可领取%.2f元话费，成功绑定邮箱后，请注意查收话费领取邮件。</string>
-	<string name="email_unverified">邮箱未验证</string>
-	<string name="email_verified">邮箱已验证</string>
-	<string name="sending_mail">正在发送邮件…</string>
-	<string name="mail_send_ok">邮件发送成功！部分邮箱可能会将邮件放入垃圾箱。</string>
-	<string name="mail_send_failed">邮件发送失败，请稍后重试！</string>
-	<string name="sending_pwd_reset_mail">正在发送密码重置邮件…</string>
-	<string name="pwd_reset_mail_send_failed">密码重置邮件发送失败，请稍后重试！</string>
-	<string name="pwd_reset_mail_send_ok">密码重置邮件已经成功发送到您绑定的邮箱%s，赶紧查收邮件来重置密码吧！</string>
-	<string name="you_havnt_bind_email">您没有绑定电子邮箱，无法发送密码重置邮件。</string>
-	<string name="you_havnt_verify_email">您绑定的邮箱%s还没有通过验证，无法发送密码重置邮件。您可以去您的邮箱找到最新的话费领取邮件或邮箱验证邮件，点击链接完成验证。</string>
-	<string name="user_not_found">:( 用户不存在！</string>
+    <string name="currency_sign">$</string>
+    <string name="online">%s(Online)</string>
+    <string name="offline">%s(Offline)</string>
+    <string name="registering">%s(Logining &#8230;)</string>
+
+    <!-- email setting -->
+    <string name="email_setting_desc" formatted="false">Bind your email now and then you can fetch %.2f$ call fees which can direct dial China telephone %d minutes!</string>
+    <string name="wanna_bind_email">Bind your email immediately?It can be used to get your account password later</string>
+    <string name="input_ur_email">Input your email</string>
+    <string name="u_havent_got_ur_money_yet">There is %.2f$ call fees not be fateched! Please goto your binded email box to get and check the call fees fetching email</string>
+    <string name="bind_email">Bind email</string>
+    <string name="email_setting_title">Email bind</string>
+    <string name="pls_input_valid_email_address">Please input the validate email!</string>
+    <string name="binding_email_address">Email binding &#8230;</string>
+    <string name="bind_email_failed">Email bind failed, please try again later!</string>
+    <string name="bind_email_success">Email bind succeed!</string>
+    <string name="money_get_mail_send_ok_check_ur_mail">The call fees fetching email had been sended to your binded mailbox, goto check and verify it now! Some eamil provider may mark it as junk email</string>
+    <string name="verify_mail_send_ok">Send bind email succeed, please goto the bilded mailbox to get the verification email, only verify it can make the binded email take effect! Some eamil provider may mark it as junk email</string>
+    <string name="email_already_binded">The setting email had been binded by another account! Please reselect and try again</string>
+    <string name="email_modify_desc">If you change your binded email, you must verify the new binded one that can make it take effect</string>
+    <string name="save">Save</string>
+    <string name="modify_email">Change Email</string>
+    <string name="send_money_gain_mail">Sending fetch call fees email &#8230;</string>
+    <string name="failed_to_get_email_info">Get binded email failed!</string>
+    <string name="getting_binded_email">Getting binded email information &#8230;</string>
+    <string name="you_havent_binded_email_now_you_can_gain_money" formatted="false">You has not binded email, bind it now can fetch %.2f$ call fees which can direct dial China telephone %d minutes!</string>
+    <string name="you_havent_binded_email_wanna_bind">You has not binded email, it can be used to get your account password later after binded!</string>
+    <string name="click_send_money_gain_to_send_mail">There is %.2f$ call fees not be fateched, please goto your binded email box to get and check the call fees fetching email. Click "Send again" button can send the call fees fetching email again</string>
+    <string name="you_have_money_to_get_after_set_email">Now you can fetch %.2f$ call fees, please check the call fees fetching email after successful binded</string>
+    <string name="email_unverified">Email unverified</string>
+    <string name="email_verified">Email verified</string>
+    <string name="sending_mail">Sending email &#8230;</string>
+    <string name="mail_send_ok">Email send succeed, some eamil provider may mark it as junk email</string>
+    <string name="mail_send_failed">Email send failed, please try again later!</string>
+    <string name="sending_pwd_reset_mail">Send changing password email, wainting &#8230;</string>
+    <string name="pwd_reset_mail_send_failed">Send changing password email failed, please try again later!</string>
+    <string name="pwd_reset_mail_send_ok">Changing password email has been send to your binded email: %s, please check and change your password immediately!</string>
+    <string name="you_havnt_bind_email">You has not bind email, can\'t send the changing password email</string>
+    <string name="you_havnt_verify_email">Your binded email: %s has not been verified, can\'t send the changing password email. You can goto the binded mailbox to get the latest call fees fetching or verification email, click the link to verify</string>
+    <string name="user_not_found">:( the account not existed!</string>
     <!-- others -->
     <!-- there is no active and available network currently -->
-    <string name="noActiveAvailableNetwork_alertDialog_title">无可用网络</string>
-    <string name="noActiveAvailableNetwork_alertDialog_message">当前没有可用网络，是否设置？</string>
-    <string name="noActiveAvailableNetwork_alertDialog_setNowBtn_title">设置</string>
-    <string name="noActiveAvailableNetwork_alertDialog_setLaterBtn_title">以后再说</string>
+    <string name="noActiveAvailableNetwork_alertDialog_title">Network unavailable</string>
+    <string name="noActiveAvailableNetwork_alertDialog_message">There is no active and available network, set immediately?</string>
+    <string name="noActiveAvailableNetwork_alertDialog_setNowBtn_title">Setting</string>
+    <string name="noActiveAvailableNetwork_alertDialog_setLaterBtn_title">Set later</string>
 
 </resources>

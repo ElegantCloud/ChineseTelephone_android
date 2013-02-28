@@ -3,6 +3,7 @@
 
     <string name="china">0086 (China 中国)</string>
     <string name="angola">00244 (Angola 安哥拉)</string>
+    <string name="colombia">0057 (Colombia 哥伦比亚)</string>
 
     <string-array name="country_codes">
         <item>0086</item>
@@ -13,6 +14,10 @@
         <item>0244</item>
         <item>+244</item>
         <item>244</item>
+        <item>0057</item>
+        <item>057</item>
+        <item>+57</item>
+        <item>57</item>
     </string-array>
 
 </resources>

@@ -172,7 +172,8 @@
                     android:layout_marginRight="70dp"
                     android:layout_marginTop="28dp"
                     android:contentDescription="@string/callbackWaiting_imageView_content_description"
-                    android:scaleType="centerInside" />
+                    android:scaleType="centerInside"
+                    android:visibility="gone" />
             </RelativeLayout>
 
             <GridView

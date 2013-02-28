@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:checkedButton="@+id/auto_launch_rbtn"
-                android:gravity="center"
+                android:gravity="left"
                 android:orientation="horizontal" >
 
                 <RadioButton
@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:checkedButton="@+id/auto_login_rbtn"
-                android:gravity="center"
+                android:gravity="left"
                 android:orientation="horizontal" >
 
                 <RadioButton

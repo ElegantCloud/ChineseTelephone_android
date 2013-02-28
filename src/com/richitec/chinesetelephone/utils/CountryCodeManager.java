@@ -44,7 +44,10 @@ public class CountryCodeManager {
 		data1.put(Country.contryname.name(), context.getString(R.string.angola));
 		data1.put(Country.code.name(), "00244");
 		datas.add(data1);
-
+		HashMap<String, String> data2 = new HashMap<String, String>();
+		data2.put(Country.contryname.name(), context.getString(R.string.colombia));
+		data2.put(Country.code.name(), "0057");
+		datas.add(data2);
 	}
 
 	public String[] getCountryNameList() {
