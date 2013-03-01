@@ -75,7 +75,7 @@
                 <Button
                     android:id="@+id/forgetpsw_cancel_btn"
                     android:layout_width="130dp"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:layout_alignParentLeft="true"
                     android:background="@drawable/gray_btn_bg"
                     android:onClick="onCancelBtnClick"
@@ -86,7 +86,7 @@
                 <Button
                     android:id="@+id/forgetpsw_ok_btn"
                     android:layout_width="130dp"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/green_btn_bg"
                     android:onClick="onGetPSWAction"
