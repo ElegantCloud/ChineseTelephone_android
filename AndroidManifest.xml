@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.richitec.chinesetelephone"
+<manifest package="com.richitec.uutalk"
     android:versionCode="1"
     android:versionName="1.0.3" xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -142,10 +142,10 @@
             </intent-filter>
         </receiver>
         <activity android:screenOrientation="portrait" android:name=".assist.AboutActivity" android:theme="@style/AppTheme"></activity>
-        <service android:name=".service.NoticeService"></service>
+        <service android:name="com.richitec.uutalk.service.NoticeService"></service>
         <activity android:name=".assist.NoticeViewActivity" android:screenOrientation="portrait"></activity>
         <activity android:screenOrientation="portrait" android:name=".assist.FeeActivity"></activity>
-        <activity android:screenOrientation="portrait" android:name=".assist.EmailSettingActivity" android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:screenOrientation="portrait" android:name="com.richitec.uutalk.assist.EmailSettingActivity" android:windowSoftInputMode="stateHidden"></activity>
     </application>
 
 </manifest>
