@@ -210,11 +210,12 @@ public class AccountRegistActivity extends Activity {
 	public void onGetAuthCode(View v) {
 		String phone = ((EditText) (findViewById(R.id.regist_phone_edittext)))
 				.getText().toString().trim();
-		String countrycode = /*
-							 * countryCodeManager .getCountryCode(((Button)
-							 * findViewById(R.id.regist_choose_country_btn))
-							 * .getText().toString().trim())
-							 */getString(R.string.default_country_code);
+		// String countrycode = countryCodeManager
+		// .getCountryCode(((Button)
+		// findViewById(R.id.regist_choose_country_btn))
+		// .getText().toString().trim());
+		String countrycode = getResources().getString(
+				R.string.default_country_code);
 		if (countrycode == null) {
 			MyToast.show(this, R.string.pls_select_country, Toast.LENGTH_SHORT);
 			return;

@@ -85,11 +85,12 @@ public class AccountForgetPSWActivity extends Activity {
 		hideSoftKeyboard();
 
 		EditText phoneEdit = (EditText) findViewById(R.id.get_phone_editText);
-		String countryCode = /*
-							 * countryCodeManager .getCountryCode(((Button)
-							 * findViewById(R.id.getpsw_choose_country_btn))
-							 * .getText().toString().trim())
-							 */getString(R.string.default_country_code);
+		// String countryCode = countryCodeManager
+		// .getCountryCode(((Button)
+		// findViewById(R.id.getpsw_choose_country_btn))
+		// .getText().toString().trim());
+		String countryCode = getResources().getString(
+				R.string.default_country_code);
 
 		if (countryCode == null) {
 			MyToast.show(this, R.string.pls_select_country, Toast.LENGTH_SHORT);

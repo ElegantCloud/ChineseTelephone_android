@@ -285,6 +285,8 @@ public class SettingActivity extends NavigationActivity {
 								DataStorageUtils.putObject(
 										TelUser.countryCode.name(), "");
 								DataStorageUtils.putObject(
+										TelUser.local_area_code.name(), "");
+								DataStorageUtils.putObject(
 										TelUser.dialCountryCode.name(), "");
 								DataStorageUtils.putObject(
 										TelUser.bindphone.name(), "");
@@ -573,14 +575,18 @@ public class SettingActivity extends NavigationActivity {
 				params, null, HttpRequestType.ASYNCHRONOUS, onFinishGetPSW);
 	}
 
-	private void setDialCountryCode(String dialcountryCode) {
-		UserBean telUserBean = UserManager.getInstance().getUser();
-		telUserBean.setValue(TelUser.dialCountryCode.name(), dialcountryCode);
-		DataStorageUtils.putObject(TelUser.dialCountryCode.name(),
-				dialcountryCode);
-	}
+	// private void setDialCountryCode(String dialcountryCode) {
+	// UserBean telUserBean = UserManager.getInstance().getUser();
+	// telUserBean.setValue(TelUser.dialCountryCode.name(), dialcountryCode);
+	// DataStorageUtils.putObject(TelUser.dialCountryCode.name(),
+	// dialcountryCode);
+	// }
 
 	private void setDialAreaCode(String dialareaCode) {
+		// update dial area code
+		dialareaCode = dialareaCode.startsWith("0") ? dialareaCode : "0"
+				+ dialareaCode;
+
 		UserBean telUserBean = UserManager.getInstance().getUser();
 		telUserBean.setValue(TelUser.local_area_code.name(), dialareaCode);
 		DataStorageUtils
@@ -931,15 +937,15 @@ public class SettingActivity extends NavigationActivity {
 					"SetDialCountryCodePopupWindow - userbean: "
 							+ telUser.toString());
 
-			String dialcountrycode = (String) telUser
-					.getValue(TelUser.dialCountryCode.name());
-			int dialCountryIndex = countryCodeManager
-					.getCountryIndex(dialcountrycode);
-			lastDialCountryCodeSelect = dialCountryIndex;
-			((Button) (this.getContentView()
-					.findViewById(R.id.set_dial_country_btn)))
-					.setText(countryCodeManager
-							.getCountryName(dialCountryIndex));
+			// String dialcountrycode = (String) telUser
+			// .getValue(TelUser.dialCountryCode.name());
+			// int dialCountryIndex = countryCodeManager
+			// .getCountryIndex(dialcountrycode);
+			// lastDialCountryCodeSelect = dialCountryIndex;
+			// ((Button) (this.getContentView()
+			// .findViewById(R.id.set_dial_country_btn)))
+			// .setText(countryCodeManager
+			// .getCountryName(dialCountryIndex));
 
 			((EditText) this.getContentView().findViewById(
 					R.id.set_dial_areaCode_editText))
@@ -1009,14 +1015,14 @@ public class SettingActivity extends NavigationActivity {
 			@Override
 			public void onClick(View v) {
 				// dismiss contact phone select popup window
-				String dialcountrycode = countryCodeManager
-						.getCountryCode(((Button) SetDialAreaCodePopupWindow.this
-								.getContentView().findViewById(
-										R.id.set_dial_country_btn)).getText()
-								.toString().trim());
-
-				Log.d("dialcountrycode", dialcountrycode);
-				setDialCountryCode(dialcountrycode);
+				// String dialcountrycode = countryCodeManager
+				// .getCountryCode(((Button) SetDialAreaCodePopupWindow.this
+				// .getContentView().findViewById(
+				// R.id.set_dial_country_btn)).getText()
+				// .toString().trim());
+				//
+				// Log.d("dialcountrycode", dialcountrycode);
+				// setDialCountryCode(dialcountrycode);
 
 				// String dialareacode = countryCodeManager
 				// .getCountryCode(((Button) SetDialAreaCodePopupWindow.this
@@ -1225,14 +1231,13 @@ public class SettingActivity extends NavigationActivity {
 						.getContentView()
 						.findViewById(R.id.set_auth_number_editText)))
 						.getText().toString().trim();
-				String countrycode = /*
-									 * countryCodeManager
-									 * .getCountryCode(((Button)
-									 * SetBindNumberPopupWindow.this
-									 * .getContentView().findViewById(
-									 * R.id.setAuth_choose_country_btn))
-									 * .getText().toString().trim())
-									 */getString(R.string.default_country_code);
+				// String countrycode = countryCodeManager
+				// .getCountryCode(((Button) SetBindNumberPopupWindow.this
+				// .getContentView().findViewById(
+				// R.id.setAuth_choose_country_btn))
+				// .getText().toString().trim());
+				String countrycode = getResources().getString(
+						R.string.default_country_code);
 				if (phone != null && !phone.equals("")) {
 					setBindNumber(phone, countrycode);
 					dismiss();
