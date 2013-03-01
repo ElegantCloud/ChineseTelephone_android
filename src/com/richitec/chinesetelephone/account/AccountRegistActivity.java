@@ -86,7 +86,8 @@ public class AccountRegistActivity extends Activity {
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("password", pwd1);
 		params.put("password1", pwd2);
-
+		params.put("source", getString(R.string.client_source));
+		
 		HttpUtils.postRequest(getString(R.string.server_url)
 				+ getString(R.string.user_register_url),
 				PostRequestFormat.URLENCODED, params, null,
