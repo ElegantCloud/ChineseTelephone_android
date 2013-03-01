@@ -163,6 +163,7 @@
     <string name="change_account_title">切换账户</string>
     <string name="set_dialcountry_code">默认国家号设置</string>
     <string name="dialcountry_country_code_inform">提示：当您在拨打电话时未加国家号码，将会自动在您拨打的号码前添加默认国家号。</string>
+    <string name="no_local_area_code_inform">提示：您要拨打的号码是本地号码，请先设置本地区号。</string>
     <string name="set_dialarea_code">默认本地区号设置</string>
     <string name="dialarea_area_code_inform">提示：当您在拨打固定电话时未加本地区号，将会自动在您拨打的号码前添加默认本地区号。</string>
     <string name="set_dialarea_areacode_textview_text">区号：</string>

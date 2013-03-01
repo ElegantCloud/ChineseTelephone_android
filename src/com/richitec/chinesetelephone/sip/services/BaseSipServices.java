@@ -132,7 +132,7 @@ public abstract class BaseSipServices implements ISipServices {
 				String _defaultCountryCode = CTApplication.getContext()
 						.getResources()
 						.getString(R.string.default_country_code);
-				if (calleePhone.matches("\\d{7,8}")) {
+				if (calleePhone.matches("^[2-9]{1}\\d{2,7}")) {
 					UserBean telUser = UserManager.getInstance().getUser();
 					checkedCalleePhone = _defaultCountryCode
 							+ (String) telUser.getValue(TelUser.local_area_code

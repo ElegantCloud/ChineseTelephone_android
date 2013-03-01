@@ -582,10 +582,12 @@ public class SettingActivity extends NavigationActivity {
 	// dialcountryCode);
 	// }
 
-	private void setDialAreaCode(String dialareaCode) {
+	private static void setDialAreaCode(String dialareaCode) {
 		// update dial area code
-		dialareaCode = dialareaCode.startsWith("0") ? dialareaCode : "0"
-				+ dialareaCode;
+		if (null != dialareaCode && !"".equalsIgnoreCase(dialareaCode)
+				&& !dialareaCode.startsWith("0")) {
+			dialareaCode = "0" + dialareaCode;
+		}
 
 		UserBean telUserBean = UserManager.getInstance().getUser();
 		telUserBean.setValue(TelUser.local_area_code.name(), dialareaCode);
@@ -922,7 +924,57 @@ public class SettingActivity extends NavigationActivity {
 
 	}
 
-	class SetDialAreaCodePopupWindow extends CTPopupWindow {
+	public static class NoLocalAreaCodePopupWindow extends CTPopupWindow {
+
+		// dependent view
+		View _mDependentView;
+
+		public NoLocalAreaCodePopupWindow(int resource, int width, int height,
+				boolean focusable, boolean isBindDefListener) {
+			super(resource, width, height, focusable, isBindDefListener);
+		}
+
+		public NoLocalAreaCodePopupWindow(int resource, int width, int height) {
+			super(resource, width, height);
+		}
+
+		@Override
+		protected void bindPopupWindowComponentsListener() {
+			// bind set local area code button click listener
+			((Button) getContentView().findViewById(R.id.set_localareacode_btn))
+					.setOnClickListener(new SetLocalAreaCodeBtnOnClickListener());
+		}
+
+		@Override
+		protected void resetPopupWindow() {
+			// nothing to do
+		}
+
+		public void setDependentView(View dependentView) {
+			_mDependentView = dependentView;
+		}
+
+		// inner class
+		class SetLocalAreaCodeBtnOnClickListener implements OnClickListener {
+
+			@Override
+			public void onClick(View v) {
+				// dismiss no local area code alert popup window
+				dismiss();
+
+				SetDialAreaCodePopupWindow _setDialAresCodePopupWindow = new SetDialAreaCodePopupWindow(
+						R.layout.set_dialareacode_popupwindow_layout,
+						LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
+
+				_setDialAresCodePopupWindow.showAtLocation(_mDependentView,
+						Gravity.CENTER, 0, 0);
+			}
+
+		}
+
+	}
+
+	static class SetDialAreaCodePopupWindow extends CTPopupWindow {
 		private int lastDialCountryCodeSelect = 0;
 
 		public SetDialAreaCodePopupWindow(int resource, int width, int height,
@@ -969,34 +1021,36 @@ public class SettingActivity extends NavigationActivity {
 						@Override
 						public void onClick(View v) {
 							// TODO Auto-generated method stub
-							chooseCountry(v);
+							// chooseCountry(v);
 						}
 					});
 		}
 
-		public void chooseCountry(View v) {
-			AlertDialog.Builder chooseCountryDialogBuilder = new AlertDialog.Builder(
-					SettingActivity.this);
-			chooseCountryDialogBuilder.setTitle(R.string.countrycode_list);
-			chooseCountryDialogBuilder.setSingleChoiceItems(
-					countryCodeManager.getCountryNameList(),
-					lastDialCountryCodeSelect, new chooseCountryListener());
-			chooseCountryDialogBuilder.setNegativeButton(R.string.cancel, null);
-			chooseCountryDialog = chooseCountryDialogBuilder.create();
-			chooseCountryDialog.show();
-		}
-
-		class chooseCountryListener implements DialogInterface.OnClickListener {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
-				lastDialCountryCodeSelect = which;
-				((Button) (SetDialAreaCodePopupWindow.this.getContentView()
-						.findViewById(R.id.set_dial_country_btn)))
-						.setText(countryCodeManager.getCountryName(which));
-				chooseCountryDialog.dismiss();
-			}
-		}
+		// public void chooseCountry(View v) {
+		// AlertDialog.Builder chooseCountryDialogBuilder = new
+		// AlertDialog.Builder(
+		// SettingActivity.this);
+		// chooseCountryDialogBuilder.setTitle(R.string.countrycode_list);
+		// chooseCountryDialogBuilder.setSingleChoiceItems(
+		// countryCodeManager.getCountryNameList(),
+		// lastDialCountryCodeSelect, new chooseCountryListener());
+		// chooseCountryDialogBuilder.setNegativeButton(R.string.cancel, null);
+		// chooseCountryDialog = chooseCountryDialogBuilder.create();
+		// chooseCountryDialog.show();
+		// }
+		//
+		// class chooseCountryListener implements
+		// DialogInterface.OnClickListener {
+		// @Override
+		// public void onClick(DialogInterface dialog, int which) {
+		// // TODO Auto-generated method stub
+		// lastDialCountryCodeSelect = which;
+		// ((Button) (SetDialAreaCodePopupWindow.this.getContentView()
+		// .findViewById(R.id.set_dial_country_btn)))
+		// .setText(countryCodeManager.getCountryName(which));
+		// chooseCountryDialog.dismiss();
+		// }
+		// }
 
 		@Override
 		protected void resetPopupWindow() {

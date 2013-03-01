@@ -18,11 +18,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.richitec.chinesetelephone.R;
+import com.richitec.chinesetelephone.assist.SettingActivity.NoLocalAreaCodePopupWindow;
 import com.richitec.chinesetelephone.call.SipCallModeSelector.SipCallModeSelectPattern;
+import com.richitec.chinesetelephone.constant.TelUser;
 import com.richitec.chinesetelephone.sip.SipUtils;
 import com.richitec.chinesetelephone.tab7tabcontent.ContactListTabContentActivity.ContactPhoneNumbersSelectPopupWindow;
 import com.richitec.commontoolkit.CTApplication;
 import com.richitec.commontoolkit.customcomponent.CTPopupWindow;
+import com.richitec.commontoolkit.user.UserBean;
+import com.richitec.commontoolkit.user.UserManager;
 import com.richitec.commontoolkit.utils.CommonUtils;
 import com.richitec.commontoolkit.utils.NetworkInfoUtils;
 import com.richitec.commontoolkit.utils.NetworkInfoUtils.NoActiveNetworkException;
@@ -154,20 +158,39 @@ public class OutgoingCallGenerator {
 
 		// check contact phone size
 		if (1 == _mContactPhones.size()) {
-			// make sip voice call
-			SipUtils.makeSipVoiceCall(_mContactName, _mContactPhones.get(0),
-					dialMode);
+			UserBean telUser = UserManager.getInstance().getUser();
+			if (_mContactPhones.get(0).matches("^[2-9]{1}\\d{2,7}")
+					&& (null == (String) telUser
+							.getValue(TelUser.local_area_code.name()) || ""
+							.equalsIgnoreCase((String) telUser
+									.getValue(TelUser.local_area_code.name())))) {
+				NoLocalAreaCodePopupWindow _noLocalAreaCodePopupWindow = new NoLocalAreaCodePopupWindow(
+						R.layout.no_areacode_popupwindow_layout,
+						LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
 
-			// check dial phone textView
-			if (null != _mDialPhoneTextView) {
-				// save previous dial phone and clear dial phone textView
-				// text
-				CharSequence _previousDialPhone = _mDialPhoneTextView.getText();
-				_mDialPhoneTextView.setText("");
-				_mPreviousDialPhone.append(_previousDialPhone);
+				_noLocalAreaCodePopupWindow
+						.setDependentView(_mGenNewOutgoingCallOperationDependentView);
+
+				_noLocalAreaCodePopupWindow.showAtLocation(
+						_mGenNewOutgoingCallOperationDependentView,
+						Gravity.CENTER, 0, 0);
 			} else {
-				Log.e(LOG_TAG,
-						"Get dial phone textView for clear its text error, dial phone textView is null");
+				// make sip voice call
+				SipUtils.makeSipVoiceCall(_mContactName,
+						_mContactPhones.get(0), dialMode);
+
+				// check dial phone textView
+				if (null != _mDialPhoneTextView) {
+					// save previous dial phone and clear dial phone textView
+					// text
+					CharSequence _previousDialPhone = _mDialPhoneTextView
+							.getText();
+					_mDialPhoneTextView.setText("");
+					_mPreviousDialPhone.append(_previousDialPhone);
+				} else {
+					Log.e(LOG_TAG,
+							"Get dial phone textView for clear its text error, dial phone textView is null");
+				}
 			}
 		} else {
 			// define contact phone numbers select popup window, set contact
