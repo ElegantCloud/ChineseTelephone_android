@@ -2,14 +2,12 @@ package com.richitec.chinesetelephone.account;
 
 import java.util.HashMap;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -20,6 +18,7 @@ import android.widget.Toast;
 import com.richitec.chinesetelephone.R;
 import com.richitec.chinesetelephone.utils.AppDataSaveRestoreUtil;
 import com.richitec.chinesetelephone.utils.CountryCodeManager;
+import com.richitec.commontoolkit.user.UserManager;
 import com.richitec.commontoolkit.utils.HttpUtils;
 import com.richitec.commontoolkit.utils.HttpUtils.HttpRequestType;
 import com.richitec.commontoolkit.utils.HttpUtils.HttpResponseResult;
@@ -112,17 +111,28 @@ public class AccountForgetPSWActivity extends Activity {
 
 		// Log.d(SystemConstants.TAG, phone+":"+countryCode);
 
+		// progressDlg = ProgressDialog.show(this, null,
+		// getString(R.string.sending_pwd_reset_mail));
+		//
+		// HashMap<String, String> params = new HashMap<String, String>();
+		// params.put("username", phone);
+		// params.put("countryCode", countryCode);
+		//
+		// HttpUtils.postRequest(getString(R.string.server_url)
+		// + getString(R.string.sendResetPwdEmail_url),
+		// PostRequestFormat.URLENCODED, params, null,
+		// HttpRequestType.ASYNCHRONOUS, onFinishSendResetPwdMail);
+
 		progressDlg = ProgressDialog.show(this, null,
-				getString(R.string.sending_pwd_reset_mail));
+				getString(R.string.sending_request));
 
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("username", phone);
 		params.put("countryCode", countryCode);
 
 		HttpUtils.postRequest(getString(R.string.server_url)
-				+ getString(R.string.sendResetPwdEmail_url),
-				PostRequestFormat.URLENCODED, params, null,
-				HttpRequestType.ASYNCHRONOUS, onFinishSendResetPwdMail);
+				+ getString(R.string.getpsw_url), PostRequestFormat.URLENCODED,
+				params, null, HttpRequestType.ASYNCHRONOUS, onFinishGetPSW);
 	}
 
 	private void dismiss() {
@@ -130,66 +140,119 @@ public class AccountForgetPSWActivity extends Activity {
 			progressDlg.dismiss();
 	}
 
-	private OnHttpRequestListener onFinishSendResetPwdMail = new OnHttpRequestListener() {
+	private OnHttpRequestListener onFinishGetPSW = new OnHttpRequestListener() {
 
 		@Override
 		public void onFinished(HttpResponseResult responseResult) {
 			// TODO Auto-generated method stub
+			int result = responseResult.getStatusCode();
 			dismiss();
-			try {
-				JSONObject data = new JSONObject(
-						responseResult.getResponseText());
-				String result = data.getString("result");
-				if ("send_ok".equals(result)) {
-					String email = data.getString("email");
-					new AlertDialog.Builder(AccountForgetPSWActivity.this)
-							.setTitle(R.string.alert_title)
-							.setMessage(
-									String.format(
-											getString(R.string.pwd_reset_mail_send_ok),
-											email))
-							.setPositiveButton(R.string.Ensure, null).show();
-				} else if ("send_failed".equals(result)) {
-					MyToast.show(AccountForgetPSWActivity.this,
-							R.string.pwd_reset_mail_send_failed,
-							Toast.LENGTH_SHORT);
-				} else if ("email_not_set".equals(result)) {
-					MyToast.show(AccountForgetPSWActivity.this,
-							R.string.you_havnt_bind_email, Toast.LENGTH_SHORT);
-				} else if ("email_unverify".equals(result)) {
-					String email = data.getString("email");
-					new AlertDialog.Builder(AccountForgetPSWActivity.this)
-							.setTitle(R.string.alert_title)
-							.setMessage(
-									String.format(
-											getString(R.string.you_havnt_verify_email),
-											email))
-							.setPositiveButton(R.string.Ensure, null).show();
-				} else if ("user_not_found".equals(result)) {
-					MyToast.show(AccountForgetPSWActivity.this,
-							R.string.user_not_found, Toast.LENGTH_SHORT);
-				}
+			if (result == 200 || result == 201) {
+				new AlertDialog.Builder(AccountForgetPSWActivity.this)
+						.setTitle(R.string.alert_title)
+						.setMessage(R.string.get_psw_finish)
+						.setPositiveButton(R.string.ok,
+								new DialogInterface.OnClickListener() {
 
-			} catch (JSONException e) {
-				e.printStackTrace();
-				MyToast.show(AccountForgetPSWActivity.this,
-						R.string.pwd_reset_mail_send_failed, Toast.LENGTH_SHORT);
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+										// TODO Auto-generated method stub
+										InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+										imm.hideSoftInputFromWindow(
+												((EditText) findViewById(R.id.get_phone_editText))
+														.getWindowToken(), 0);
+
+										UserManager.getInstance().getUser()
+												.setPassword("");
+										UserManager.getInstance().getUser()
+												.setUserKey("");
+										Intent intent = new Intent(
+												AccountForgetPSWActivity.this,
+												AccountSettingActivity.class);
+										intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+												| Intent.FLAG_ACTIVITY_CLEAR_TOP);
+										startActivity(intent);
+										dialog.dismiss();
+										finish();
+									}
+								}).show();
+
 			}
 		}
 
 		@Override
 		public void onFailed(HttpResponseResult responseResult) {
+			// TODO Auto-generated method stub
+			// Log.d(SystemConstants.TAG, responseResult.getStatusCode()+"");
 			dismiss();
-			if (responseResult.getStatusCode() == -1) {
-				MyToast.show(AccountForgetPSWActivity.this,
-						R.string.cannot_connet_server, Toast.LENGTH_SHORT);
-			} else {
-				MyToast.show(AccountForgetPSWActivity.this,
-						R.string.pwd_reset_mail_send_failed, Toast.LENGTH_SHORT);
-			}
+			MyToast.show(AccountForgetPSWActivity.this,
+					R.string.phone_number_not_exist, Toast.LENGTH_SHORT);
 		}
 
 	};
+
+	// private OnHttpRequestListener onFinishSendResetPwdMail = new
+	// OnHttpRequestListener() {
+	//
+	// @Override
+	// public void onFinished(HttpResponseResult responseResult) {
+	// // TODO Auto-generated method stub
+	// dismiss();
+	// try {
+	// JSONObject data = new JSONObject(
+	// responseResult.getResponseText());
+	// String result = data.getString("result");
+	// if ("send_ok".equals(result)) {
+	// String email = data.getString("email");
+	// new AlertDialog.Builder(AccountForgetPSWActivity.this)
+	// .setTitle(R.string.alert_title)
+	// .setMessage(
+	// String.format(
+	// getString(R.string.pwd_reset_mail_send_ok),
+	// email))
+	// .setPositiveButton(R.string.Ensure, null).show();
+	// } else if ("send_failed".equals(result)) {
+	// MyToast.show(AccountForgetPSWActivity.this,
+	// R.string.pwd_reset_mail_send_failed,
+	// Toast.LENGTH_SHORT);
+	// } else if ("email_not_set".equals(result)) {
+	// MyToast.show(AccountForgetPSWActivity.this,
+	// R.string.you_havnt_bind_email, Toast.LENGTH_SHORT);
+	// } else if ("email_unverify".equals(result)) {
+	// String email = data.getString("email");
+	// new AlertDialog.Builder(AccountForgetPSWActivity.this)
+	// .setTitle(R.string.alert_title)
+	// .setMessage(
+	// String.format(
+	// getString(R.string.you_havnt_verify_email),
+	// email))
+	// .setPositiveButton(R.string.Ensure, null).show();
+	// } else if ("user_not_found".equals(result)) {
+	// MyToast.show(AccountForgetPSWActivity.this,
+	// R.string.user_not_found, Toast.LENGTH_SHORT);
+	// }
+	//
+	// } catch (JSONException e) {
+	// e.printStackTrace();
+	// MyToast.show(AccountForgetPSWActivity.this,
+	// R.string.pwd_reset_mail_send_failed, Toast.LENGTH_SHORT);
+	// }
+	// }
+	//
+	// @Override
+	// public void onFailed(HttpResponseResult responseResult) {
+	// dismiss();
+	// if (responseResult.getStatusCode() == -1) {
+	// MyToast.show(AccountForgetPSWActivity.this,
+	// R.string.cannot_connet_server, Toast.LENGTH_SHORT);
+	// } else {
+	// MyToast.show(AccountForgetPSWActivity.this,
+	// R.string.pwd_reset_mail_send_failed, Toast.LENGTH_SHORT);
+	// }
+	// }
+	//
+	// };
 
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
