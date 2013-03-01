@@ -163,15 +163,18 @@ public class CallRecordDetailInfoActivity extends NavigationActivity {
 								.format(_callLog.getCallDate()));
 				ImageView durationIcon = (ImageView) findViewById(R.id.callRecord_detailInfo_duration_type_icon);
 				if (CallType.MISSED == _callLog.getCallType()) {
-					durationIcon.setImageResource(android.R.drawable.sym_call_missed);
+					durationIcon
+							.setImageResource(android.R.drawable.sym_call_missed);
 				} else if (CallType.INCOMING == _callLog.getCallType()) {
-					durationIcon.setImageResource(android.R.drawable.sym_call_incoming);
+					durationIcon
+							.setImageResource(android.R.drawable.sym_call_incoming);
 				} else if (CallType.OUTGOING == _callLog.getCallType()) {
-					durationIcon.setImageResource(android.R.drawable.sym_call_outgoing);
+					durationIcon
+							.setImageResource(android.R.drawable.sym_call_outgoing);
 				} else {
 					durationIcon.setImageDrawable(null);
 				}
-				
+
 				((TextView) findViewById(R.id.callRecord_detailInfo_duration_textView))
 						.setText(CallType.MISSED == _callLog.getCallType() ? getResources()
 								.getString(
@@ -333,13 +336,13 @@ public class CallRecordDetailInfoActivity extends NavigationActivity {
 	}
 
 	@Override
-	protected void onRestoreInstanceState (Bundle savedInstanceState) {
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
 		AppDataSaveRestoreUtil.onRestoreInstanceState(savedInstanceState);
 		super.onRestoreInstanceState(savedInstanceState);
 	}
-	
+
 	@Override
-	protected void onSaveInstanceState (Bundle outState) {
+	protected void onSaveInstanceState(Bundle outState) {
 		AppDataSaveRestoreUtil.onSaveInstanceState(outState);
 		super.onSaveInstanceState(outState);
 	}

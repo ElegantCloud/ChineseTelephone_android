@@ -32,6 +32,7 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
@@ -47,10 +48,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.richitec.chinesetelephone.R;
+import com.richitec.chinesetelephone.assist.SettingActivity.NoLocalAreaCodePopupWindow;
 import com.richitec.chinesetelephone.call.OutgoingCallActivity;
 import com.richitec.chinesetelephone.call.OutgoingCallGenerator;
 import com.richitec.chinesetelephone.call.SipCallMode;
 import com.richitec.chinesetelephone.constant.SystemConstants;
+import com.richitec.chinesetelephone.constant.TelUser;
 import com.richitec.chinesetelephone.sip.SipUtils;
 import com.richitec.chinesetelephone.utils.AppDataSaveRestoreUtil;
 import com.richitec.commontoolkit.CTApplication;
@@ -64,6 +67,8 @@ import com.richitec.commontoolkit.customcomponent.CTToast;
 import com.richitec.commontoolkit.customcomponent.ImageBarButtonItem;
 import com.richitec.commontoolkit.customcomponent.ListViewQuickAlphabetBar;
 import com.richitec.commontoolkit.customcomponent.ListViewQuickAlphabetBar.OnTouchListener;
+import com.richitec.commontoolkit.user.UserBean;
+import com.richitec.commontoolkit.user.UserManager;
 import com.richitec.commontoolkit.utils.CommonUtils;
 import com.richitec.commontoolkit.utils.StringUtils;
 
@@ -741,9 +746,26 @@ public class ContactListTabContentActivity extends NavigationActivity {
 				// dismiss contact phone select popup window
 				dismiss();
 
-				// make sip voice call
-				SipUtils.makeSipVoiceCall(_mContactDisplayName, _selectedPhone,
-						_mDialContactPhoneMode);
+				UserBean telUser = UserManager.getInstance().getUser();
+				if (_selectedPhone.matches("^[2-9]{1}\\d{2,7}")
+						&& (null == (String) telUser
+								.getValue(TelUser.local_area_code.name()) || ""
+								.equalsIgnoreCase((String) telUser
+										.getValue(TelUser.local_area_code
+												.name())))) {
+					NoLocalAreaCodePopupWindow _noLocalAreaCodePopupWindow = new NoLocalAreaCodePopupWindow(
+							R.layout.no_areacode_popupwindow_layout,
+							LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
+
+					_noLocalAreaCodePopupWindow.setDependentView(v);
+
+					_noLocalAreaCodePopupWindow.showAtLocation(v,
+							Gravity.CENTER, 0, 0);
+				} else {
+					// make sip voice call
+					SipUtils.makeSipVoiceCall(_mContactDisplayName,
+							_selectedPhone, _mDialContactPhoneMode);
+				}
 			}
 
 		}
