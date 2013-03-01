@@ -14,7 +14,6 @@
         android:text="@string/setting"
         android:textSize="20.0sp" />
 
-   
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -85,7 +84,7 @@
                 android:layout_marginLeft="10.0dp"
                 android:layout_weight="1.0"
                 android:gravity="center_vertical"
-                android:text="@string/setting_countrycode_item"
+                android:text="@string/setting_areacode_item"
                 android:textColor="@color/dark_dim_gray"
                 android:textSize="18.0sp" />
 
@@ -137,16 +136,18 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="1.0dp"
-            android:background="@drawable/setting_line_img" />
+            android:background="@drawable/setting_line_img"
+            android:visibility="gone" />
 
-         <LinearLayout
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="50.0dp"
             android:background="@drawable/setting_middle_item_bg"
             android:clickable="true"
             android:gravity="center_vertical"
             android:onClick="onEmailSettingButtonClick"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:visibility="gone" >
 
             <ImageView
                 android:layout_width="30.0dp"
@@ -175,7 +176,7 @@
             android:layout_width="fill_parent"
             android:layout_height="1.0dp"
             android:background="@drawable/setting_line_img" />
-        
+
         <LinearLayout
             android:id="@+id/setting_setup_btn"
             android:layout_width="fill_parent"

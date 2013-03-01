@@ -251,9 +251,12 @@ public class AccountSettingActivity extends Activity {
 				.getText().toString().trim();
 		String psw = ((EditText) (findViewById(R.id.account_psw_edittext)))
 				.getText().toString().trim();
-		String countrycode = countryCodeManager
-				.getCountryCode(((Button) findViewById(R.id.account_choose_country_btn))
-						.getText().toString().trim());
+		// String countrycode = countryCodeManager
+		// .getCountryCode(((Button)
+		// findViewById(R.id.account_choose_country_btn))
+		// .getText().toString().trim());
+		String countrycode = getResources().getString(
+				R.string.default_country_code);
 
 		boolean isRemember = ((CheckBox) (findViewById(R.id.account_remember_psw_cbtn)))
 				.isChecked();
@@ -286,6 +289,10 @@ public class AccountSettingActivity extends Activity {
 			UserBean user = new UserBean();
 			user.setName(username);
 			user.setPassword(StringUtils.md5(psw));
+			user.setValue(
+					TelUser.local_area_code.name(),
+					UserManager.getInstance().getUser()
+							.getValue(TelUser.local_area_code.name()));
 			UserManager.getInstance().setUser(user);
 		}
 
@@ -380,7 +387,7 @@ public class AccountSettingActivity extends Activity {
 					ChineseTelephoneTabActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
 					| Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			intent.putExtra("email_status", emailStatus);
+			// intent.putExtra("email_status", emailStatus);
 			intent.putExtra("email", email);
 			intent.putExtra("reg_given_money", regGivenMoney);
 			startActivity(intent);
