@@ -95,8 +95,7 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="1.0dp"
-            android:background="@drawable/setting_line_img"
-            android:visibility="gone" />
+            android:background="@drawable/setting_line_img" />
 
         <LinearLayout
             android:id="@+id/my_suites_btn"
@@ -106,8 +105,7 @@
             android:clickable="true"
             android:gravity="center_vertical"
             android:onClick="onClickMySuiteAction"
-            android:orientation="horizontal"
-            android:visibility="gone" >
+            android:orientation="horizontal" >
 
             <ImageView
                 android:layout_width="26.0dp"
