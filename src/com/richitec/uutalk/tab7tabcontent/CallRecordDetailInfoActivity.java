@@ -11,13 +11,16 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
@@ -34,6 +37,7 @@ import com.richitec.commontoolkit.call.CallLogBean;
 import com.richitec.commontoolkit.call.CallLogBean.CallType;
 import com.richitec.commontoolkit.customadapter.CTListAdapter;
 import com.richitec.commontoolkit.utils.CommonUtils;
+import com.richitec.commontoolkit.utils.NetworkInfoUtils;
 import com.richitec.uutalk.R;
 import com.richitec.uutalk.call.SipCallMode;
 import com.richitec.uutalk.sip.SipUtils;
@@ -303,18 +307,17 @@ public class CallRecordDetailInfoActivity extends NavigationActivity {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
+
 			// check clicked position
 			switch (position) {
 			case 0:
 				// direct call
-				SipUtils.makeSipVoiceCall(_mCalleeName, _mCalleePhone,
-						SipCallMode.DIRECT_CALL);
+				checkNetworkState7MakeSipVoiceCall(SipCallMode.DIRECT_CALL);
 				break;
 
 			case 1:
 				// call back
-				SipUtils.makeSipVoiceCall(_mCalleeName, _mCalleePhone,
-						SipCallMode.CALLBACK);
+				checkNetworkState7MakeSipVoiceCall(SipCallMode.CALLBACK);
 				break;
 
 			case 2:
@@ -331,6 +334,50 @@ public class CallRecordDetailInfoActivity extends NavigationActivity {
 
 				break;
 			}
+		}
+
+		// check there is or not active network currently and make a sip voice
+		// call
+		private void checkNetworkState7MakeSipVoiceCall(SipCallMode sipCallMode) {
+			if (NetworkInfoUtils.isCurrentActiveNetworkAvailable()) {
+				// make a sip voice call
+				SipUtils.makeSipVoiceCall(_mCalleeName, _mCalleePhone,
+						sipCallMode);
+			} else {
+				// show there is no active and available network currently
+				new AlertDialog.Builder(CallRecordDetailInfoActivity.this)
+						.setTitle(
+								R.string.noActiveAvailableNetwork_alertDialog_title)
+						.setMessage(
+								R.string.noActiveAvailableNetwork_alertDialog_message)
+						.setNegativeButton(
+								R.string.noActiveAvailableNetwork_alertDialog_setLaterBtn_title,
+								null)
+						.setPositiveButton(
+								R.string.noActiveAvailableNetwork_alertDialog_setNowBtn_title,
+								new ModifyWirelessSettingsBtnOnClickListener())
+						.show();
+			}
+		}
+
+		// inner class
+		// modify android system wireless settings button on click listener
+		class ModifyWirelessSettingsBtnOnClickListener implements
+				android.content.DialogInterface.OnClickListener {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// define android system wireless settings intent
+				Intent _wirelessSettingsIntent = new Intent(
+						Settings.ACTION_WIRELESS_SETTINGS);
+
+				// check wireless settings intent and start the activity
+				if (CommonUtils.isIntentAvailable(_wirelessSettingsIntent)) {
+					CallRecordDetailInfoActivity.this
+							.startActivity(_wirelessSettingsIntent);
+				}
+			}
+
 		}
 
 	}
