@@ -29,6 +29,7 @@ import com.richitec.uutalk.assist.SettingActivity.NoLocalAreaCodePopupWindow;
 import com.richitec.uutalk.call.SipCallModeSelector.SipCallModeSelectPattern;
 import com.richitec.uutalk.constant.TelUser;
 import com.richitec.uutalk.sip.SipUtils;
+import com.richitec.uutalk.sip.services.ISipServices.SipCallSponsor;
 import com.richitec.uutalk.tab7tabcontent.ContactListTabContentActivity.ContactPhoneNumbersSelectPopupWindow;
 
 public class OutgoingCallGenerator {
@@ -181,7 +182,7 @@ public class OutgoingCallGenerator {
 						Gravity.CENTER, 0, 0);
 			} else {
 				// make sip voice call
-				SipUtils.makeSipVoiceCall(_mContactName,
+				SipUtils.makeSipVoiceCall(SipCallSponsor.inner, _mContactName,
 						_mContactPhones.get(0), dialMode);
 
 				// check dial phone textView

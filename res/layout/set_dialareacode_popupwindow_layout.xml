@@ -90,7 +90,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/textfield_selector"
                     android:ems="4"
-                    android:inputType="phone" >
+                    android:inputType="phone"
+                    android:textColor="@android:color/black" >
 
                     <requestFocus />
                 </EditText>

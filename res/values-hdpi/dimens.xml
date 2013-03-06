@@ -27,7 +27,7 @@
     <dimen name="callbackWaiting_relativeLayout_marginLeft7Right">10dp</dimen>
 
     <!-- exported outgoing call -->
-    <dimen name="exportedOutgoingCall_linearLayout_marginTop7Bottom">45dp</dimen>
+    <dimen name="exportedOutgoingCall_linearLayout_marginTop7Bottom">62dp</dimen>
     <dimen name="exportedOutgoingCall_linearLayout_marginLeft7Right">22dp</dimen>
 
 </resources>

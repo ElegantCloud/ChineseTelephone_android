@@ -16,19 +16,24 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.Cursor;
 import android.graphics.Point;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.provider.ContactsContract.PhoneLookup;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
@@ -63,19 +68,26 @@ import com.richitec.commontoolkit.utils.HttpUtils.HttpResponseResult;
 import com.richitec.commontoolkit.utils.HttpUtils.OnHttpRequestListener;
 import com.richitec.commontoolkit.utils.NetworkInfoUtils;
 import com.richitec.commontoolkit.utils.NetworkInfoUtils.NoActiveNetworkException;
+import com.richitec.commontoolkit.utils.StringUtils;
 import com.richitec.commontoolkit.utils.ToneGeneratorUtils;
 import com.richitec.uutalk.ChineseTelephoneAppLaunchActivity;
 import com.richitec.uutalk.R;
+import com.richitec.uutalk.assist.SettingActivity.NoLocalAreaCodePopupWindow;
 import com.richitec.uutalk.call.SipCallModeSelector.SipCallModeSelectPattern;
 import com.richitec.uutalk.constant.SystemConstants;
 import com.richitec.uutalk.constant.TelUser;
 import com.richitec.uutalk.sip.SipUtils;
 import com.richitec.uutalk.sip.listeners.SipInviteStateListener;
+import com.richitec.uutalk.sip.listeners.SipRegistrationStateListener;
+import com.richitec.uutalk.sip.listeners.SipRegistrationStateListenerImp;
 import com.richitec.uutalk.sip.services.BaseSipServices;
+import com.richitec.uutalk.sip.services.ISipServices.SipCallSponsor;
+import com.richitec.uutalk.tab7tabcontent.ChineseTelephoneTabActivity;
 import com.richitec.uutalk.tab7tabcontent.ContactListTabContentActivity;
 import com.richitec.uutalk.tab7tabcontent.ContactListTabContentActivity.CTContactListViewQuickAlphabetToast;
 import com.richitec.uutalk.tab7tabcontent.ContactListTabContentActivity.ContactsInABListViewQuickAlphabetBarOnTouchListener;
 import com.richitec.uutalk.utils.AppDataSaveRestoreUtil;
+import com.richitec.uutalk.utils.SipRegisterManager;
 
 public class OutgoingCallActivity extends Activity implements
 		SipInviteStateListener {
@@ -132,6 +144,9 @@ public class OutgoingCallActivity extends Activity implements
 	// sip voice call terminated type, default value is passive
 	private SipVoiceCallTerminatedType _mSipVoiceCallTerminatedType = SipVoiceCallTerminatedType.PASSIVE;
 
+	// sip registration state listener
+	private SipRegistrationStateListener _mSipRegistrationStateListener;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -164,6 +179,10 @@ public class OutgoingCallActivity extends Activity implements
 
 		// check the data bundle again and get call phone
 		if (null != _data) {
+			// init call state textView text
+			((TextView) findViewById(R.id.callState_textView))
+					.setText(R.string.outgoing_call_trying);
+
 			// check and reset outgoing call mode
 			if (null != _data.get(OUTGOING_CALL_MODE)) {
 				_mOutgoingCallMode = (SipCallMode) _data
@@ -181,53 +200,47 @@ public class OutgoingCallActivity extends Activity implements
 								: _mCalleePhone);
 			}
 		} else {
-			// load and get login account
-			AppDataSaveRestoreUtil.loadAccount();
+			// get user bean
+			UserBean _userBean = UserManager.getInstance().getUser();
 
 			// get exported dial phone and set as callee phone
-			_mCalleePhone = getIntent().getData().getSchemeSpecificPart();
+			_mCalleePhone = StringUtils.trim(getIntent().getData()
+					.getSchemeSpecificPart(), " ");
 
-			UserBean userBean = UserManager.getInstance().getUser();
-			if (userBean.getPassword() != null
-					&& !userBean.getPassword().equals("")
-					&& userBean.getUserKey() != null
-					&& !userBean.getUserKey().equals("")) {
-				String _calleeName = getResources().getString(
-						R.string.dial_phone_callee_unknown);
-				// get address book manager reference
-				AddressBookManager _addressBookManager = AddressBookManager
-						.getInstance();
-
-				// get dial phone has ownership
-				Long _dialPhoneOwnershipId = _addressBookManager
-						.isContactWithPhoneInAddressBook(_mCalleePhone);
-
-				// check dial phone has ownership
-				if (null != _dialPhoneOwnershipId) {
-					_calleeName = _addressBookManager.getContactByAggregatedId(
-							_dialPhoneOwnershipId).getDisplayName();
-				}
-
-				// set callee textView text
-				((TextView) findViewById(R.id.callee_textView))
-						.setText(null != _dialPhoneOwnershipId ? _calleeName
-								: _mCalleePhone);
+			// check user logined
+			if (null != _userBean.getValue(SystemConstants.logined.name())
+					&& (Boolean) _userBean.getValue(SystemConstants.logined
+							.name())) {
+				// init exported outgoing call
+				initExportedOutgoingCall();
 			} else {
-				// save outgoing call callee phone
-				userBean.setValue(TelUser.exported_dial_phone.name(),
-						_mCalleePhone);
+				// load and get login account
+				AppDataSaveRestoreUtil.loadAccount();
 
-				// goto Chinese telephone application launch activity
-				Intent _chineseTelephoneAppLaunchIntent = new Intent(this,
-						ChineseTelephoneAppLaunchActivity.class);
-				_chineseTelephoneAppLaunchIntent
-						.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				_chineseTelephoneAppLaunchIntent
-						.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(_chineseTelephoneAppLaunchIntent);
+				// update user bean
+				_userBean = UserManager.getInstance().getUser();
 
-				// finish outgoing call activity
-				finish();
+				if (_userBean.getPassword() != null
+						&& !_userBean.getPassword().equals("")) {
+					// init exported outgoing call
+					initExportedOutgoingCall();
+				} else {
+					// save outgoing call callee phone
+					_userBean.setValue(TelUser.exported_dial_phone.name(),
+							_mCalleePhone);
+
+					// goto Chinese telephone application launch activity
+					Intent _chineseTelephoneAppLaunchIntent = new Intent(this,
+							ChineseTelephoneAppLaunchActivity.class);
+					_chineseTelephoneAppLaunchIntent
+							.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					_chineseTelephoneAppLaunchIntent
+							.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(_chineseTelephoneAppLaunchIntent);
+
+					// finish outgoing call activity
+					finish();
+				}
 			}
 		}
 
@@ -329,9 +342,9 @@ public class OutgoingCallActivity extends Activity implements
 		if (null != _mOutgoingCallMode) {
 			switch (_mOutgoingCallMode) {
 			case DIRECT_CALL:
-				// hide cancel exported outgoing call linearLayout button, show
-				// call
-				// controller gridView and call controller footer linearLayout
+				// hide cancel exported outgoing call linearLayout and button,
+				// show call controller gridView and call controller footer
+				// linearLayout
 				_cancelExportedOutgoingCallImgBtn.setVisibility(View.GONE);
 				_exportedOutgoingCallLinearLayout.setVisibility(View.GONE);
 
@@ -343,9 +356,8 @@ public class OutgoingCallActivity extends Activity implements
 
 			default:
 			case CALLBACK:
-				// hide cancel exported outgoing call linearLayout button and
-				// show
-				// back for waiting callback call button
+				// hide cancel exported outgoing call linearLayout and button
+				// and show back for waiting callback call button
 				_cancelExportedOutgoingCallImgBtn.setVisibility(View.GONE);
 				_exportedOutgoingCallLinearLayout.setVisibility(View.GONE);
 
@@ -362,25 +374,24 @@ public class OutgoingCallActivity extends Activity implements
 			if (SipCallModeSelectPattern.MANUAL != _sipCallModeSelectPattern) {
 				// generate an new outgoing call
 				if (NetworkInfoUtils.isCurrentActiveNetworkAvailable()) {
+					// get callee name
+					String _calleeName = (String) ((TextView) findViewById(R.id.callee_textView))
+							.getText();
+
 					// get and check sip call mode select pattern
 					switch (SipCallModeSelector.getSipCallModeSelectPattern()) {
 					case DIRECT_CALL:
 						// check contact for generating an new outgoing call:
-						// direct
-						// dial
-						SipUtils.makeSipVoiceCall(
-								(String) ((TextView) findViewById(R.id.callee_textView))
-										.getText(), _mCalleePhone,
-								SipCallMode.DIRECT_CALL);
+						// direct dial
+						generateExportedOutgoingCall(_calleeName,
+								_mCalleePhone, SipCallMode.DIRECT_CALL);
 						break;
 
 					case CALLBACK:
 						// check contact for generating an new outgoing call:
 						// callback
-						SipUtils.makeSipVoiceCall(
-								(String) ((TextView) findViewById(R.id.callee_textView))
-										.getText(), _mCalleePhone,
-								SipCallMode.CALLBACK);
+						generateExportedOutgoingCall(_calleeName,
+								_mCalleePhone, SipCallMode.CALLBACK);
 						break;
 
 					default:
@@ -391,20 +402,16 @@ public class OutgoingCallActivity extends Activity implements
 							case ConnectivityManager.TYPE_WIFI:
 								// check contact for generating an new outgoing
 								// call: auto direct dial
-								SipUtils.makeSipVoiceCall(
-										(String) ((TextView) findViewById(R.id.callee_textView))
-												.getText(), _mCalleePhone,
-										SipCallMode.DIRECT_CALL);
+								generateExportedOutgoingCall(_calleeName,
+										_mCalleePhone, SipCallMode.DIRECT_CALL);
 								break;
 
 							case ConnectivityManager.TYPE_MOBILE:
 							default:
 								// check contact for generating an new outgoing
 								// call: auto callback
-								SipUtils.makeSipVoiceCall(
-										(String) ((TextView) findViewById(R.id.callee_textView))
-												.getText(), _mCalleePhone,
-										SipCallMode.CALLBACK);
+								generateExportedOutgoingCall(_calleeName,
+										_mCalleePhone, SipCallMode.CALLBACK);
 								break;
 							}
 						} catch (NoActiveNetworkException e) {
@@ -436,6 +443,17 @@ public class OutgoingCallActivity extends Activity implements
 	}
 
 	@Override
+	protected void onResume() {
+		// check sip registration state listener and register sip account
+		if (null != _mSipRegistrationStateListener) {
+			SipRegisterManager.registSip(_mSipRegistrationStateListener,
+					getString(R.string.vos_server));
+		}
+
+		super.onResume();
+	}
+
+	@Override
 	public void onBackPressed() {
 		// get contacts list sliding drawer
 		SlidingDrawer _contactListSlidingDrawer = (SlidingDrawer) findViewById(R.id.contactslist_slidingDrawer);
@@ -457,6 +475,11 @@ public class OutgoingCallActivity extends Activity implements
 	protected void onDestroy() {
 		// unregister phone state broadcast receiver
 		unregisterReceiver(_mPhoneStateBroadcastReceiver);
+
+		// check sip registration state listener and cancel voip online status
+		if (null != _mSipRegistrationStateListener) {
+			SipRegistrationStateListenerImp.cancelVOIPOnlineStatus();
+		}
 
 		super.onDestroy();
 	}
@@ -789,6 +812,10 @@ public class OutgoingCallActivity extends Activity implements
 				// stop call duration chronometer
 				_mCallDurationChronometer.stop();
 
+				// check if or not need to go to Chinese telephone tab activity
+				// before finish
+				checkBeforeFinish();
+
 				// force finish outgoing call activity
 				finish();
 
@@ -825,12 +852,189 @@ public class OutgoingCallActivity extends Activity implements
 
 					@Override
 					public void run() {
+						checkBeforeFinish();
+
 						// finish outgoing call activity
 						finish();
 					}
 				}, 600);
 			}
 		}, 500);
+	}
+
+	private void initExportedOutgoingCall() {
+		// init sip registration state listener
+		_mSipRegistrationStateListener = new SipRegistrationStateListenerImp();
+
+		// define callee name, default is callee phone
+		String _calleeName = _mCalleePhone;
+
+		// define constant
+		final String[] _projection = new String[] { PhoneLookup.DISPLAY_NAME };
+		Uri _phoneLookupUri = Uri.withAppendedPath(
+				PhoneLookup.CONTENT_FILTER_URI, Uri.encode(_mCalleePhone));
+
+		// use contentResolver to query contacts table
+		Cursor _displayNameCursor = CTApplication.getContext()
+				.getContentResolver()
+				.query(_phoneLookupUri, _projection, null, null, null);
+
+		// check displayName cursor and traverse result
+		if (null != _displayNameCursor) {
+			// check has next
+			if (_displayNameCursor.moveToNext()) {
+				// update callee name
+				_calleeName = _displayNameCursor.getString(_displayNameCursor
+						.getColumnIndex(PhoneLookup.DISPLAY_NAME));
+			}
+
+			// close displayName cursor
+			_displayNameCursor.close();
+		}
+
+		// set callee textView text
+		((TextView) findViewById(R.id.callee_textView)).setText(_calleeName);
+	}
+
+	private void generateExportedOutgoingCall(String calleeName,
+			String calleePhone, SipCallMode callMode) {
+		// get cancel exported outgoing call button and linearLayout
+		ImageButton _cancelExportedOutgoingCallImgBtn = (ImageButton) findViewById(R.id.cancel_exportedOutgoingCall_button);
+		LinearLayout _exportedOutgoingCallLinearLayout = (LinearLayout) findViewById(R.id.exportedOutgoingCall_linearLayout);
+
+		UserBean telUser = UserManager.getInstance().getUser();
+		if (calleePhone.matches("^[2-9]{1}\\d{2,7}")
+				&& (null == (String) telUser.getValue(TelUser.local_area_code
+						.name()) || "".equalsIgnoreCase((String) telUser
+						.getValue(TelUser.local_area_code.name())))) {
+			// hide cancel exported outgoing call linearLayout
+			_exportedOutgoingCallLinearLayout.setVisibility(View.GONE);
+
+			NoLocalAreaCodePopupWindow _noLocalAreaCodePopupWindow = new NoLocalAreaCodePopupWindow(
+					R.layout.no_areacode_popupwindow_layout,
+					LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
+
+			_noLocalAreaCodePopupWindow
+					.setDependentView(_mCenterContentRelativeLayout);
+
+			_noLocalAreaCodePopupWindow.showAtLocation(
+					_mCenterContentRelativeLayout, Gravity.CENTER, 0, 0);
+		} else {
+			// update call state textView text
+			_mCallStateTextView.setText(R.string.outgoing_call_trying);
+
+			// hide cancel exported outgoing call linearLayout and button
+			_cancelExportedOutgoingCallImgBtn.setVisibility(View.GONE);
+			_exportedOutgoingCallLinearLayout.setVisibility(View.GONE);
+
+			switch (callMode) {
+			case DIRECT_CALL:
+				// show call controller gridView and call controller footer
+				// linearLayout
+				((GridView) findViewById(R.id.callController_gridView))
+						.setVisibility(View.VISIBLE);
+				((LinearLayout) findViewById(R.id.callController_footerLinearLayout))
+						.setVisibility(View.VISIBLE);
+
+				break;
+
+			default:
+			case CALLBACK:
+				// show back for waiting callback call button
+				((ImageButton) findViewById(R.id.back4waiting_callbackCall_button))
+						.setVisibility(View.VISIBLE);
+
+				break;
+			}
+
+			// make sip voice call
+			SipUtils.makeSipVoiceCall(SipCallSponsor.outer, calleeName,
+					calleePhone, callMode);
+		}
+	}
+
+	private void checkBeforeFinish() {
+		// get addressBook manager reference
+		AddressBookManager _addressBookManagerRef = AddressBookManager
+				.getInstance();
+
+		if (null != _mSipRegistrationStateListener
+				&& _addressBookManagerRef.getAllContactsInfoArray().isEmpty()) {
+			Log.d(LOG_TAG,
+					"Exported outgoing call, traversal address book again");
+
+			// traversal address book
+			AddressBookManager.setFilterMode(AddressBookManager.FILTER_DEFAULT);
+			_addressBookManagerRef.traversalAddressBook();
+
+			// init all name phonetic sorted contacts info array
+			ContactListTabContentActivity
+					.initNamePhoneticSortedContactsInfoArray();
+
+			// goto Chinese telephone tab activity
+			Intent _chineseTelephoneTabIntent = new Intent(this,
+					ChineseTelephoneTabActivity.class);
+			_chineseTelephoneTabIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			_chineseTelephoneTabIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(_chineseTelephoneTabIntent);
+		}
+	}
+
+	public void onClickExportedOutgoingCallDirectDial(View v) {
+		Log.d(LOG_TAG, "Exported outgoing call direct dial");
+
+		// check contact for generating an new outgoing call:
+		// direct dial
+		if (NetworkInfoUtils.isCurrentActiveNetworkAvailable()) {
+			// get callee name
+			String _calleeName = (String) ((TextView) findViewById(R.id.callee_textView))
+					.getText();
+
+			generateExportedOutgoingCall(_calleeName, _mCalleePhone,
+					SipCallMode.DIRECT_CALL);
+		} else {
+			// show there is no active and available network currently
+			new AlertDialog.Builder(OutgoingCallActivity.this)
+					.setTitle(
+							R.string.noActiveAvailableNetwork_alertDialog_title)
+					.setMessage(
+							R.string.noActiveAvailableNetwork_alertDialog_message)
+					.setNegativeButton(
+							R.string.noActiveAvailableNetwork_alertDialog_setLaterBtn_title,
+							null)
+					.setPositiveButton(
+							R.string.noActiveAvailableNetwork_alertDialog_setNowBtn_title,
+							new ModifyWirelessSettingsBtnOnClickListener())
+					.show();
+		}
+	}
+
+	public void onClickExportedOutgoingCallCallback(View v) {
+		Log.d(LOG_TAG, "Exported outgoing call callback");
+
+		// check contact for generating an new outgoing call: callback
+		if (NetworkInfoUtils.isCurrentActiveNetworkAvailable()) {
+			// get callee name
+			String _calleeName = (String) ((TextView) findViewById(R.id.callee_textView))
+					.getText();
+
+			generateExportedOutgoingCall(_calleeName, _mCalleePhone,
+					SipCallMode.CALLBACK);
+		} else {
+			// show there is no active and available network currently
+			new AlertDialog.Builder(OutgoingCallActivity.this)
+					.setTitle(
+							R.string.noActiveAvailableNetwork_alertDialog_title)
+					.setMessage(
+							R.string.noActiveAvailableNetwork_alertDialog_message)
+					.setNegativeButton(
+							R.string.noActiveAvailableNetwork_alertDialog_setLaterBtn_title,
+							null)
+					.setPositiveButton(
+							R.string.noActiveAvailableNetwork_alertDialog_setNowBtn_title,
+							new ModifyWirelessSettingsBtnOnClickListener())
+					.show();
+		}
 	}
 
 	// inner class

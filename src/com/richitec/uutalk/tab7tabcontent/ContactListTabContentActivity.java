@@ -70,6 +70,7 @@ import com.richitec.uutalk.call.SipCallMode;
 import com.richitec.uutalk.constant.SystemConstants;
 import com.richitec.uutalk.constant.TelUser;
 import com.richitec.uutalk.sip.SipUtils;
+import com.richitec.uutalk.sip.services.ISipServices.SipCallSponsor;
 import com.richitec.uutalk.utils.AppDataSaveRestoreUtil;
 
 public class ContactListTabContentActivity extends NavigationActivity {
@@ -770,8 +771,9 @@ public class ContactListTabContentActivity extends NavigationActivity {
 							Gravity.CENTER, 0, 0);
 				} else {
 					// make sip voice call
-					SipUtils.makeSipVoiceCall(_mContactDisplayName,
-							_selectedPhone, _mDialContactPhoneMode);
+					SipUtils.makeSipVoiceCall(SipCallSponsor.inner,
+							_mContactDisplayName, _selectedPhone,
+							_mDialContactPhoneMode);
 				}
 			}
 
@@ -807,8 +809,9 @@ public class ContactListTabContentActivity extends NavigationActivity {
 							Gravity.CENTER, 0, 0);
 				} else {
 					// make sip voice call
-					SipUtils.makeSipVoiceCall(_mContactDisplayName,
-							_selectedPhone, _mDialContactPhoneMode);
+					SipUtils.makeSipVoiceCall(SipCallSponsor.inner,
+							_mContactDisplayName, _selectedPhone,
+							_mDialContactPhoneMode);
 				}
 			}
 

@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.richitec.uutalk"
     android:versionCode="1"
-    android:versionName="0.1">
-
+    android:versionName="0.1" >
 
     <uses-sdk
         android:minSdkVersion="7"
@@ -65,7 +64,8 @@
         </activity>
         <activity
             android:name=".call.OutgoingCallActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@style/AppOutgoingCallActivityTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.CALL" />
 

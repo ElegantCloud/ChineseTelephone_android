@@ -119,6 +119,9 @@
     <string name="endCall_imageView_content_description">end call image button</string>
     <string name="contactslist_slidingDrawer_handleBtn_text">contacts list sliding drawer handle button text</string>
     <string name="hidecontactslist_button_text">返回</string>
+    <string name="exportedOutgoingCall_tipTextView_text">选择拨打方式</string>
+    <string name="exportedOutgoingCall_directDialTextView_text">环宇通直拨</string>
+    <string name="exportedOutgoingCall_callbackTextView_text">环宇通回拨</string>
     <string name="hideKeyboard_imageView_content_description">hide keyboard image button</string>
     <string name="sending_request">正在发送请求</string>
     <string name="callbackWaiting_imageView_content_description">callback waiting image view</string>

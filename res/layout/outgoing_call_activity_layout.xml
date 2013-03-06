@@ -68,7 +68,6 @@
                     android:layout_gravity="center"
                     android:ellipsize="end"
                     android:singleLine="true"
-                    android:text="@string/outgoing_call_trying"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@android:color/white" />
 
@@ -156,25 +155,28 @@
                 android:layout_marginLeft="@dimen/exportedOutgoingCall_linearLayout_marginLeft7Right"
                 android:layout_marginRight="@dimen/exportedOutgoingCall_linearLayout_marginLeft7Right"
                 android:layout_marginTop="@dimen/exportedOutgoingCall_linearLayout_marginTop7Bottom"
-                android:background="@drawable/popupwindow_title_relativelayout_bg"
+                android:background="@drawable/exportedoutgoingcall_linearlayout_bg"
                 android:orientation="vertical" >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="60.0dp"
                     android:gravity="center_vertical"
-                    android:text="选择拨打方式"
+                    android:paddingLeft="10dp"
+                    android:text="@string/exportedOutgoingCall_tipTextView_text"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@android:color/white"
                     android:textStyle="bold" />
 
-                <TextView
+                <Button
                     android:id="@+id/exportedOutgoingCall_directDial_textView"
                     android:layout_width="fill_parent"
                     android:layout_height="80.0dp"
                     android:background="@drawable/exportedoutgoingcall_callmode_middle_item_bg"
                     android:gravity="center_vertical"
-                    android:text="环宇通直拨"
+                    android:onClick="onClickExportedOutgoingCallDirectDial"
+                    android:paddingLeft="20dp"
+                    android:text="@string/exportedOutgoingCall_directDialTextView_text"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="@color/dark_dim_gray" />
 
@@ -183,13 +185,15 @@
                     android:layout_height="1.0dp"
                     android:background="@drawable/setting_line_img" />
 
-                <TextView
+                <Button
                     android:id="@+id/exportedOutgoingCall_callback_textView"
                     android:layout_width="fill_parent"
                     android:layout_height="80.0dp"
                     android:background="@drawable/exportedoutgoingcall_callmode_middle_item_bg"
                     android:gravity="center_vertical"
-                    android:text="环宇通回拨"
+                    android:onClick="onClickExportedOutgoingCallCallback"
+                    android:paddingLeft="20dp"
+                    android:text="@string/exportedOutgoingCall_callbackTextView_text"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="@color/dark_dim_gray" />
             </LinearLayout>

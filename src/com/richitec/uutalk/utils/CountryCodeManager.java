@@ -38,11 +38,11 @@ public class CountryCodeManager {
 		Context context = CTApplication.getContext();
 		HashMap<String, String> data = new HashMap<String, String>();
 		data.put(Country.contryname.name(), context.getString(R.string.china));
-		data.put(Country.code.name(), "0086");
+		data.put(Country.code.name(), "86");
 		datas.add(data);
 		HashMap<String, String> data1 = new HashMap<String, String>();
 		data1.put(Country.contryname.name(), context.getString(R.string.angola));
-		data1.put(Country.code.name(), "00244");
+		data1.put(Country.code.name(), "244");
 		datas.add(data1);
 
 	}

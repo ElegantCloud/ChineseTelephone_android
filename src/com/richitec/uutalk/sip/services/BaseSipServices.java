@@ -105,10 +105,11 @@ public abstract class BaseSipServices implements ISipServices {
 	public abstract boolean hangupSipVoiceCall();
 
 	@Override
-	public void makeSipVoiceCall(final String calleeName,
-			final String calleePhone, final SipCallMode callMode) {
+	public void makeSipVoiceCall(final SipCallSponsor sponsor,
+			final String calleeName, final String calleePhone,
+			final SipCallMode callMode) {
 		// before make sip voice call
-		beforeMakeSipVoiceCall(calleeName, calleePhone, callMode);
+		beforeMakeSipVoiceCall(sponsor, calleeName, calleePhone, callMode);
 
 		// new handle post delay 0.5 second to execute make sip voice call
 		new Handler().postDelayed(new Runnable() {
@@ -132,20 +133,32 @@ public abstract class BaseSipServices implements ISipServices {
 				String _defaultCountryCode = CTApplication.getContext()
 						.getResources()
 						.getString(R.string.default_country_code);
-				if (calleePhone.matches("^[2-9]{1}\\d{2,7}")) {
-					UserBean telUser = UserManager.getInstance().getUser();
-					checkedCalleePhone = _defaultCountryCode
-							+ (String) telUser.getValue(TelUser.local_area_code
-									.name()) + calleePhone;
+				if (calleePhone.startsWith("00") && calleePhone.length() > 2) {
+					checkedCalleePhone = calleePhone.substring(2);
+				} else {
+					if (calleePhone.matches("^[2-9]{1}\\d{2,7}")) {
+						UserBean telUser = UserManager.getInstance().getUser();
+						checkedCalleePhone = _defaultCountryCode
+								+ (String) telUser
+										.getValue(TelUser.local_area_code
+												.name()) + calleePhone;
+					}
+					if (calleePhone
+							.matches("(^[0]\\d{2,3}\\d{7,8})|(^[1][\\d]{10})")) {
+						checkedCalleePhone = _defaultCountryCode + calleePhone;
+						// UserBean telUser =
+						// UserManager.getInstance().getUser();
+						// checkedCalleePhone = (String) telUser
+						// .getValue(TelUser.dialCountryCode.name())
+						// + calleePhone;
+					}
 				}
-				if (calleePhone
-						.matches("(^[0]\\d{2,3}\\d{7,8})|(^[1][\\d]{10})")) {
-					checkedCalleePhone = _defaultCountryCode + calleePhone;
-					// UserBean telUser = UserManager.getInstance().getUser();
-					// checkedCalleePhone = (String) telUser
-					// .getValue(TelUser.dialCountryCode.name())
-					// + calleePhone;
-				}
+
+				Log.d(LOG_TAG, "checkedCalleePhone = "
+						+ checkedCalleePhone
+						+ " and local area code = "
+						+ (String) UserManager.getInstance().getUser()
+								.getValue(TelUser.local_area_code.name()));
 
 				switch (callMode) {
 				case CALLBACK:
@@ -170,7 +183,7 @@ public abstract class BaseSipServices implements ISipServices {
 				// after make sip voice call
 				afterMakeSipVoiceCall(_makeSipVoiceCallResult);
 			}
-		}, 500);
+		}, SipCallSponsor.inner == sponsor ? 500 : 0);
 	}
 
 	@Override
@@ -266,30 +279,33 @@ public abstract class BaseSipServices implements ISipServices {
 	}
 
 	// before make sip voice call
-	private void beforeMakeSipVoiceCall(String calleeName, String calleePhone,
-			SipCallMode callMode) {
+	private void beforeMakeSipVoiceCall(SipCallSponsor sponsor,
+			String calleeName, String calleePhone, SipCallMode callMode) {
 		// insert sip voice call log
 		_mSipVoiceCallLogId = CallLogManager.insertCallLog(calleeName,
 				calleePhone);
 
-		// start outgoing call activity and set parameters
-		// define the outgoing call intent
-		Intent _outgoingCallIntent = new Intent(_appContext,
-				OutgoingCallActivity.class);
+		// check sip voice call sponsor
+		if (SipCallSponsor.inner == sponsor) {
+			// start outgoing call activity and set parameters define the
+			// outgoing call intent
+			Intent _outgoingCallIntent = new Intent(_appContext,
+					OutgoingCallActivity.class);
 
-		// set it as an new task
-		_outgoingCallIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			// set it as an new task
+			_outgoingCallIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		// set outgoing call mode, callee phone and callee name
-		_outgoingCallIntent.putExtra(OutgoingCallActivity.OUTGOING_CALL_MODE,
-				callMode);
-		_outgoingCallIntent.putExtra(OutgoingCallActivity.OUTGOING_CALL_PHONE,
-				calleePhone);
-		_outgoingCallIntent.putExtra(
-				OutgoingCallActivity.OUTGOING_CALL_OWNERSHIP, calleeName);
+			// set outgoing call mode, callee phone and callee name
+			_outgoingCallIntent.putExtra(
+					OutgoingCallActivity.OUTGOING_CALL_MODE, callMode);
+			_outgoingCallIntent.putExtra(
+					OutgoingCallActivity.OUTGOING_CALL_PHONE, calleePhone);
+			_outgoingCallIntent.putExtra(
+					OutgoingCallActivity.OUTGOING_CALL_OWNERSHIP, calleeName);
 
-		// start outgoing call activity
-		_appContext.startActivity(_outgoingCallIntent);
+			// start outgoing call activity
+			_appContext.startActivity(_outgoingCallIntent);
+		}
 	}
 
 	// after make sip voice call

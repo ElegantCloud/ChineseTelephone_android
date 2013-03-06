@@ -41,6 +41,7 @@ import com.richitec.commontoolkit.utils.NetworkInfoUtils;
 import com.richitec.uutalk.R;
 import com.richitec.uutalk.call.SipCallMode;
 import com.richitec.uutalk.sip.SipUtils;
+import com.richitec.uutalk.sip.services.ISipServices.SipCallSponsor;
 import com.richitec.uutalk.utils.AppDataSaveRestoreUtil;
 
 public class CallRecordDetailInfoActivity extends NavigationActivity {
@@ -341,8 +342,8 @@ public class CallRecordDetailInfoActivity extends NavigationActivity {
 		private void checkNetworkState7MakeSipVoiceCall(SipCallMode sipCallMode) {
 			if (NetworkInfoUtils.isCurrentActiveNetworkAvailable()) {
 				// make a sip voice call
-				SipUtils.makeSipVoiceCall(_mCalleeName, _mCalleePhone,
-						sipCallMode);
+				SipUtils.makeSipVoiceCall(SipCallSponsor.inner, _mCalleeName,
+						_mCalleePhone, sipCallMode);
 			} else {
 				// show there is no active and available network currently
 				new AlertDialog.Builder(CallRecordDetailInfoActivity.this)
