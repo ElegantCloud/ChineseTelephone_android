@@ -6,16 +6,21 @@
     <!-- application launch activity theme -->
     <style name="AppLaunchActivityTheme" parent="android:Theme.Black.NoTitleBar.Fullscreen" />
 
+    <!-- application outgoing call activity theme -->
+    <style name="AppOutgoingCallActivityTheme" parent="android:Theme.Black.NoTitleBar" />
+
     <style name="popup_window_cancel_bt">
         <item name="android:background">@drawable/gray_btn_bg</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">20sp</item>
         <item name="android:text">@string/cancel</item>
     </style>
+
     <style name="popup_window_ok_bt">
         <item name="android:background">@drawable/green_btn_bg</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">20sp</item>
         <item name="android:text">@string/ok</item>
     </style>
+
 </resources>

@@ -58,7 +58,8 @@ public class CallRecordHistoryListTabContentActivity extends NavigationActivity 
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		Log.d(SystemConstants.TAG, "CallRecordHistoryListTabContentActivity - onCreate");
+		Log.d(SystemConstants.TAG,
+				"CallRecordHistoryListTabContentActivity - onCreate");
 		super.onCreate(savedInstanceState);
 
 		// set content view
@@ -95,50 +96,54 @@ public class CallRecordHistoryListTabContentActivity extends NavigationActivity 
 		// add call log changed ContentObserver
 		getContentResolver().registerContentObserver(CallLog.Calls.CONTENT_URI,
 				false, CALLLOG_CONTENTOBSERVER);
-		
-		
+
 	}
 
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		getMenuInflater().inflate(
-//				R.menu.call_record_history_list_tab_content_activity_layout,
-//				menu);
-//		return true;
-//	}
-	
+	// @Override
+	// public boolean onCreateOptionsMenu(Menu menu) {
+	// getMenuInflater().inflate(
+	// R.menu.call_record_history_list_tab_content_activity_layout,
+	// menu);
+	// return true;
+	// }
+
 	@Override
-    public void onBackPressed(){
-    	this.getParent().onBackPressed();
-    }
+	public void onBackPressed() {
+		this.getParent().onBackPressed();
+	}
 
 	@Override
 	protected void onStop() {
-		Log.d(SystemConstants.TAG, "CallRecordHistoryListTabContentActivity - onStop");
+		Log.d(SystemConstants.TAG,
+				"CallRecordHistoryListTabContentActivity - onStop");
 		super.onStop();
 	}
-	
+
 	@Override
-    protected void onPause() {
-		Log.d(SystemConstants.TAG, "CallRecordHistoryListTabContentActivity - onPause");
+	protected void onPause() {
+		Log.d(SystemConstants.TAG,
+				"CallRecordHistoryListTabContentActivity - onPause");
 		super.onPause();
-    }
-	
+	}
+
 	@Override
 	protected void onRestart() {
-		Log.d(SystemConstants.TAG, "CallRecordHistoryListTabContentActivity - onRestart");
+		Log.d(SystemConstants.TAG,
+				"CallRecordHistoryListTabContentActivity - onRestart");
 		super.onRestart();
 	}
 
 	@Override
 	protected void onStart() {
-		Log.d(SystemConstants.TAG, "CallRecordHistoryListTabContentActivity - onStart");
+		Log.d(SystemConstants.TAG,
+				"CallRecordHistoryListTabContentActivity - onStart");
 		super.onStart();
 	}
-	
+
 	@Override
 	protected void onResume() {
-		Log.d(SystemConstants.TAG, "CallRecordHistoryListTabContentActivity - onResume");
+		Log.d(SystemConstants.TAG,
+				"CallRecordHistoryListTabContentActivity - onResume");
 		// check call log need to reload flag
 		if (_mCallLogNeed2Reload) {
 			// reset call log need to reload flag
@@ -183,7 +188,6 @@ public class CallRecordHistoryListTabContentActivity extends NavigationActivity 
 
 		super.onResume();
 	}
-
 
 	@Override
 	protected void onDestroy() {
@@ -257,11 +261,12 @@ public class CallRecordHistoryListTabContentActivity extends NavigationActivity 
 					// get call type and callee name
 					CallType _callType = _dataCallLogBean.getCallType();
 					String _calleeName = _dataCallLogBean.getCalleeName();
-//					List<ContactBean> tmpContacts =  AddressBookManager.getInstance().getContactsByPhone(_dataCallLogBean.getCalleePhone());
-//					if (tmpContacts.size() > 0) {
-//						_calleeName = tmpContacts.get(0).getDisplayName();
-//					}
-					
+					// List<ContactBean> tmpContacts =
+					// AddressBookManager.getInstance().getContactsByPhone(_dataCallLogBean.getCalleePhone());
+					// if (tmpContacts.size() > 0) {
+					// _calleeName = tmpContacts.get(0).getDisplayName();
+					// }
+
 					_dataValue = CallType.MISSED == _callType ? new SpannableString(
 							_calleeName) : _calleeName;
 				} else if (CALL_RECORD_PHONE.equalsIgnoreCase(dataKey)) {
@@ -467,8 +472,6 @@ public class CallRecordHistoryListTabContentActivity extends NavigationActivity 
 
 	}
 
-	
-	
 	// call record history listView on item click listener
 	class CallRecordHistoryListViewOnItemClickListener implements
 			OnItemClickListener {
@@ -543,7 +546,7 @@ public class CallRecordHistoryListTabContentActivity extends NavigationActivity 
 
 		@Override
 		public void onChange(boolean selfChange) {
-//			super.onChange(selfChange);
+			// super.onChange(selfChange);
 			Log.d(SystemConstants.TAG, "CallLogContentObserver - on change");
 			// call log need to reload
 			_mCallLogNeed2Reload = true;

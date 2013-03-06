@@ -51,6 +51,8 @@ public class AppDataSaveRestoreUtil {
 		String bindPhone = DataStorageUtils.getString(TelUser.bindphone.name());
 		String bindPhoneCountryCode = DataStorageUtils
 				.getString(TelUser.bindphone_country_code.name());
+		String exportedDialPhone = (String) UserManager.getInstance().getUser()
+				.getValue(TelUser.exported_dial_phone.name());
 
 		UserBean user = new UserBean();
 		user.setName(userName);
@@ -62,6 +64,10 @@ public class AppDataSaveRestoreUtil {
 		user.setValue(TelUser.bindphone_country_code.name(),
 				bindPhoneCountryCode);
 
+		if (null != exportedDialPhone
+				&& !"".equalsIgnoreCase(exportedDialPhone.trim())) {
+			user.setValue(TelUser.exported_dial_phone.name(), exportedDialPhone);
+		}
 		if (dialcountrycode == null || dialcountrycode.trim().equals("")) {
 			user.setValue(TelUser.dialCountryCode.name(), countrycode);
 		} else {

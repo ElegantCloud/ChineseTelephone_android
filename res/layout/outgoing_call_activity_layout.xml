@@ -68,7 +68,6 @@
                     android:layout_gravity="center"
                     android:ellipsize="end"
                     android:singleLine="true"
-                    android:text="@string/outgoing_call_trying"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@android:color/white" />
 
@@ -92,12 +91,21 @@
             android:padding="16dp" >
 
             <ImageButton
+                android:id="@+id/cancel_exportedOutgoingCall_button"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/cancelexportedoutgoingcall_btn_bg"
+                android:contentDescription="@string/cancelExportedOutgoingCall_imageButton_content_description"
+                android:src="@drawable/img_cancel_exportedoutgoingcall_btn" />
+
+            <ImageButton
                 android:id="@+id/back4waiting_callbackCall_button"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:background="@drawable/back4waitingcallbackcall_btn_bg"
                 android:contentDescription="@string/back4waitingCallbackCall_imageButton_content_description"
-                android:src="@drawable/img_back4waiting_callbackcall_btn" />
+                android:src="@drawable/img_back4waiting_callbackcall_btn"
+                android:visibility="gone" />
 
             <LinearLayout
                 android:id="@+id/callController_footerLinearLayout"
@@ -137,6 +145,58 @@
             android:layout_below="@id/outgoingCall_headerLinearLayout"
             android:background="@android:color/transparent"
             android:padding="16dp" >
+
+            <LinearLayout
+                android:id="@+id/exportedOutgoingCall_linearLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="@dimen/exportedOutgoingCall_linearLayout_marginTop7Bottom"
+                android:layout_marginLeft="@dimen/exportedOutgoingCall_linearLayout_marginLeft7Right"
+                android:layout_marginRight="@dimen/exportedOutgoingCall_linearLayout_marginLeft7Right"
+                android:layout_marginTop="@dimen/exportedOutgoingCall_linearLayout_marginTop7Bottom"
+                android:background="@drawable/exportedoutgoingcall_linearlayout_bg"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="60.0dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="@string/exportedOutgoingCall_tipTextView_text"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/exportedOutgoingCall_directDial_textView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="80.0dp"
+                    android:background="@drawable/exportedoutgoingcall_callmode_middle_item_bg"
+                    android:gravity="center_vertical"
+                    android:onClick="onClickExportedOutgoingCallDirectDial"
+                    android:paddingLeft="20dp"
+                    android:text="@string/exportedOutgoingCall_directDialTextView_text"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/dark_dim_gray" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1.0dp"
+                    android:background="@drawable/setting_line_img" />
+
+                <Button
+                    android:id="@+id/exportedOutgoingCall_callback_textView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="80.0dp"
+                    android:background="@drawable/exportedoutgoingcall_callmode_middle_item_bg"
+                    android:gravity="center_vertical"
+                    android:onClick="onClickExportedOutgoingCallCallback"
+                    android:paddingLeft="20dp"
+                    android:text="@string/exportedOutgoingCall_callbackTextView_text"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/dark_dim_gray" />
+            </LinearLayout>
 
             <RelativeLayout
                 android:id="@+id/callbackWaiting_relativeLayout"

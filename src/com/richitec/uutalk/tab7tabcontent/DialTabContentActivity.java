@@ -32,12 +32,14 @@ import com.richitec.commontoolkit.activityextension.NavigationActivity;
 import com.richitec.commontoolkit.addressbook.AddressBookManager;
 import com.richitec.commontoolkit.customadapter.CTListAdapter;
 import com.richitec.commontoolkit.customcomponent.CTPopupWindow;
+import com.richitec.commontoolkit.user.UserManager;
 import com.richitec.commontoolkit.utils.CommonUtils;
 import com.richitec.commontoolkit.utils.DisplayScreenUtils;
 import com.richitec.commontoolkit.utils.ToneGeneratorUtils;
 import com.richitec.uutalk.R;
 import com.richitec.uutalk.call.OutgoingCallGenerator;
 import com.richitec.uutalk.constant.SystemConstants;
+import com.richitec.uutalk.constant.TelUser;
 import com.richitec.uutalk.utils.AppDataSaveRestoreUtil;
 
 public class DialTabContentActivity extends NavigationActivity {
@@ -69,12 +71,17 @@ public class DialTabContentActivity extends NavigationActivity {
 		// set dial phone textView
 		_mDialPhoneTextView = (TextView) findViewById(R.id.dial_phone_textView);
 
-		// set its default text
-		_mDialPhoneTextView.setText("");
-
 		// set its text watcher
 		_mDialPhoneTextView
 				.addTextChangedListener(new DialPhoneTextViewTextWatcher());
+
+		// get exported dial phone
+		String _exportedDialPhone = (String) UserManager.getInstance()
+				.getUser().popValue(TelUser.exported_dial_phone.name());
+		// set its default text
+		_mDialPhoneTextView.setText(null == _exportedDialPhone
+				|| "".equalsIgnoreCase(_exportedDialPhone) ? ""
+				: _exportedDialPhone);
 
 		// set dial phone button grid view adapter
 		((GridView) findViewById(R.id.dial_phoneBtn_gridView))
@@ -170,39 +177,40 @@ public class DialTabContentActivity extends NavigationActivity {
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
-//	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//	
-//	    if (requestCode == 0) {
-//	
-//	        if (resultCode == RESULT_OK) {
-//	
-//	            if (data == null) {
-//	                return;
-//	            }    
-//	            String _dialPhoneString = _mDialPhoneTextView.getText().toString();
-//	            
-//	            Uri result = data.getData();
-//	            String contactId = result.getLastPathSegment();
-//	            Intent intent = new Intent(Intent.ACTION_EDIT, 
-//	            		Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_URI, 
-//	            				String.valueOf(contactId)));
-//	            intent.putExtra(Intents.Insert.PHONE, _dialPhoneString);
-//	            intent.putExtra(Intents.Insert.PHONE_TYPE,
-//	            		CommonDataKinds.Phone.TYPE_MOBILE);
-//	            startActivity(intent);
-//	        }
-//	    }
-//	}
+	// protected void onActivityResult(int requestCode, int resultCode, Intent
+	// data) {
+	//
+	// if (requestCode == 0) {
+	//
+	// if (resultCode == RESULT_OK) {
+	//
+	// if (data == null) {
+	// return;
+	// }
+	// String _dialPhoneString = _mDialPhoneTextView.getText().toString();
+	//
+	// Uri result = data.getData();
+	// String contactId = result.getLastPathSegment();
+	// Intent intent = new Intent(Intent.ACTION_EDIT,
+	// Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_URI,
+	// String.valueOf(contactId)));
+	// intent.putExtra(Intents.Insert.PHONE, _dialPhoneString);
+	// intent.putExtra(Intents.Insert.PHONE_TYPE,
+	// CommonDataKinds.Phone.TYPE_MOBILE);
+	// startActivity(intent);
+	// }
+	// }
+	// }
 
 	@Override
 	protected boolean hideNavigationBarWhenOnCreated() {
 		return true;
 	}
-	
+
 	@Override
-    public void onBackPressed(){
-    	this.getParent().onBackPressed();
-    }
+	public void onBackPressed() {
+		this.getParent().onBackPressed();
+	}
 
 	// generate dial phone button adapter
 	private ListAdapter generateDialPhoneButtonAdapter() {
@@ -463,7 +471,7 @@ public class DialTabContentActivity extends NavigationActivity {
 		}
 
 	}
-	
+
 	// add new or update contact dial function button on click listener
 	class AddNew6updateContactDialFunBtnOnClickListener implements
 			OnClickListener {
@@ -698,29 +706,29 @@ public class DialTabContentActivity extends NavigationActivity {
 	}
 
 	@Override
-	protected void onRestoreInstanceState (Bundle savedInstanceState) {
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
 		AppDataSaveRestoreUtil.onRestoreInstanceState(savedInstanceState);
 		super.onRestoreInstanceState(savedInstanceState);
 	}
-	
+
 	@Override
-	protected void onSaveInstanceState (Bundle outState) {
+	protected void onSaveInstanceState(Bundle outState) {
 		AppDataSaveRestoreUtil.onSaveInstanceState(outState);
 		super.onSaveInstanceState(outState);
 	}
-	
+
 	@Override
 	protected void onStop() {
 		Log.d(SystemConstants.TAG, "DialTabContentActivity - onStop");
 		super.onStop();
 	}
-	
+
 	@Override
-    protected void onPause() {
+	protected void onPause() {
 		Log.d(SystemConstants.TAG, "DialTabContentActivity - onPause");
 		super.onPause();
-    }
-	
+	}
+
 	@Override
 	protected void onRestart() {
 		Log.d(SystemConstants.TAG, "DialTabContentActivity - onRestart");
@@ -732,7 +740,7 @@ public class DialTabContentActivity extends NavigationActivity {
 		Log.d(SystemConstants.TAG, "DialTabContentActivity - onStart");
 		super.onStart();
 	}
-	
+
 	@Override
 	protected void onResume() {
 		Log.d(SystemConstants.TAG, "DialTabContentActivity - onResume");

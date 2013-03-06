@@ -15,8 +15,8 @@ public interface ISipServices {
 			SipRegistrationStateListener sipRegistrationStateListener);
 
 	// make sip voice call
-	public void makeSipVoiceCall(String calleeName, String calleePhone,
-			SipCallMode callMode);
+	public void makeSipVoiceCall(SipCallSponsor sponsor, String calleeName,
+			String calleePhone, SipCallMode callMode);
 
 	// hangup current sip voice call
 	public boolean hangupSipVoiceCall(Long callDuration);
@@ -38,5 +38,11 @@ public interface ISipServices {
 
 	// destroy sip engine
 	public void destroySipEngine();
+
+	// inner class
+	// sip voice call sponsor
+	public enum SipCallSponsor {
+		inner, outer
+	}
 
 }

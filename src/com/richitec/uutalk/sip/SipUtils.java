@@ -7,6 +7,7 @@ import com.richitec.uutalk.constant.SystemConstants;
 import com.richitec.uutalk.sip.listeners.SipRegistrationStateListener;
 import com.richitec.uutalk.sip.services.BaseSipServices;
 import com.richitec.uutalk.sip.services.ISipServices;
+import com.richitec.uutalk.sip.services.ISipServices.SipCallSponsor;
 import com.richitec.uutalk.sip.services.SipDroidSipServices;
 
 public class SipUtils {
@@ -46,13 +47,14 @@ public class SipUtils {
 	}
 
 	// make sip voice call
-	public static void makeSipVoiceCall(String calleeName, String calleePhone,
-			SipCallMode callMode) {
-		Log.d("SipUtils", "makeSipVoiceCall - callee name = " + calleeName
-				+ " , phone number = " + calleePhone + " and call mode = "
-				+ callMode);
+	public static void makeSipVoiceCall(SipCallSponsor sponsor,
+			String calleeName, String calleePhone, SipCallMode callMode) {
+		Log.d("SipUtils", "makeSipVoiceCall - sponsor = " + sponsor
+				+ " , callee name = " + calleeName + " , phone number = "
+				+ calleePhone + " and call mode = " + callMode);
 
-		getSipServices().makeSipVoiceCall(calleeName, calleePhone, callMode);
+		getSipServices().makeSipVoiceCall(sponsor, calleeName, calleePhone,
+				callMode);
 	}
 
 	// destroy sip engine

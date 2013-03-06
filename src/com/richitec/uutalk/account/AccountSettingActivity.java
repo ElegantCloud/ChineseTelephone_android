@@ -287,12 +287,19 @@ public class AccountSettingActivity extends Activity {
 
 		if (!useSavedPsw) {
 			UserBean user = new UserBean();
+			UserBean oldUser = UserManager.getInstance().getUser();
+			String exportedDialPhone = (String) oldUser
+					.getValue(TelUser.exported_dial_phone.name());
+
 			user.setName(username);
 			user.setPassword(StringUtils.md5(psw));
-			user.setValue(
-					TelUser.local_area_code.name(),
-					UserManager.getInstance().getUser()
-							.getValue(TelUser.local_area_code.name()));
+			user.setValue(TelUser.local_area_code.name(),
+					oldUser.getValue(TelUser.local_area_code.name()));
+			if (null != exportedDialPhone
+					&& !"".equalsIgnoreCase(exportedDialPhone)) {
+				user.setValue(TelUser.exported_dial_phone.name(),
+						exportedDialPhone);
+			}
 			UserManager.getInstance().setUser(user);
 		}
 

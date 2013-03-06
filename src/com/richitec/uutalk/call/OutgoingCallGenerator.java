@@ -29,6 +29,7 @@ import com.richitec.uutalk.assist.SettingActivity.NoLocalAreaCodePopupWindow;
 import com.richitec.uutalk.call.SipCallModeSelector.SipCallModeSelectPattern;
 import com.richitec.uutalk.constant.TelUser;
 import com.richitec.uutalk.sip.SipUtils;
+import com.richitec.uutalk.sip.services.ISipServices.SipCallSponsor;
 import com.richitec.uutalk.tab7tabcontent.ContactListTabContentActivity.ContactPhoneNumbersSelectPopupWindow;
 
 public class OutgoingCallGenerator {
@@ -153,7 +154,12 @@ public class OutgoingCallGenerator {
 			SipCallModeSelectPattern dialModeSelectPattern) {
 		// check dial mode select pattern
 		if (SipCallModeSelectPattern.MANUAL == dialModeSelectPattern) {
-			_mContactPhoneDialModeSelectPopupWindow.dismiss();
+			// check contact phone size
+			if (1 == _mContactPhones.size()) {
+				_mContactPhoneDialModeSelectPopupWindow.dismiss();
+			} else {
+				_mContactPhoneDialModeSelectPopupWindow.dismissWithAnimation();
+			}
 		}
 
 		// check contact phone size
@@ -176,7 +182,7 @@ public class OutgoingCallGenerator {
 						Gravity.CENTER, 0, 0);
 			} else {
 				// make sip voice call
-				SipUtils.makeSipVoiceCall(_mContactName,
+				SipUtils.makeSipVoiceCall(SipCallSponsor.inner, _mContactName,
 						_mContactPhones.get(0), dialMode);
 
 				// check dial phone textView
@@ -205,8 +211,10 @@ public class OutgoingCallGenerator {
 									R.layout.contact_phonenumbers_select_popupwindow_layout,
 									LayoutParams.FILL_PARENT,
 									LayoutParams.FILL_PARENT)
-									.setContactPhones4Selecting(_mContactName,
-											_mContactPhones, dialMode))
+									.setContactPhones4Selecting(
+											_mGenNewOutgoingCallOperationDependentView,
+											_mContactName, _mContactPhones,
+											dialMode))
 									.showAtLocationWithAnimation(
 											_mGenNewOutgoingCallOperationDependentView,
 											Gravity.CENTER, 0, 0);

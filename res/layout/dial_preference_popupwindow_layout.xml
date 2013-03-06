@@ -65,8 +65,8 @@
                 android:text="@string/manual_choose_dial"
                 android:textColor="@color/dark_dim_gray"
                 android:textSize="18dp" />
-            
-             <RadioButton
+
+            <RadioButton
                 android:id="@+id/radio_auto_select_call_mode_btn"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

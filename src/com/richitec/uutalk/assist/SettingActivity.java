@@ -926,7 +926,7 @@ public class SettingActivity extends NavigationActivity {
 
 	public static class NoLocalAreaCodePopupWindow extends CTPopupWindow {
 
-		// dependent view
+		// no local area code popup window present dependent view
 		View _mDependentView;
 
 		public NoLocalAreaCodePopupWindow(int resource, int width, int height,

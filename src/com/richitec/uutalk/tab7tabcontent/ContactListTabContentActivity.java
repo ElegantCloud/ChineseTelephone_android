@@ -70,6 +70,7 @@ import com.richitec.uutalk.call.SipCallMode;
 import com.richitec.uutalk.constant.SystemConstants;
 import com.richitec.uutalk.constant.TelUser;
 import com.richitec.uutalk.sip.SipUtils;
+import com.richitec.uutalk.sip.services.ISipServices.SipCallSponsor;
 import com.richitec.uutalk.utils.AppDataSaveRestoreUtil;
 
 public class ContactListTabContentActivity extends NavigationActivity {
@@ -612,6 +613,9 @@ public class ContactListTabContentActivity extends NavigationActivity {
 		// dial contact phone mode
 		private SipCallMode _mDialContactPhoneMode;
 
+		// contact phone number select popup window present dependent view
+		private View _mDependentView;
+
 		public ContactPhoneNumbersSelectPopupWindow(int resource, int width,
 				int height, boolean focusable, boolean isBindDefListener) {
 			super(resource, width, height, focusable, isBindDefListener);
@@ -670,8 +674,11 @@ public class ContactListTabContentActivity extends NavigationActivity {
 
 		// set contact phone number for selecting
 		public ContactPhoneNumbersSelectPopupWindow setContactPhones4Selecting(
-				String displayName, List<String> phoneNumbers,
-				SipCallMode dialContactPhoneMode) {
+				View dependentView, String displayName,
+				List<String> phoneNumbers, SipCallMode dialContactPhoneMode) {
+			// save dependent view
+			_mDependentView = dependentView;
+
 			// update select contact display name and dial its phone mode
 			_mContactDisplayName = displayName;
 			_mDialContactPhoneMode = dialContactPhoneMode;
@@ -757,14 +764,16 @@ public class ContactListTabContentActivity extends NavigationActivity {
 							R.layout.no_areacode_popupwindow_layout,
 							LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
 
-					_noLocalAreaCodePopupWindow.setDependentView(v);
+					_noLocalAreaCodePopupWindow
+							.setDependentView(_mDependentView);
 
-					_noLocalAreaCodePopupWindow.showAtLocation(v,
+					_noLocalAreaCodePopupWindow.showAtLocation(_mDependentView,
 							Gravity.CENTER, 0, 0);
 				} else {
 					// make sip voice call
-					SipUtils.makeSipVoiceCall(_mContactDisplayName,
-							_selectedPhone, _mDialContactPhoneMode);
+					SipUtils.makeSipVoiceCall(SipCallSponsor.inner,
+							_mContactDisplayName, _selectedPhone,
+							_mDialContactPhoneMode);
 				}
 			}
 
@@ -782,9 +791,28 @@ public class ContactListTabContentActivity extends NavigationActivity {
 				// dismiss contact phone select popup window
 				dismiss();
 
-				// make sip voice call
-				SipUtils.makeSipVoiceCall(_mContactDisplayName, _selectedPhone,
-						_mDialContactPhoneMode);
+				UserBean telUser = UserManager.getInstance().getUser();
+				if (_selectedPhone.matches("^[2-9]{1}\\d{2,7}")
+						&& (null == (String) telUser
+								.getValue(TelUser.local_area_code.name()) || ""
+								.equalsIgnoreCase((String) telUser
+										.getValue(TelUser.local_area_code
+												.name())))) {
+					NoLocalAreaCodePopupWindow _noLocalAreaCodePopupWindow = new NoLocalAreaCodePopupWindow(
+							R.layout.no_areacode_popupwindow_layout,
+							LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
+
+					_noLocalAreaCodePopupWindow
+							.setDependentView(_mDependentView);
+
+					_noLocalAreaCodePopupWindow.showAtLocation(_mDependentView,
+							Gravity.CENTER, 0, 0);
+				} else {
+					// make sip voice call
+					SipUtils.makeSipVoiceCall(SipCallSponsor.inner,
+							_mContactDisplayName, _selectedPhone,
+							_mDialContactPhoneMode);
+				}
 			}
 
 		}

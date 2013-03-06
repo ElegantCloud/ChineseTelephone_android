@@ -153,7 +153,8 @@ public class ChineseTelephoneTabActivity extends TabActivity {
 				if (regGivenMoney > 0) {
 					descTv.setText(String.format(
 							getString(R.string.email_setting_desc),
-							regGivenMoney.floatValue(), (int) (regGivenMoney / 0.08)));
+							regGivenMoney.floatValue(),
+							(int) (regGivenMoney / 0.08)));
 				} else {
 					descTv.setText(R.string.wanna_bind_email);
 				}
@@ -316,6 +317,8 @@ public class ChineseTelephoneTabActivity extends TabActivity {
 		Log.d(SystemConstants.TAG, "ChineseTelephoneTabActivity - onResume");
 		SipRegisterManager.registSip(sipRegistrationStateListener,
 				getString(R.string.vos_server));
+		UserManager.getInstance().getUser()
+				.setValue(SystemConstants.logined.name(), true);
 		super.onResume();
 
 		// if (espw != null) {
