@@ -149,6 +149,7 @@ public class OutgoingCallActivity extends Activity implements
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		Log.d(SystemConstants.TAG, "OutgoingCallActivity - onCreate");
 		super.onCreate(savedInstanceState);
 
 		// keep outgoing call activity screen on
@@ -234,8 +235,6 @@ public class OutgoingCallActivity extends Activity implements
 							ChineseTelephoneAppLaunchActivity.class);
 					_chineseTelephoneAppLaunchIntent
 							.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					_chineseTelephoneAppLaunchIntent
-							.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(_chineseTelephoneAppLaunchIntent);
 
 					// finish outgoing call activity
@@ -444,6 +443,7 @@ public class OutgoingCallActivity extends Activity implements
 
 	@Override
 	protected void onResume() {
+		Log.d(SystemConstants.TAG, "OutgoingCallActivity - onResume");
 		// check sip registration state listener and register sip account
 		if (null != _mSipRegistrationStateListener) {
 			SipRegisterManager.registSip(_mSipRegistrationStateListener,
@@ -451,6 +451,18 @@ public class OutgoingCallActivity extends Activity implements
 		}
 
 		super.onResume();
+	}
+
+	@Override
+	protected void onStart() {
+		Log.d(SystemConstants.TAG, "OutgoingCallActivity - onStart");
+		super.onStart();
+	}
+
+	@Override
+	protected void onRestart() {
+		Log.d(SystemConstants.TAG, "OutgoingCallActivity - onRestart");
+		super.onRestart();
 	}
 
 	@Override
