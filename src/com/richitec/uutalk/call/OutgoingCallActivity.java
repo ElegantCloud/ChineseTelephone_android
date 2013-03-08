@@ -879,7 +879,8 @@ public class OutgoingCallActivity extends Activity implements
 		_mSipRegistrationStateListener = new SipRegistrationStateListenerImp();
 
 		// define callee name, default is callee phone
-		String _calleeName = _mCalleePhone;
+		String _calleeName = getResources().getString(
+				R.string.dial_phone_callee_unknown);
 
 		// define constant
 		final String[] _projection = new String[] { PhoneLookup.DISPLAY_NAME };
@@ -905,6 +906,8 @@ public class OutgoingCallActivity extends Activity implements
 		}
 
 		// set callee textView text
+		((TextView) findViewById(R.id.callState_textView))
+				.setText(_mCalleePhone);
 		((TextView) findViewById(R.id.callee_textView)).setText(_calleeName);
 	}
 
@@ -1032,6 +1035,58 @@ public class OutgoingCallActivity extends Activity implements
 
 			generateExportedOutgoingCall(_calleeName, _mCalleePhone,
 					SipCallMode.CALLBACK);
+		} else {
+			// show there is no active and available network currently
+			new AlertDialog.Builder(OutgoingCallActivity.this)
+					.setTitle(
+							R.string.noActiveAvailableNetwork_alertDialog_title)
+					.setMessage(
+							R.string.noActiveAvailableNetwork_alertDialog_message)
+					.setNegativeButton(
+							R.string.noActiveAvailableNetwork_alertDialog_setLaterBtn_title,
+							null)
+					.setPositiveButton(
+							R.string.noActiveAvailableNetwork_alertDialog_setNowBtn_title,
+							new ModifyWirelessSettingsBtnOnClickListener())
+					.show();
+		}
+	}
+
+	public void onClickExportedOutgoingCallAutoSelect(View v) {
+		Log.d(LOG_TAG, "Exported outgoing call auto select");
+
+		// check contact for generating an new outgoing call:
+		// direct dial
+		if (NetworkInfoUtils.isCurrentActiveNetworkAvailable()) {
+			// get callee name
+			String _calleeName = (String) ((TextView) findViewById(R.id.callee_textView))
+					.getText();
+
+			try {
+				// get and check current active network type
+				switch (NetworkInfoUtils.getNetworkType()) {
+				case ConnectivityManager.TYPE_WIFI:
+					// check contact for generating an new outgoing
+					// call: auto direct dial
+					generateExportedOutgoingCall(_calleeName, _mCalleePhone,
+							SipCallMode.DIRECT_CALL);
+					break;
+
+				case ConnectivityManager.TYPE_MOBILE:
+				default:
+					// check contact for generating an new outgoing
+					// call: auto callback
+					generateExportedOutgoingCall(_calleeName, _mCalleePhone,
+							SipCallMode.CALLBACK);
+					break;
+				}
+			} catch (NoActiveNetworkException e) {
+				Log.e(LOG_TAG,
+						"Generate an new outgoing call error, because here is no active network currently, exception message = "
+								+ e.getMessage());
+
+				e.printStackTrace();
+			}
 		} else {
 			// show there is no active and available network currently
 			new AlertDialog.Builder(OutgoingCallActivity.this)
@@ -1366,6 +1421,12 @@ public class OutgoingCallActivity extends Activity implements
 
 		@Override
 		public void onClick(View v) {
+			// check sip registration state listener and cancel voip online
+			// status
+			if (null != _mSipRegistrationStateListener) {
+				SipRegistrationStateListenerImp.cancelVOIPOnlineStatus();
+			}
+
 			// finish outgoing call activity
 			finish();
 		}

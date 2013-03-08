@@ -107,7 +107,8 @@ public class ContactListTabContentActivity extends NavigationActivity {
 	public static ListAdapter getInABContactAdapter(
 			Context outgoingCallActivityContext) {
 		// check all address book name phonetic sorted contacts detail info list
-		if (null == _smAllNamePhoneticSortedContactsInfoArray) {
+		if (null == _smAllNamePhoneticSortedContactsInfoArray
+				|| _smAllNamePhoneticSortedContactsInfoArray.isEmpty()) {
 			Log.d(LOG_TAG,
 					"All address book name phonetic sorted contacts detail info list is null, init immediately");
 
@@ -168,7 +169,8 @@ public class ContactListTabContentActivity extends NavigationActivity {
 	private void initListUI() {
 		// check all address book name phonetic sorted contacts detail info list
 		// and init present contacts in address book detail info array
-		if (null == _smAllNamePhoneticSortedContactsInfoArray) {
+		if (null == _smAllNamePhoneticSortedContactsInfoArray
+				|| _smAllNamePhoneticSortedContactsInfoArray.isEmpty()) {
 			Log.d(LOG_TAG,
 					"All address book name phonetic sorted contacts detail info list is null, init immediately when on create");
 

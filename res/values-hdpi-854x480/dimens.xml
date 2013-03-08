@@ -19,4 +19,7 @@
     <!-- outgoing call keyboard phone button -->
     <dimen name="keyboardBtn_imageView_height">64dp</dimen>
 
+    <!-- exported outgoing call -->
+    <dimen name="exportedOutgoingCall_linearLayout_marginTop7Bottom">60dp</dimen>
+
 </resources>
