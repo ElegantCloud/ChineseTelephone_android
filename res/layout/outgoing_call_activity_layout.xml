@@ -160,7 +160,7 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="60.0dp"
+                    android:layout_height="46.0dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
                     android:text="@string/exportedOutgoingCall_tipTextView_text"
@@ -171,7 +171,7 @@
                 <Button
                     android:id="@+id/exportedOutgoingCall_directDial_textView"
                     android:layout_width="fill_parent"
-                    android:layout_height="80.0dp"
+                    android:layout_height="60.0dp"
                     android:background="@drawable/exportedoutgoingcall_callmode_middle_item_bg"
                     android:gravity="center_vertical"
                     android:onClick="onClickExportedOutgoingCallDirectDial"
@@ -188,12 +188,29 @@
                 <Button
                     android:id="@+id/exportedOutgoingCall_callback_textView"
                     android:layout_width="fill_parent"
-                    android:layout_height="80.0dp"
+                    android:layout_height="60.0dp"
                     android:background="@drawable/exportedoutgoingcall_callmode_middle_item_bg"
                     android:gravity="center_vertical"
                     android:onClick="onClickExportedOutgoingCallCallback"
                     android:paddingLeft="20dp"
                     android:text="@string/exportedOutgoingCall_callbackTextView_text"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/dark_dim_gray" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1.0dp"
+                    android:background="@drawable/setting_line_img" />
+
+                <Button
+                    android:id="@+id/exportedOutgoingCall_autoSelect_textView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="60.0dp"
+                    android:background="@drawable/exportedoutgoingcall_callmode_middle_item_bg"
+                    android:gravity="center_vertical"
+                    android:onClick="onClickExportedOutgoingCallAutoSelect"
+                    android:paddingLeft="20dp"
+                    android:text="@string/exportedOutgoingCall_autoSelectTextView_text"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="@color/dark_dim_gray" />
             </LinearLayout>

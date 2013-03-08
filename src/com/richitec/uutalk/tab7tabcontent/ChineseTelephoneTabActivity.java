@@ -319,6 +319,7 @@ public class ChineseTelephoneTabActivity extends TabActivity {
 				getString(R.string.vos_server));
 		UserManager.getInstance().getUser()
 				.setValue(SystemConstants.logined.name(), true);
+
 		super.onResume();
 
 		// if (espw != null) {
