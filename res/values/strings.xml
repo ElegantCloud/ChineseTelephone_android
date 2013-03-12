@@ -71,7 +71,7 @@
     <!-- dial tab content activity -->
     <string name="title_activity_dial_tab_content">DialTabContentActivity</string>
     <string name="dial_tab_title">拨号</string>
-    <string name="dialPhone_tipText">拨打国际长途请加拨00</string>
+    <string name="dialPhone_tipText">拨打固话前请加拨区号</string>
     <string name="dialBtn_imageView_content_description">dial button image view</string>
     <string name="dialBtn_imageButton_content_description">dial button image button</string>
     <string name="dial_phone_callee_unknown">未知联系人</string>
