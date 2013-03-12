@@ -400,6 +400,11 @@ public class DialTabContentActivity extends NavigationActivity {
 				// hide dial phone ownership textView
 				_dialPhoneOwnershipTextView.setVisibility(View.GONE);
 			}
+
+			// recover dial phone text font size
+			if ("".equalsIgnoreCase(s.toString())) {
+				_mDialPhoneTextView.setTextSize(27.0f);
+			}
 		}
 
 		@Override
