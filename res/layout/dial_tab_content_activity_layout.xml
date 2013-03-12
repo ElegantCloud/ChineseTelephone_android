@@ -16,6 +16,7 @@
             android:background="@drawable/img_dial_phone_textview_bg"
             android:ellipsize="middle"
             android:gravity="center"
+            android:hint="@string/dialPhone_tipText"
             android:singleLine="true"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@android:color/white"
