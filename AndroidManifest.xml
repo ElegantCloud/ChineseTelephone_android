@@ -190,6 +190,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" >
         </activity>
+        <activity android:name=".assist.AlipayWapActivity" android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
