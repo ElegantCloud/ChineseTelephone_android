@@ -79,13 +79,13 @@
                 android:clickable="true"
                 android:gravity="center_vertical"
                 android:onClick="onCardChargeBtnClick"
-                android:visibility="gone" >
+                android:visibility="visible" >
 
                 <ImageView
                     android:layout_width="fill_parent"
                     android:layout_height="30dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/angolacard_charge_card" />
+                    android:src="@drawable/hyt_charge_card" />
             </RelativeLayout>
 
             <View
