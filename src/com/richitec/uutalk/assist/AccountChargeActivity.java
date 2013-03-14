@@ -62,14 +62,14 @@ public class AccountChargeActivity extends NavigationActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.account_charge_layout);
 
-		mspHelper = new MobileSecurePayHelper(AccountChargeActivity.this);
+//		mspHelper = new MobileSecurePayHelper(AccountChargeActivity.this);
 
 		setTitle(R.string.charge_title_popwin);
 
-		chargeMoneyListAdapter = new ChargeMoneyListAdapter(this);
-		ListView chargeMoneyList = (ListView) findViewById(R.id.alipay_charge_money_list);
-		chargeMoneyList.setAdapter(chargeMoneyListAdapter);
-		chargeMoneyList.setOnItemClickListener(onChargeMoneySelectedListener);
+//		chargeMoneyListAdapter = new ChargeMoneyListAdapter(this);
+//		ListView chargeMoneyList = (ListView) findViewById(R.id.alipay_charge_money_list);
+//		chargeMoneyList.setAdapter(chargeMoneyListAdapter);
+//		chargeMoneyList.setOnItemClickListener(onChargeMoneySelectedListener);
 
 		getRemainMoney();
 	}
@@ -186,28 +186,30 @@ public class AccountChargeActivity extends NavigationActivity {
 	}
 
 	public void aliPayBtnAction(View v) {
-		boolean isMobile_spExist = mspHelper.detectMobile_sp();
-		if (!isMobile_spExist)
-			return;
-
-		if (mProgress == null || !mProgress.isShowing()) {
-			mProgress = ProgressDialog.show(this, null,
-					getString(R.string.sending_request), true);
-		}
-		if (PartnerConfig.PARTNER.equals("")) {
-
-			UserBean telUser = UserManager.getInstance().getUser();
-			HashMap<String, String> params = new HashMap<String, String>();
-			params.put("countryCode",
-					(String) telUser.getValue(TelUser.countryCode.name()));
-
-			HttpUtils.postSignatureRequest(getString(R.string.server_url)
-					+ getString(R.string.get_seller_partner_key),
-					PostRequestFormat.URLENCODED, params, null,
-					HttpRequestType.ASYNCHRONOUS, onGetPrivateKeyListener);
-		} else {
-			fetchChargeMoneyList();
-		}
+//		boolean isMobile_spExist = mspHelper.detectMobile_sp();
+//		if (!isMobile_spExist)
+//			return;
+//
+//		if (mProgress == null || !mProgress.isShowing()) {
+//			mProgress = ProgressDialog.show(this, null,
+//					getString(R.string.sending_request), true);
+//		}
+//		if (PartnerConfig.PARTNER.equals("")) {
+//
+//			UserBean telUser = UserManager.getInstance().getUser();
+//			HashMap<String, String> params = new HashMap<String, String>();
+//			params.put("countryCode",
+//					(String) telUser.getValue(TelUser.countryCode.name()));
+//
+//			HttpUtils.postSignatureRequest(getString(R.string.server_url)
+//					+ getString(R.string.get_seller_partner_key),
+//					PostRequestFormat.URLENCODED, params, null,
+//					HttpRequestType.ASYNCHRONOUS, onGetPrivateKeyListener);
+//		} else {
+//			fetchChargeMoneyList();
+//		}
+		
+		pushActivity(AlipayWapActivity.class);
 	}
 
 	private void showAlipayChargeContent() {
