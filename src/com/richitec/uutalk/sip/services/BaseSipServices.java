@@ -295,7 +295,9 @@ public abstract class BaseSipServices implements ISipServices {
 			// set it as an new task
 			_outgoingCallIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-			// set outgoing call mode, callee phone and callee name
+			// set outgoing call sponsor, mode, callee phone and callee name
+			_outgoingCallIntent.putExtra(
+					OutgoingCallActivity.OUTGOING_CALL_SPONSOR, sponsor);
 			_outgoingCallIntent.putExtra(
 					OutgoingCallActivity.OUTGOING_CALL_MODE, callMode);
 			_outgoingCallIntent.putExtra(

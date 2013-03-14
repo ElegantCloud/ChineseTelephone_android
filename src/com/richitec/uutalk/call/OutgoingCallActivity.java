@@ -100,6 +100,7 @@ public class OutgoingCallActivity extends Activity implements
 			.getSipServices();
 
 	// outgoing call activity onCreate param key
+	public static final String OUTGOING_CALL_SPONSOR = "outgoing_call_sponsor";
 	public static final String OUTGOING_CALL_MODE = "outgoing_call_mode";
 	public static final String OUTGOING_CALL_PHONE = "outgoing_call_phone";
 	public static final String OUTGOING_CALL_OWNERSHIP = "outgoing_call_ownership";
@@ -178,8 +179,17 @@ public class OutgoingCallActivity extends Activity implements
 		// get the intent parameter data
 		Bundle _data = getIntent().getExtras();
 
+		// Log.d(LOG_TAG, "on create bundle data = " + _data);
+		// if (null != _data) {
+		// for (String bundleKey : _data.keySet()) {
+		// Log.d(LOG_TAG, "bundle data, key = " + bundleKey
+		// + " and bundle value = " + _data.get(bundleKey));
+		// }
+		// }
+
 		// check the data bundle again and get call phone
-		if (null != _data) {
+		if (null != _data
+				&& SipCallSponsor.inner == _data.get(OUTGOING_CALL_SPONSOR)) {
 			// init call state textView text
 			((TextView) findViewById(R.id.callState_textView))
 					.setText(R.string.outgoing_call_trying);
