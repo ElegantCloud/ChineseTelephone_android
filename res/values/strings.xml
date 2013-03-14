@@ -137,16 +137,16 @@
 
     <!-- setting -->
     <string name="menu_settings">More Setting</string>
-    <string name="notice_center">Notice Center</string>
-    <string name="view_notice">View notice</string>
+    <string name="notice_center">Message Center</string>
+    <string name="view_notice">Message</string>
     <string name="account">Account</string>
-    <string name="account_invite_friend_item">Share to win call fees</string>
+    <string name="account_invite_friend_item">Get bonus by sharing</string>
     <string name="account_setting_item">Change account</string>
     <string name="account_changePSW_item">Change password</string>
-    <string name="account_getPSW_item">Find your password</string>
-    <string name="account_charge_item">Recharge your account</string>
+    <string name="account_getPSW_item">Get back password</string>
+    <string name="account_charge_item">Top-up</string>
     <string name="my_suites_item">My suites</string>
-    <string name="search">Query</string>
+    <string name="search">Balance</string>
     <string name="fee_query_item">Rates query</string>
     <string name="setting">Setting</string>
     <string name="back">Back</string>
@@ -155,7 +155,7 @@
     <string name="setting_countrycode_item">Default country code setting</string>
     <string name="setting_setup_item">Startup setting</string>
     <string name="setting_set_auth_number">Callback phone setting</string>
-    <string name="setting_logout_item">Sign out and exit</string>
+    <string name="setting_logout_item">Sign out</string>
     <string name="help">Help</string>
     <string name="help_item">FAQ</string>
     <string name="help_update_item">Update</string>
@@ -225,12 +225,12 @@
     <string name="cannot_connet_server">Can\'t connect to server, please check your network and try again later</string>
     <string name="change_psw_success">Change password succeed</string>
     <!-- get remain money -->
-    <string name="account_info">Balance query</string>
+    <string name="account_info">Check balance</string>
     <string name="get_balance_error">Query error, please try again</string>
     <string name="remain_balance_textfield">Balance:</string>
     <string name="yuan"></string>
     <string name="minute">minutes</string>
-    <string name="charge_history">Recharge records</string>
+    <string name="charge_history">Top-up records</string>
     <!-- alipay -->
     <string name="confirm_install_hint">"Installation notes"</string>
     <string name="confirm_install">"In order to ensure your transaction security, please install alipay and pay.\n\nClick OK, install immediately."</string>
@@ -239,24 +239,24 @@
     <string name="Ensure">Confirm</string>
     <string name="Cancel">Cancel</string>
     <string name="check_sign_failed">Your order has been illegally tampered</string>
-    <string name="ensure_charge_title">Recharge confirm</string>
-    <string name="charge_alipay_hint">You will refill***$\nClick confirm button and then goto alipay to complete recharge</string>
-    <string name="charge_title_popwin">Recharge</string>
-    <string name="charge_textfield_popwin">Recharge amount:</string>
-    <string name="charge_pattern_title">Select recharge method</string>
+    <string name="ensure_charge_title">Top-up confirm</string>
+    <string name="charge_alipay_hint">You will refill***$\nClick confirm button and then goto alipay to complete top-up</string>
+    <string name="charge_title_popwin">Top-up</string>
+    <string name="charge_textfield_popwin">Top-up amount:</string>
+    <string name="charge_pattern_title">Select top-up method</string>
     <string name="alipay_pattern">Alipay</string>
     <string name="card_charge">Credit card</string>
-    <string name="charge_back">Other recharge method</string>
+    <string name="charge_back">Other top-up method</string>
     <string name="input_card_number">Please input the credit card number</string>
     <string name="input_card_pwd">Please input the credit card password</string>
-    <string name="charge">Recharge</string>
+    <string name="charge">Top-up</string>
     <string name="charging_now">Complete recharging &#8230;</string>
-    <string name="charge_successfully">Recharge succeed!</string>
-    <string name="charge_failed_no_account_exist">Recharge failed, the account not existed!</string>
-    <string name="charge_failed_invalid_card_number">Recharge failed, card number or password not correct!</string>
+    <string name="charge_successfully">Top-up succeed!</string>
+    <string name="charge_failed_no_account_exist">Top-up failed, the account not existed!</string>
+    <string name="charge_failed_invalid_card_number">Top-up failed, card number or password not correct!</string>
     <string name="card_already_used">Sorry, invalid credit card!</string>
-    <string name="charge_failed">Recharge failed, please try again later!</string>
-    <string name="input_valid_charge_money">Please input the correct recharge amount</string>
+    <string name="charge_failed">Top-up failed, please try again later!</string>
+    <string name="input_valid_charge_money">Please input the correct top-up amount</string>
     <string name="process_charge_pls_wait">Trading, waiting &#8230;</string>
     <string name="is_charging">Paying &#8230;</string>
     <string name="get_alipay_info_from_server_failed">Get alipay information failed, please try again!</string>
@@ -272,7 +272,7 @@
     <string name="remember_psw">Remember pwd</string>
     <string name="regist_btn_title">Register</string>
     <string name="login_btn_title">Login in</string>
-    <string name="getpsw">Find password</string>
+    <string name="getpsw">Get back password</string>
     <string name="getpsw_phone">Phone:</string>
     <string name="getpsw_phone_hint">Your register phone</string>
     <string name="pls_select_country">Select your country code</string>
@@ -376,7 +376,7 @@
     <string name="input_ur_email">Input your email</string>
     <string name="u_havent_got_ur_money_yet">There is %.2f$ call fees not be fateched! Please goto your binded email box to get and check the call fees fetching email</string>
     <string name="bind_email">Bind email</string>
-    <string name="email_setting_title">Email bind</string>
+    <string name="email_setting_title">Email setting</string>
     <string name="pls_input_valid_email_address">Please input the validate email!</string>
     <string name="binding_email_address">Email binding &#8230;</string>
     <string name="bind_email_failed">Email bind failed, please try again later!</string>

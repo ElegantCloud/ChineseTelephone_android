@@ -40,14 +40,25 @@ public class CountryCodeManager {
 		data.put(Country.contryname.name(), context.getString(R.string.china));
 		data.put(Country.code.name(), "0086");
 		datas.add(data);
+		HashMap<String, String> data0 = new HashMap<String, String>();
+		data0.put(Country.contryname.name(),
+				context.getString(R.string.hongkong));
+		data0.put(Country.code.name(), "00852");
+		datas.add(data0);
 		HashMap<String, String> data1 = new HashMap<String, String>();
 		data1.put(Country.contryname.name(), context.getString(R.string.angola));
 		data1.put(Country.code.name(), "00244");
 		datas.add(data1);
 		HashMap<String, String> data2 = new HashMap<String, String>();
-		data2.put(Country.contryname.name(), context.getString(R.string.colombia));
+		data2.put(Country.contryname.name(),
+				context.getString(R.string.colombia));
 		data2.put(Country.code.name(), "0057");
 		datas.add(data2);
+		HashMap<String, String> data3 = new HashMap<String, String>();
+		data3.put(Country.contryname.name(),
+				context.getString(R.string.thailand));
+		data3.put(Country.code.name(), "0066");
+		datas.add(data3);
 	}
 
 	public String[] getCountryNameList() {

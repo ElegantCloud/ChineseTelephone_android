@@ -45,7 +45,8 @@
                 android:layout_marginTop="20dp"
                 android:text="@string/email_modify_desc"
                 android:textColor="@color/dim_gray"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/email_bind_bt"

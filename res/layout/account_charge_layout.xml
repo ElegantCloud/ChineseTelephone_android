@@ -151,6 +151,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="40dp"
                     android:background="@drawable/textfield_selector"
+                    android:ellipsize="end"
                     android:hint="@string/input_card_number"
                     android:inputType="number"
                     android:singleLine="true"
@@ -162,6 +163,7 @@
                     android:layout_height="40dp"
                     android:layout_marginTop="6dp"
                     android:background="@drawable/textfield_selector"
+                    android:ellipsize="end"
                     android:hint="@string/input_card_pwd"
                     android:singleLine="true"
                     android:textColor="@android:color/black" />

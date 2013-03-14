@@ -19,7 +19,8 @@
             android:layout_height="wrap_content"
             android:text="@string/email_setting_desc"
             android:textColor="@android:color/white"
-            android:textSize="17sp" />
+            android:textSize="17sp"
+            android:visibility="gone" />
 
         <EditText
             android:id="@+id/email_setting_input"
