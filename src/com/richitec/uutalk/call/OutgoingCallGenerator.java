@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.richitec.commontoolkit.CTApplication;
+import com.richitec.commontoolkit.call.TelephonyManagerExtension;
 import com.richitec.commontoolkit.customcomponent.CTPopupWindow;
 import com.richitec.commontoolkit.user.UserBean;
 import com.richitec.commontoolkit.user.UserManager;
@@ -164,38 +165,47 @@ public class OutgoingCallGenerator {
 
 		// check contact phone size
 		if (1 == _mContactPhones.size()) {
-			UserBean telUser = UserManager.getInstance().getUser();
-			if (_mContactPhones.get(0).matches("^[2-9]{1}\\d{2,7}")
-					&& (null == (String) telUser
-							.getValue(TelUser.local_area_code.name()) || ""
-							.equalsIgnoreCase((String) telUser
-									.getValue(TelUser.local_area_code.name())))) {
-				NoLocalAreaCodePopupWindow _noLocalAreaCodePopupWindow = new NoLocalAreaCodePopupWindow(
-						R.layout.no_areacode_popupwindow_layout,
-						LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
-
-				_noLocalAreaCodePopupWindow
-						.setDependentView(_mGenNewOutgoingCallOperationDependentView);
-
-				_noLocalAreaCodePopupWindow.showAtLocation(
-						_mGenNewOutgoingCallOperationDependentView,
-						Gravity.CENTER, 0, 0);
+			// check dial mode
+			if (null == dialMode) {
+				// system dialer
+				TelephonyManagerExtension.genSysOutgoingCall(_mContactPhones
+						.get(0));
 			} else {
-				// make sip voice call
-				SipUtils.makeSipVoiceCall(SipCallSponsor.inner, _mContactName,
-						_mContactPhones.get(0), dialMode);
+				UserBean telUser = UserManager.getInstance().getUser();
+				if (_mContactPhones.get(0).matches("^[2-9]{1}\\d{2,7}")
+						&& (null == (String) telUser
+								.getValue(TelUser.local_area_code.name()) || ""
+								.equalsIgnoreCase((String) telUser
+										.getValue(TelUser.local_area_code
+												.name())))) {
+					NoLocalAreaCodePopupWindow _noLocalAreaCodePopupWindow = new NoLocalAreaCodePopupWindow(
+							R.layout.no_areacode_popupwindow_layout,
+							LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
 
-				// check dial phone textView
-				if (null != _mDialPhoneTextView) {
-					// save previous dial phone and clear dial phone textView
-					// text
-					CharSequence _previousDialPhone = _mDialPhoneTextView
-							.getText();
-					_mDialPhoneTextView.setText("");
-					_mPreviousDialPhone.append(_previousDialPhone);
+					_noLocalAreaCodePopupWindow
+							.setDependentView(_mGenNewOutgoingCallOperationDependentView);
+
+					_noLocalAreaCodePopupWindow.showAtLocation(
+							_mGenNewOutgoingCallOperationDependentView,
+							Gravity.CENTER, 0, 0);
 				} else {
-					Log.e(LOG_TAG,
-							"Get dial phone textView for clear its text error, dial phone textView is null");
+					// make sip voice call
+					SipUtils.makeSipVoiceCall(SipCallSponsor.inner,
+							_mContactName, _mContactPhones.get(0), dialMode);
+
+					// check dial phone textView
+					if (null != _mDialPhoneTextView) {
+						// save previous dial phone and clear dial phone
+						// textView
+						// text
+						CharSequence _previousDialPhone = _mDialPhoneTextView
+								.getText();
+						_mDialPhoneTextView.setText("");
+						_mPreviousDialPhone.append(_previousDialPhone);
+					} else {
+						Log.e(LOG_TAG,
+								"Get dial phone textView for clear its text error, dial phone textView is null");
+					}
 				}
 			}
 		} else {
@@ -277,6 +287,10 @@ public class OutgoingCallGenerator {
 					.setOnClickListener(new ContactPhoneDialModeSelectCallbackBtnOnClickListener());
 
 			((Button) getContentView().findViewById(
+					R.id.contactPhone_dialMode_select_dialerBtn))
+					.setOnClickListener(new ContactPhoneDialModeSelectDialerBtnOnClickListener());
+
+			((Button) getContentView().findViewById(
 					R.id.contactPhone_dialMode_select_cancelBtn))
 					.setOnClickListener(new ContactPhoneDialModeSelectCancelBtnOnClickListener());
 		}
@@ -335,6 +349,13 @@ public class OutgoingCallGenerator {
 							.getString(
 									R.string.contactPhone_dialMode_selectPopupWindow_callbackBtn_title)
 							+ _contactPhone4selecting);
+			((Button) getContentView().findViewById(
+					R.id.contactPhone_dialMode_select_dialerBtn))
+					.setText(_appContext
+							.getResources()
+							.getString(
+									R.string.contactPhone_dialMode_selectPopupWindow_dialerBtn_title)
+							+ _contactPhone4selecting);
 		}
 
 		// inner class
@@ -361,6 +382,19 @@ public class OutgoingCallGenerator {
 				// check contact for generating an new outgoing call: manual
 				// callback
 				checkContact4GenNewOutgongCall(SipCallMode.CALLBACK,
+						SipCallModeSelectPattern.MANUAL);
+			}
+
+		}
+
+		// contact phone dial mode select dialer button on click listener
+		class ContactPhoneDialModeSelectDialerBtnOnClickListener implements
+				OnClickListener {
+
+			@Override
+			public void onClick(View v) {
+				// check contact for generating an new system outgoing call
+				checkContact4GenNewOutgongCall(null,
 						SipCallModeSelectPattern.MANUAL);
 			}
 
