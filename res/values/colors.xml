@@ -27,5 +27,6 @@
     <color name="red">#bb1919</color>
     <color name="gainsboro">#c0c0c0</color>
     <color name="graySmoke">#ececed</color>
-
+	<color name="orange_red">#FF4500</color>
+	<color name="royal_blue1">#4876FF</color>
 </resources>
