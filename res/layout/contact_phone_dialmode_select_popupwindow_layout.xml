@@ -23,21 +23,21 @@
             android:gravity="center"
             android:text="@string/contactPhone_dialMode_selectPopupWindow_titleTextView_text"
             android:textColor="@android:color/white" />
-        
+
         <TextView
             android:id="@+id/contactPhone_dialMode_directinform_TextView"
-            android:layout_margin="10dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:gravity="center_vertical"
             android:text="@string/contactPhone_dialMode_selectPopupWindow_informTextView_text"
             android:textColor="@android:color/white" />
-        
+
         <TextView
             android:id="@+id/contactPhone_dialMode_callbackinform_TextView"
-            android:layout_margin="10dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:gravity="center_vertical"
             android:text="@string/contactPhone_dialMode_selectPopupWindow_callback_informTextView_text"
             android:textColor="@android:color/white" />
@@ -71,6 +71,19 @@
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:text="@string/contactPhone_dialMode_selectPopupWindow_callbackBtn_title"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@drawable/component_normal7pressed_textcolor"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/contactPhone_dialMode_select_dialerBtn"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/popupwindow_common_btn_bg"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@string/contactPhone_dialMode_selectPopupWindow_dialerBtn_title"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@drawable/component_normal7pressed_textcolor"
                 android:textStyle="bold" />

@@ -51,6 +51,7 @@ import com.richitec.commontoolkit.CTApplication;
 import com.richitec.commontoolkit.activityextension.NavigationActivity;
 import com.richitec.commontoolkit.addressbook.AddressBookManager;
 import com.richitec.commontoolkit.addressbook.ContactBean;
+import com.richitec.commontoolkit.call.TelephonyManagerExtension;
 import com.richitec.commontoolkit.customadapter.CTListAdapter;
 import com.richitec.commontoolkit.customcomponent.BarButtonItem.BarButtonItemStyle;
 import com.richitec.commontoolkit.customcomponent.CTPopupWindow;
@@ -693,16 +694,21 @@ public class ContactListTabContentActivity extends NavigationActivity {
 							.getResources()
 							.getString(
 									R.string.contactPhones_selectPopupWindow_titleTextView_text)
-							+ " " + (SipCallMode.DIRECT_CALL == dialContactPhoneMode ? CTApplication
+							+ " " + (null == dialContactPhoneMode ? CTApplication
 							.getContext()
 							.getResources()
 							.getString(
-									R.string.contactPhones_selectPopupWindow_4directdial)
-							: CTApplication
+									R.string.contactPhones_selectPopupWindow_4dialer)
+							: SipCallMode.DIRECT_CALL == dialContactPhoneMode ? CTApplication
 									.getContext()
 									.getResources()
 									.getString(
-											R.string.contactPhones_selectPopupWindow_4callback)))
+											R.string.contactPhones_selectPopupWindow_4directdial)
+									: CTApplication
+											.getContext()
+											.getResources()
+											.getString(
+													R.string.contactPhones_selectPopupWindow_4callback)))
 							.replace("***", displayName));
 
 			// check phone numbers for selecting
@@ -772,10 +778,17 @@ public class ContactListTabContentActivity extends NavigationActivity {
 					_noLocalAreaCodePopupWindow.showAtLocation(_mDependentView,
 							Gravity.CENTER, 0, 0);
 				} else {
-					// make sip voice call
-					SipUtils.makeSipVoiceCall(SipCallSponsor.inner,
-							_mContactDisplayName, _selectedPhone,
-							_mDialContactPhoneMode);
+					// check dial contact phone mode
+					if (null == _mDialContactPhoneMode) {
+						// system dialer
+						TelephonyManagerExtension
+								.genSysOutgoingCall(_selectedPhone);
+					} else {
+						// make sip voice call
+						SipUtils.makeSipVoiceCall(SipCallSponsor.inner,
+								_mContactDisplayName, _selectedPhone,
+								_mDialContactPhoneMode);
+					}
 				}
 			}
 
@@ -810,13 +823,19 @@ public class ContactListTabContentActivity extends NavigationActivity {
 					_noLocalAreaCodePopupWindow.showAtLocation(_mDependentView,
 							Gravity.CENTER, 0, 0);
 				} else {
-					// make sip voice call
-					SipUtils.makeSipVoiceCall(SipCallSponsor.inner,
-							_mContactDisplayName, _selectedPhone,
-							_mDialContactPhoneMode);
+					// check dial contact phone mode
+					if (null == _mDialContactPhoneMode) {
+						// system dialer
+						TelephonyManagerExtension
+								.genSysOutgoingCall(_selectedPhone);
+					} else {
+						// make sip voice call
+						SipUtils.makeSipVoiceCall(SipCallSponsor.inner,
+								_mContactDisplayName, _selectedPhone,
+								_mDialContactPhoneMode);
+					}
 				}
 			}
-
 		}
 
 		// contact phone select cancel button on click listener

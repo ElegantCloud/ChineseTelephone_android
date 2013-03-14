@@ -90,11 +90,13 @@
     <string name="contactPhone_dialMode_selectPopupWindow_titleTextView_text">请选择拨打模式以联系 ***</string>
     <string name="contactPhone_dialMode_selectPopupWindow_directdialBtn_title">直拨</string>
     <string name="contactPhone_dialMode_selectPopupWindow_callbackBtn_title">回拨</string>
+    <string name="contactPhone_dialMode_selectPopupWindow_dialerBtn_title">手机拨打</string>
     <string name="contactPhone_dialMode_selectPopupWindow_cancelBtn_title">取 消</string>
     <string name="contactPhone_dialMode_selectPopupWindow_contactPhones_4select">个号码供选择</string>
     <string name="contactPhones_selectPopupWindow_titleTextView_text">选择 ***的电话</string>
     <string name="contactPhones_selectPopupWindow_4directdial">直拨</string>
     <string name="contactPhones_selectPopupWindow_4callback">回拨</string>
+    <string name="contactPhones_selectPopupWindow_4dialer">手机拨打</string>
     <string name="contactPhones_selectPopupWindow_cancelBtn_title">取 消</string>
     <string name="contactPhone_dialMode_selectPopupWindow_informTextView_text">直拨：网速快时选用，在家一般用直拨，拨号快接通率高资费省</string>
     <string name="contactPhone_dialMode_selectPopupWindow_callback_informTextView_text">回拨：网速慢直播声音断续时选用，出门一般用回拨，通话质量好且省流量</string>
