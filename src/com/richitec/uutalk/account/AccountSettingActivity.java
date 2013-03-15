@@ -243,6 +243,7 @@ public class AccountSettingActivity extends Activity {
 	public void onRegist(View v) {
 		Intent intent = new Intent(this, AccountRegistActivity.class);
 		startActivity(intent);
+		finish();
 	}
 
 	public void onLogin(View v) {
@@ -373,7 +374,6 @@ public class AccountSettingActivity extends Activity {
 			String bindPhone = data.getString("bindphone");
 			String bindPhoneCountryCode = data
 					.getString("bindphone_country_code");
-			String emailStatus = data.getString("email_status");
 			String email = null;
 			try {
 				email = data.getString("email");
