@@ -305,7 +305,7 @@
     <string name="get_auth_code_inform">输入手机号，获取验证码</string>
     <string name="regist_step1_hint">输入注册手机号</string>
     <string name="get_auth_code_btn">获取验证码</string>
-    <string name="step1_info">（您的手机仅用于身份验证，我们不会向您发送垃圾短信</string>
+    <string name="step1_info">您的手机仅用于身份验证，我们不会向您发送垃圾短信</string>
     <string name="invalid_phone_number">手机号码无效！</string>
     <string name="existed_phone_number">手机号码已存在！</string>
     <string name="error_in_retrieve_auth_code">获取验证码出错，请重试！</string>
