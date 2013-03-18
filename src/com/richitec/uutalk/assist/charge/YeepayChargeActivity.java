@@ -45,10 +45,12 @@ public class YeepayChargeActivity extends NavigationActivity {
 	private ChargeMoneyListAdapter chargeMoneyListAdapter;
 	private String chargeType;
 
-	// private HashMap<String, String> productMap;
+	private HashMap<String, String> productMap;
+	private boolean hasLoadChargeList = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		Log.d(TAG, "onCreate");
 		if (savedInstanceState != null) {
 			AppDataSaveRestoreUtil.onRestoreInstanceState(savedInstanceState);
 		}
@@ -77,25 +79,37 @@ public class YeepayChargeActivity extends NavigationActivity {
 		chargeMoneyList.setAdapter(chargeMoneyListAdapter);
 		chargeMoneyList.setOnItemClickListener(onChargeMoneySelectedListener);
 
-		// productMap = new HashMap<String, String>();
+		productMap = new HashMap<String, String>();
 	}
-	
-	
 
 	@Override
 	protected void onStart() {
-		// TODO Auto-generated method stub
+		Log.d(TAG, "onStart");
 		super.onStart();
-		fetchChargeMoneyList();
+		if (!hasLoadChargeList) {
+			fetchChargeMoneyList();
+			hasLoadChargeList = true;
+		}
+	}
+
+	@Override
+	protected void onResume() {
+		Log.d(TAG, "onResume");
+		super.onResume();
 	}
 
 	// close the progress bar
 	// 关闭进度框
 	private void closeProgress() {
-		if (mProgress != null) {
-			mProgress.dismiss();
-			mProgress = null;
+		try {
+			if (mProgress != null) {
+				mProgress.dismiss();
+				mProgress = null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+
 	}
 
 	private void fetchChargeMoneyList() {
@@ -165,10 +179,10 @@ public class YeepayChargeActivity extends NavigationActivity {
 		String orderNum = ChargeUtil.getOrderNum(chargeType);
 		String time = "" + System.currentTimeMillis();
 
-		// productMap.put("price", price);
-		// productMap.put("order_num", orderNum);
-		// productMap.put("time", time);
-		// productMap.put("product_name", getString(R.string.product_subject));
+		productMap.put("price", price);
+		productMap.put("order_num", orderNum);
+		productMap.put("time", time);
+		productMap.put("product_name", getString(R.string.product_subject));
 
 		StringBuilder builder = new StringBuilder();
 		builder.append(CUSTOMER_NUMBER).append("$");
@@ -177,81 +191,64 @@ public class YeepayChargeActivity extends NavigationActivity {
 		builder.append(getString(R.string.product_subject)).append("$");
 		builder.append(time);
 
-		// UserBean user = UserManager.getInstance().getUser();
-		//
-		// HashMap<String, String> params = new HashMap<String, String>();
-		// params.put("charge_money_id", String.valueOf(chargeMoneyId));
-		// params.put("content", builder.toString());
-		// params.put("order_num", orderNum);
-		// params.put("money", price);
-		// params.put("countryCode",
-		// (String) user.getValue(TelUser.countryCode.name()));
-		// HttpUtils.postSignatureRequest(getString(R.string.server_url)
-		// + getString(R.string.yeepaySign_url),
-		// PostRequestFormat.URLENCODED, params, null,
-		// HttpRequestType.ASYNCHRONOUS, onFinishedSign);
+		UserBean user = UserManager.getInstance().getUser();
 
-		// ======
-		String hmac = YeepayUtils.hmacSign(builder.toString(), KEY);
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("charge_money_id", String.valueOf(chargeMoneyId));
+		params.put("content", builder.toString());
+		params.put("order_num", orderNum);
+		params.put("money", price);
+		params.put("countryCode",
+				(String) user.getValue(TelUser.countryCode.name()));
+		HttpUtils.postSignatureRequest(getString(R.string.server_url)
+				+ getString(R.string.yeepaySign_url),
+				PostRequestFormat.URLENCODED, params, null,
+				HttpRequestType.ASYNCHRONOUS, onFinishedSign);
 
-		Intent intent = new Intent(getBaseContext(), YeepayPlugin.class);
-		intent.putExtra("customerNumber", CUSTOMER_NUMBER);
-		intent.putExtra("requestId", orderNum);
-		intent.putExtra("amount", price);
-		intent.putExtra("productName", getString(R.string.product_subject));
-		intent.putExtra("time", time);
-		intent.putExtra("productDesc", "");
-		intent.putExtra("support", "CH_MOBILE");
-		intent.putExtra("environment", "");
-		intent.putExtra("hmac", hmac);
-
-		startActivityForResult(intent, 200);
 	}
 
-	// private OnHttpRequestListener onFinishedSign = new
-	// OnHttpRequestListener() {
-	//
-	// @Override
-	// public void onFinished(HttpResponseResult responseResult) {
-	// try {
-	// JSONObject data = new JSONObject(
-	// responseResult.getResponseText());
-	// String sign = data.getString("sign");
-	// Log.d(TAG, "sign: " + sign);
-	//
-	// Intent intent = new Intent(getBaseContext(),
-	// YeepayPlugin.class);
-	// intent.putExtra("customerNumber", CUSTOMER_NUMBER);
-	// intent.putExtra("requestId", productMap.get("order_num"));
-	// intent.putExtra("amount", productMap.get("price"));
-	// intent.putExtra("productName", productMap.get("product_name"));
-	// intent.putExtra("time", productMap.get("time"));
-	// intent.putExtra("productDesc", "");
-	// intent.putExtra("support", "CH_MOBILE");
-	// intent.putExtra("environment", "");
-	// intent.putExtra("hmac", sign);
-	//
-	// startActivityForResult(intent, 200);
-	// } catch (JSONException e) {
-	// e.printStackTrace();
-	// MyToast.show(YeepayChargeActivity.this,
-	// R.string.get_sign_info_failed, Toast.LENGTH_SHORT);
-	// }
-	//
-	// }
-	//
-	// @Override
-	// public void onFailed(HttpResponseResult responseResult) {
-	// if (responseResult.getStatusCode() == -1) {
-	// MyToast.show(YeepayChargeActivity.this,
-	// R.string.cannot_connet_server, Toast.LENGTH_SHORT);
-	// } else {
-	// MyToast.show(YeepayChargeActivity.this,
-	// R.string.get_sign_info_failed, Toast.LENGTH_SHORT);
-	// }
-	//
-	// }
-	// };
+	private OnHttpRequestListener onFinishedSign = new OnHttpRequestListener() {
+
+		@Override
+		public void onFinished(HttpResponseResult responseResult) {
+			try {
+				JSONObject data = new JSONObject(
+						responseResult.getResponseText());
+				String sign = data.getString("sign");
+				Log.d(TAG, "sign: " + sign);
+
+				Intent intent = new Intent(getBaseContext(), YeepayPlugin.class);
+				intent.putExtra("customerNumber", CUSTOMER_NUMBER);
+				intent.putExtra("requestId", productMap.get("order_num"));
+				intent.putExtra("amount", productMap.get("price"));
+				intent.putExtra("productName", productMap.get("product_name"));
+				intent.putExtra("time", productMap.get("time"));
+				intent.putExtra("productDesc", "");
+				intent.putExtra("support", "CH_MOBILE");
+				intent.putExtra("environment", "");
+				intent.putExtra("hmac", sign);
+
+				startActivityForResult(intent, 200);
+			} catch (JSONException e) {
+				e.printStackTrace();
+				MyToast.show(YeepayChargeActivity.this,
+						R.string.get_sign_info_failed, Toast.LENGTH_SHORT);
+			}
+
+		}
+
+		@Override
+		public void onFailed(HttpResponseResult responseResult) {
+			if (responseResult.getStatusCode() == -1) {
+				MyToast.show(YeepayChargeActivity.this,
+						R.string.cannot_connet_server, Toast.LENGTH_SHORT);
+			} else {
+				MyToast.show(YeepayChargeActivity.this,
+						R.string.get_sign_info_failed, Toast.LENGTH_SHORT);
+			}
+
+		}
+	};
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
@@ -261,8 +258,9 @@ public class YeepayChargeActivity extends NavigationActivity {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		Log.e(TAG, "requestCode=" + requestCode + "  resultCode=" + resultCode
-				+ " (data==null)=" + (data == null));
+		Log.e(TAG, "onActivityResult - requestCode=" + requestCode
+				+ "  resultCode=" + resultCode + " (data==null)="
+				+ (data == null));
 
 		if (data != null) {
 			Bundle params = data.getExtras();
@@ -292,29 +290,25 @@ public class YeepayChargeActivity extends NavigationActivity {
 				amount = "";
 			}
 			if (TextUtils.isEmpty(requestId) && TextUtils.isEmpty(amount)) {
-				// new AlertDialog.Builder(YeepayChargeActivity.this)
-				// .setTitle(R.string.pay_result)
-				// .setMessage(
-				// getString(R.string.pay_failed)
-				// + String.format(
-				// getString(R.string.pay_failed_error_msg),
-				// message))
-				// .setPositiveButton(R.string.Ensure, null).show();
+				new AlertDialog.Builder(YeepayChargeActivity.this)
+						.setTitle(R.string.pay_result)
+						.setMessage(getString(R.string.pay_failed))
+						.setPositiveButton(R.string.Ensure, null).show();
 				Log.d(TAG, "charge failed: " + message);
 			} else {
-				// new AlertDialog.Builder(YeepayChargeActivity.this)
-				// .setTitle(R.string.pay_result)
-				// .setMessage(
-				// String.format(getString(R.string.pay_success),
-				// amount))
-				// .setPositiveButton(R.string.Ensure, null).show();
+				new AlertDialog.Builder(YeepayChargeActivity.this)
+						.setTitle(R.string.pay_result)
+						.setMessage(
+								String.format(getString(R.string.pay_success),
+										amount))
+						.setPositiveButton(R.string.Ensure, null).show();
 				Log.d(TAG, "charge success");
 			}
 		} else {
-			// new
-			// AlertDialog.Builder(YeepayChargeActivity.this).setTitle(R.string.pay_result)
-			// .setMessage(R.string.pay_failed)
-			// .setPositiveButton(R.string.Ensure, null).show();
+			new AlertDialog.Builder(YeepayChargeActivity.this)
+					.setTitle(R.string.pay_result)
+					.setMessage(R.string.pay_failed)
+					.setPositiveButton(R.string.Ensure, null).show();
 			Log.d(TAG, "charge failed");
 		}
 	}

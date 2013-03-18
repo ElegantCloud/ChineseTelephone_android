@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ import com.richitec.uutalk.assist.charge.AlipayWapActivity;
 import com.richitec.uutalk.assist.charge.UUTalkCardChargeActivity;
 import com.richitec.uutalk.assist.charge.YeepayChargeActivity;
 import com.richitec.uutalk.constant.ChargeType;
+import com.richitec.uutalk.constant.SystemConstants;
 import com.richitec.uutalk.constant.TelUser;
 import com.richitec.uutalk.utils.AppDataSaveRestoreUtil;
 
@@ -59,6 +61,7 @@ public class AccountChargeActivity extends NavigationActivity {
 	}
 
 	private void getRemainMoney() {
+		Log.d(SystemConstants.TAG, "getRemainMoney");
 		UserBean userBean = UserManager.getInstance().getUser();
 		String username = userBean.getName();
 		String countryCode = (String) userBean.getValue(TelUser.countryCode
