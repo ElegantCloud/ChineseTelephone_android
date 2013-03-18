@@ -70,7 +70,7 @@ public abstract class BaseSipServices implements ISipServices {
 	private Boolean _mIsSipVoiceCallUsingLoudspeaker;
 
 	private boolean sipRegisterCalled;
-	
+
 	public BaseSipServices() {
 		super();
 
@@ -80,22 +80,23 @@ public abstract class BaseSipServices implements ISipServices {
 		// init audio manager
 		_mAudioManager = (AudioManager) _appContext
 				.getSystemService(Context.AUDIO_SERVICE);
-		
+
 		sipRegisterCalled = false;
 	}
-	
+
 	protected void setSipRegisterCalled(boolean flag) {
 		sipRegisterCalled = flag;
 	}
 
 	/**
 	 * whether the sip service registration method has been called
+	 * 
 	 * @return
 	 */
 	public boolean isSipRegisterCalled() {
 		return sipRegisterCalled;
 	}
-	
+
 	// make direct dial sip voice call
 	public abstract boolean makeDirectDialSipVoiceCall(String calleeName,
 			String calleePhone);
@@ -127,8 +128,9 @@ public abstract class BaseSipServices implements ISipServices {
 								.length());
 					}
 				}
-				if (calleePhone
-						.matches("(^[0]\\d{2,3}\\d{7,8})|(^[1][\\d]{10})|(\\d{9})")) {
+				if (calleePhone.startsWith("00") && calleePhone.length() > 2) {
+					// checkedCalleePhone = calleePhone.substring(2);
+				} else {
 					UserBean telUser = UserManager.getInstance().getUser();
 					checkedCalleePhone = (String) telUser
 							.getValue(TelUser.dialCountryCode.name())
