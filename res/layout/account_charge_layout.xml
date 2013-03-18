@@ -29,139 +29,141 @@
                 android:textSize="20sp" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical" >
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
 
-            <TextView
+            <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
-                android:text="@string/charge_pattern_title"
-                android:textColor="@color/dodger_blue"
-                android:textSize="20sp" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical" >
 
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1.0dp"
-                android:background="@drawable/setting_line_img" />
-
-            <RelativeLayout
-                android:id="@+id/alipay_btn"
-                android:layout_width="fill_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/setting_middle_item_bg"
-                android:clickable="true"
-                android:gravity="center_vertical"
-                android:onClick="aliPayBtnAction" >
-
-                <ImageView
+                <TextView
                     android:layout_width="fill_parent"
-                    android:layout_height="30dp"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/alipay_logo" />
-            </RelativeLayout>
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/charge_pattern_title"
+                    android:textColor="@color/dodger_blue"
+                    android:textSize="20sp" />
 
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1.0dp"
-                android:background="@drawable/setting_line_img" />
-
-            <RelativeLayout
-                android:id="@+id/card_charge_btn"
-                android:layout_width="fill_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/setting_middle_item_bg"
-                android:clickable="true"
-                android:gravity="center_vertical"
-                android:onClick="onCardChargeBtnClick"
-                android:visibility="visible" >
-
-                <ImageView
+                <View
                     android:layout_width="fill_parent"
-                    android:layout_height="30dp"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/hyt_charge_card" />
-            </RelativeLayout>
+                    android:layout_height="1.0dp"
+                    android:background="@drawable/setting_line_img" />
 
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1.0dp"
-                android:background="@drawable/setting_line_img" />
-            
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/setting_middle_item_bg"
-                android:clickable="true"
-                android:gravity="center_vertical"
-                android:onClick="onSZXCardCharge"
-                android:visibility="visible" >
+                <RelativeLayout
+                    android:id="@+id/alipay_btn"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/setting_middle_item_bg"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:onClick="aliPayBtnAction" >
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="41dp"
-                    android:scaleType="centerInside"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/szx_card" />
-            </RelativeLayout>
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="30dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/alipay_logo" />
+                </RelativeLayout>
 
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1.0dp"
-                android:background="@drawable/setting_line_img" />
-            
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/setting_middle_item_bg"
-                android:clickable="true"
-                android:gravity="center_vertical"
-                android:onClick="onUnicomCardCharge"
-                android:visibility="visible" >
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1.0dp"
+                    android:background="@drawable/setting_line_img" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="41dp"
-                    android:scaleType="centerInside"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/unicom_card" />
-            </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/card_charge_btn"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/setting_middle_item_bg"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:onClick="onCardChargeBtnClick"
+                    android:visibility="visible" >
 
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1.0dp"
-                android:background="@drawable/setting_line_img" />
-            
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/setting_middle_item_bg"
-                android:clickable="true"
-                android:gravity="center_vertical"
-                android:onClick="onTelecomCardCharge"
-                android:visibility="visible" >
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="30dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/hyt_charge_card" />
+                </RelativeLayout>
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="41dp"
-                    android:scaleType="centerInside"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/telecom_card" />
-            </RelativeLayout>
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1.0dp"
+                    android:background="@drawable/setting_line_img" />
 
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1.0dp"
-                android:background="@drawable/setting_line_img" />
-        </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/setting_middle_item_bg"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:onClick="onSZXCardCharge"
+                    android:visibility="visible" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="41dp"
+                        android:layout_centerInParent="true"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/szx_card" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1.0dp"
+                    android:background="@drawable/setting_line_img" />
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/setting_middle_item_bg"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:onClick="onUnicomCardCharge"
+                    android:visibility="visible" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="41dp"
+                        android:layout_centerInParent="true"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/unicom_card" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1.0dp"
+                    android:background="@drawable/setting_line_img" />
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/setting_middle_item_bg"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:onClick="onTelecomCardCharge"
+                    android:visibility="visible" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="41dp"
+                        android:layout_centerInParent="true"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/telecom_card" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1.0dp"
+                    android:background="@drawable/setting_line_img" />
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
-
-  
-
 
 </LinearLayout>
