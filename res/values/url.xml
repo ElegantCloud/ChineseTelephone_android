@@ -33,6 +33,7 @@
     <string name="app_download_url">/downloadapp/4/android</string>
     <string name="app_version_url">/version/4/android</string>
     <string name="getNewNotice_url">/getNewNotice</string>
+    <string name="share_to_qzone_url">/share_assist/share_to_qzone</string> 
     <string name="appvcenter_url">http://www.uu-talk.com/appvcenter</string>
     <string name="vos_server">vos.uu-talk.com</string>
     <string name="fee_query_url">http://www.uu-talk.com/a/zifeishuoming/mobile/</string>

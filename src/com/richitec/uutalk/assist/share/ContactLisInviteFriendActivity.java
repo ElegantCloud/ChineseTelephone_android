@@ -1,4 +1,4 @@
-package com.richitec.uutalk.assist;
+package com.richitec.uutalk.assist.share;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

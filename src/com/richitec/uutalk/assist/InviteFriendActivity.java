@@ -19,6 +19,8 @@ import com.richitec.commontoolkit.utils.HttpUtils.HttpResponseResult;
 import com.richitec.commontoolkit.utils.HttpUtils.OnHttpRequestListener;
 import com.richitec.commontoolkit.utils.HttpUtils.PostRequestFormat;
 import com.richitec.uutalk.R;
+import com.richitec.uutalk.assist.share.ContactLisInviteFriendActivity;
+import com.richitec.uutalk.assist.share.QzoneShareActivity;
 import com.richitec.uutalk.constant.TelUser;
 import com.richitec.uutalk.utils.AppDataSaveRestoreUtil;
 
@@ -117,6 +119,19 @@ public class InviteFriendActivity extends NavigationActivity {
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		params.put("inviteLink", inviteLink);
 		pushActivity(ContactLisInviteFriendActivity.class, params);
+	}
+
+	public void onShareToQQzone(View v) {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		String summary = getString(R.string.invite_message).replace("***",
+				inviteLink);
+		String title = getString(R.string.share_to_qzone_title);
+		String url = getString(R.string.share_to_qzone_link_url);
+		params.put("summary", summary);
+		params.put("title", title);
+		params.put("url", url);
+		params.put("images", getString(R.string.share_to_qzone_images));
+		pushActivity(QzoneShareActivity.class, params);
 	}
 
 	@Override

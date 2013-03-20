@@ -36,6 +36,7 @@ public class WebViewActivity extends NavigationActivity {
 		// get support webView
 		webView = (WebView) findViewById(R.id.webView);
 		webView.setWebViewClient(new MyWebViewClient());
+		webView.getSettings().setJavaScriptEnabled(true); 
 		// add web chrome client for loading progress changed
 		webView.setWebChromeClient(new WebChromeClient() {
 
