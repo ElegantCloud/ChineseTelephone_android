@@ -177,6 +177,9 @@
     <string name="add_exist_contact_item">添加现有联系人</string>
     <string name="no_sms_number">无号码，请重新选择</string>
     <string name="invite_message">使用安中通直拨中国，最低只要3分钱每分钟,点击 *** 下载安装</string>
+    <string name="share_to_qzone_title">安中通，通天下</string>
+    <string name="share_to_qzone_link_url">http://www.00244dh.com</string>
+    <string name="share_to_qzone_images">http://www.00244dh.com/templets/00244dh/images/dwqrcode.jpg</string>
     <string name="choose_sms_number">请选择号码</string>
     <string name="pls_input_phone">请输入电话号码</string>
     <string name="set_bind_number_title">设置回拨号码</string>
@@ -193,6 +196,7 @@
     <string name="current_user_shared_reg_count">您已成功推荐%s个好友使用安中通</string>
     <string name="invite_pattern_title">请选择分享方式</string>
     <string name="sms_invite_pattern">短信分享</string>
+    <string name="share_to_qzone">分享到QQ空间</string>
     <string name="get_bindphone_failed">因网络原因，无法获取回拨号码</string>
 
     <!-- fee query activity -->

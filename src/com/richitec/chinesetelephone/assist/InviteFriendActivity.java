@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.richitec.chinesetelephone.R;
+import com.richitec.chinesetelephone.assist.share.ContactLisInviteFriendActivity;
+import com.richitec.chinesetelephone.assist.share.QzoneShareActivity;
 import com.richitec.chinesetelephone.constant.TelUser;
 import com.richitec.chinesetelephone.utils.AppDataSaveRestoreUtil;
 import com.richitec.commontoolkit.activityextension.NavigationActivity;
@@ -117,6 +119,19 @@ public class InviteFriendActivity extends NavigationActivity {
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		params.put("inviteLink", inviteLink);
 		pushActivity(ContactLisInviteFriendActivity.class, params);
+	}
+
+	public void onShareToQQzone(View v) {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		String summary = getString(R.string.invite_message).replace(
+				"***", inviteLink);
+		String title = getString(R.string.share_to_qzone_title);
+		String url = getString(R.string.share_to_qzone_link_url);
+		params.put("summary", summary);
+		params.put("title", title);
+		params.put("url", url);
+		params.put("images", getString(R.string.share_to_qzone_images));
+		pushActivity(QzoneShareActivity.class, params);
 	}
 
 	@Override

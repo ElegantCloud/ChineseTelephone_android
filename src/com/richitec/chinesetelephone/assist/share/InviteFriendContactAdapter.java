@@ -1,4 +1,4 @@
-package com.richitec.chinesetelephone.assist;
+package com.richitec.chinesetelephone.assist.share;
 
 import java.util.List;
 import java.util.Map;
