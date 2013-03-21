@@ -1,4 +1,4 @@
-package com.richitec.chinesetelephone.assist;
+package com.richitec.chinesetelephone.assist.charge;
 
 import org.json.JSONArray;
 import org.json.JSONException;

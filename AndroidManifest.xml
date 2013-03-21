@@ -147,6 +147,8 @@
         <activity android:screenOrientation="portrait" android:name=".assist.FeeActivity"></activity>
         <activity android:screenOrientation="portrait" android:name=".assist.EmailSettingActivity" android:windowSoftInputMode="stateHidden"></activity>
         <activity android:name=".assist.share.QzoneShareActivity" android:screenOrientation="portrait"></activity>
+        <activity android:screenOrientation="portrait" android:name=".assist.charge.AlipayClientChargeActivity"></activity>
+        <activity android:screenOrientation="portrait" android:name=".assist.charge.UUTalkCardChargeActivity"></activity>
     </application>
 
 </manifest>
