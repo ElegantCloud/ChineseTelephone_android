@@ -199,9 +199,8 @@
     <string name="share_to_qzone">分享到QQ空间</string>
     <string name="get_bindphone_failed">因网络原因，无法获取回拨号码</string>
 
-    <!-- fee query activity -->
-    <string name="fee_loading_textView_textHeader">正在加载&#8230;，</string>
-    <string name="fee_loading_progressBar_max">100</string>
+    <!-- webview activity -->
+    <string name="loading_textView_textHeader">正在加载&#8230;，</string>
     <string name="loading_progressBar_max">100</string>
 
     <!-- dial preference -->
