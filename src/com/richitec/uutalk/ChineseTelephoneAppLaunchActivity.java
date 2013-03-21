@@ -46,7 +46,6 @@ public class ChineseTelephoneAppLaunchActivity extends AppLaunchActivity {
 
 		// init all name phonetic sorted contacts info array
 		ContactListTabContentActivity.initNamePhoneticSortedContactsInfoArray();
-
 	}
 
 	@Override
