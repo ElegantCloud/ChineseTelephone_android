@@ -28,7 +28,7 @@ public class WebViewActivity extends NavigationActivity {
 		setContentView(R.layout.webview_activity_layout);
 
 		maxNumber = Integer
-				.parseInt(getString(R.string.fee_loading_progressBar_max));
+				.parseInt(getString(R.string.loading_progressBar_max));
 
 		loadingLayout = (LinearLayout) findViewById(R.id.loading_linearLayout);
 		progressBar = (ProgressBar) findViewById(R.id.loading_progressBar);
@@ -49,7 +49,7 @@ public class WebViewActivity extends NavigationActivity {
 
 				// set support loading textView text
 				loadingTV
-						.setText(getString(R.string.fee_loading_textView_textHeader)
+						.setText(getString(R.string.loading_textView_textHeader)
 								+ newProgress + "%");
 
 				// check support page loading completed
