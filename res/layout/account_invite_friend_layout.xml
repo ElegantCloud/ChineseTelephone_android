@@ -100,6 +100,44 @@
                     android:layout_width="fill_parent"
                     android:layout_height="1.0dp"
                     android:background="@drawable/setting_line_img" />
+                
+                 <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/setting_middle_item_bg"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:onClick="onShareToQQzone"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/qzone_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1.0"
+                        android:gravity="center_vertical"
+                        android:text="@string/share_to_qzone"
+                        android:textColor="@color/dark_dim_gray"
+                        android:textSize="20dp" />
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/imgright" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1.0dp"
+                    android:background="@drawable/setting_line_img" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

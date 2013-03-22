@@ -1,4 +1,4 @@
-package com.richitec.uutalk.assist;
+package com.richitec.uutalk.assist.charge;
 
 import org.json.JSONArray;
 import org.json.JSONException;

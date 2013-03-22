@@ -1,10 +1,11 @@
-package com.richitec.uutalk.assist;
+package com.richitec.uutalk.assist.charge;
 
 import android.os.Bundle;
 
 import com.richitec.commontoolkit.user.UserBean;
 import com.richitec.commontoolkit.user.UserManager;
 import com.richitec.uutalk.R;
+import com.richitec.uutalk.assist.WebViewActivity;
 import com.richitec.uutalk.utils.AppDataSaveRestoreUtil;
 
 public class AlipayWapActivity extends WebViewActivity {
