@@ -22,6 +22,19 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/dial_phone_textView_hint"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/img_dial_phone_textview_bg"
+            android:ellipsize="middle"
+            android:gravity="center"
+            android:hint="@string/dialPhone_tipText"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <TextView
             android:id="@+id/dial_phone_ownership_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
