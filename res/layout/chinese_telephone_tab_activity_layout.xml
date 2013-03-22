@@ -21,7 +21,7 @@
             android:layout_height="66dp"
             android:layout_alignParentBottom="true"
             android:background="@drawable/img_tabwidget_bg"
-            android:paddingTop="2dp" >
+            android:paddingTop="0dp" >
         </TabWidget>
     </RelativeLayout>
 
