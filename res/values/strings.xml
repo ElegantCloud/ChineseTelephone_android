@@ -71,7 +71,7 @@
     <!-- dial tab content activity -->
     <string name="title_activity_dial_tab_content">DialTabContentActivity</string>
     <string name="dial_tab_title">拨号</string>
-    <string name="dialPhone_tipText">拨打中国请加拨0086，拨打安哥拉请加拨00244</string>
+    <string name="dialPhone_tipText">拨打中国请加拨0086\n拨打安哥拉请加拨00244</string>
     <string name="dialBtn_imageView_content_description">dial button image view</string>
     <string name="dialBtn_imageButton_content_description">dial button image button</string>
     <string name="dial_phone_callee_unknown">未知联系人</string>
@@ -282,7 +282,7 @@
 	<string name="getpsw">找回密码</string> 
     <string name="getpsw_phone">手机号：</string>
     <string name="getpsw_phone_hint">请输入手机号</string>
-    <string name="pls_select_country">请选择您所在的国家</string>
+    <string name="pls_select_country">请选择您号码所属的国家</string>
     <string name="cancel">取   消</string>
     <string name="ok">确   定</string>
     <string name="countrycode_list">国家代码列表</string>
