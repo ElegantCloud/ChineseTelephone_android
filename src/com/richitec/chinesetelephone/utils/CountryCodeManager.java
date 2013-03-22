@@ -16,11 +16,11 @@ import com.richitec.commontoolkit.user.UserBean;
 import com.richitec.commontoolkit.user.UserManager;
 
 public class CountryCodeManager {
-	private List<Map<String, String>> datas;
+	private List<Map<String, Object>> datas;
 	private static CountryCodeManager countryCodeManager;
 
 	private CountryCodeManager() {
-		datas = new ArrayList<Map<String, String>>();
+		datas = new ArrayList<Map<String, Object>>();
 		getCountryCode();
 	}
 
@@ -36,36 +36,42 @@ public class CountryCodeManager {
 
 	private void getCountryCode() {
 		Context context = CTApplication.getContext();
-		HashMap<String, String> data = new HashMap<String, String>();
+		HashMap<String, Object> data = new HashMap<String, Object>();
 		data.put(Country.contryname.name(), context.getString(R.string.china));
 		data.put(Country.code.name(), "0086");
+		data.put(Country.flag.name(), R.drawable.china_flat);
 		datas.add(data);
-		HashMap<String, String> data1 = new HashMap<String, String>();
+		HashMap<String, Object> data1 = new HashMap<String, Object>();
 		data1.put(Country.contryname.name(), context.getString(R.string.angola));
 		data1.put(Country.code.name(), "00244");
+		data1.put(Country.flag.name(), R.drawable.angola_flat);
 		datas.add(data1);
 
+	}
+	
+	public List<Map<String, Object>> getCountryList() {
+		return datas;
 	}
 
 	public String[] getCountryNameList() {
 		ArrayList<String> names = new ArrayList<String>();
-		for (Map<String, String> data : datas) {
-			names.add(data.get(Country.contryname.name()));
+		for (Map<String, Object> data : datas) {
+			names.add((String) data.get(Country.contryname.name()));
 		}
 		String[] result = new String[names.size()];
 		return names.toArray(result);
 	}
 
 	public String getCountryName(int index) {
-		Map<String, String> data = datas.get(index);
-		return data.get(Country.contryname.name());
+		Map<String, Object> data = datas.get(index);
+		return (String) data.get(Country.contryname.name());
 	}
 
 	public String getCountryCode(String countryname) {
 		String code = null;
-		for (Map<String, String> data : datas) {
-			String name = data.get(Country.contryname.name()).trim();
-			String c = data.get(Country.code.name());
+		for (Map<String, Object> data : datas) {
+			String name = (String) data.get(Country.contryname.name());
+			String c = (String) data.get(Country.code.name());
 			if (countryname.equals(name)) {
 				code = c;
 				break;
@@ -82,8 +88,8 @@ public class CountryCodeManager {
 		// end test
 
 		int i = 0;
-		for (Map<String, String> data : datas) {
-			String c = data.get(Country.code.name());
+		for (Map<String, Object> data : datas) {
+			String c = (String) data.get(Country.code.name());
 			Log.d(SystemConstants.TAG,
 					"code: " + code + " data: " + data.toString());
 			if (c.equals(code)) {

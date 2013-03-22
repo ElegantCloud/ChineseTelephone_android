@@ -232,9 +232,10 @@ public class AccountSettingActivity extends Activity {
 		AlertDialog.Builder chooseCountryDialogBuilder = new AlertDialog.Builder(
 				this);
 		chooseCountryDialogBuilder.setTitle(R.string.countrycode_list);
-		chooseCountryDialogBuilder.setSingleChoiceItems(
-				countryCodeManager.getCountryNameList(), lastSelectCountryCode,
-				new ChooseCountryListener());
+//		chooseCountryDialogBuilder.setSingleChoiceItems(
+//				countryCodeManager.getCountryNameList(), lastSelectCountryCode,
+//				new ChooseCountryListener());
+		chooseCountryDialogBuilder.setAdapter(new CountryCodeListAdapter(this), new ChooseCountryListener());
 		chooseCountryDialogBuilder.setNegativeButton(R.string.cancel, null);
 		chooseCountryDialog = chooseCountryDialogBuilder.create();
 		chooseCountryDialog.show();

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="china">0086 (China 中国)</string>
-    <string name="angola">00244 (Angola 安哥拉)</string>
+    <string name="china">中国 0086</string>
+    <string name="angola">安哥拉 00244</string>
 
     <string-array name="country_codes">
         <item>0086</item>
