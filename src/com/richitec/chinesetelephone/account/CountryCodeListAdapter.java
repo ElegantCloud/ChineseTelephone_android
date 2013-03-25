@@ -58,7 +58,7 @@ public class CountryCodeListAdapter extends BaseAdapter {
 		Log.d(SystemConstants.TAG, "size: " + list.size());
 		Map<String, Object> country = list.get(position);
 		Log.d(SystemConstants.TAG, "pos: " + position + " country: " + country + " " + viewHolder.countryName);
-		viewHolder.countryName.setText((String) country.get(Country.contryname.name()));
+		viewHolder.countryName.setText((String) country.get(Country.countryname.name()));
 		viewHolder.countryFlag.setImageResource((Integer)country.get(Country.flag.name()));
 		
 		return convertView;

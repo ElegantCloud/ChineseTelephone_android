@@ -1,6 +1,7 @@
 package com.richitec.chinesetelephone.assist;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,17 +20,21 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.richitec.chinesetelephone.R;
 import com.richitec.chinesetelephone.account.AccountForgetPSWActivity;
 import com.richitec.chinesetelephone.account.AccountSettingActivity;
+import com.richitec.chinesetelephone.account.CountryCodeListAdapter;
 import com.richitec.chinesetelephone.bean.DialPreferenceBean;
 import com.richitec.chinesetelephone.call.SipCallModeSelector;
 import com.richitec.chinesetelephone.call.SipCallModeSelector.SipCallModeSelectPattern;
+import com.richitec.chinesetelephone.constant.Country;
 import com.richitec.chinesetelephone.constant.DialPreference;
 import com.richitec.chinesetelephone.constant.LaunchSetting;
 import com.richitec.chinesetelephone.constant.SystemConstants;
@@ -211,29 +216,46 @@ public class SettingActivity extends NavigationActivity {
 
 		@Override
 		public void onFinished(HttpResponseResult responseResult) {
-			dismiss();
-			Button countryButton = (Button) setBindNumberPopupWindow
-					.getContentView().findViewById(
-							R.id.setAuth_choose_country_btn);
+			dismissProgressDlg();
+//			Button countryButton = (Button) setBindNumberPopupWindow
+//					.getContentView().findViewById(
+//							R.id.setAuth_choose_country_btn);
 			EditText phoneET = (EditText) setBindNumberPopupWindow
 					.getContentView().findViewById(
 							R.id.set_auth_number_editText);
 
+			TextView countryNameTV = (TextView) setBindNumberPopupWindow.getContentView()
+					.findViewById(R.id.setAuth_choose_country_btn);
+			
+			ImageView flagView = (ImageView) setBindNumberPopupWindow.getContentView()
+					.findViewById(R.id.country_flag);
+			
 			try {
 				JSONObject data = new JSONObject(
 						responseResult.getResponseText());
 				String phone = data.getString("bindphone");
 				String countrycode = data.getString("bindphone_country_code");
 
-				countryButton.setText(countryCodeManager
-						.getCountryName(countryCodeManager
-								.getCountryIndex(countrycode)));
+				Map<String, Object> country = countryCodeManager.getCountry(countryCodeManager.getCountryIndex(countrycode));
+				String countryName = (String) country.get(Country.countryname.name());
+				Integer countryFlag = (Integer) country.get(Country.flag.name());
+				countryNameTV.setText(countryName);
+				flagView.setImageResource(countryFlag);
+//				countryButton.setText(countryCodeManager
+//						.getCountryName(countryCodeManager
+//								.getCountryIndex(countrycode)));
 
 				phoneET.setText(phone);
 
 			} catch (JSONException e) {
 				e.printStackTrace();
-				countryButton.setText(countryCodeManager.getCountryName(0));
+//				countryButton.setText(countryCodeManager.getCountryName(0));
+				Map<String, Object> country = countryCodeManager.getCountry(0);
+				String countryName = (String) country.get(Country.countryname.name());
+				Integer countryFlag = (Integer) country.get(Country.flag.name());
+				countryNameTV.setText(countryName);
+				flagView.setImageResource(countryFlag);
+				
 				phoneET.setText("");
 			}
 
@@ -244,16 +266,28 @@ public class SettingActivity extends NavigationActivity {
 
 		@Override
 		public void onFailed(HttpResponseResult responseResult) {
-			dismiss();
+			dismissProgressDlg();
 			MyToast.show(SettingActivity.this, R.string.get_bindphone_failed,
 					Toast.LENGTH_SHORT);
-			Button countryButton = (Button) setBindNumberPopupWindow
-					.getContentView().findViewById(
-							R.id.setAuth_choose_country_btn);
+//			Button countryButton = (Button) setBindNumberPopupWindow
+//					.getContentView().findViewById(
+//							R.id.setAuth_choose_country_btn);
 			EditText phoneET = (EditText) setBindNumberPopupWindow
 					.getContentView().findViewById(
 							R.id.set_auth_number_editText);
-			countryButton.setText(countryCodeManager.getCountryName(0));
+			TextView countryNameTV = (TextView) setBindNumberPopupWindow.getContentView()
+					.findViewById(R.id.setAuth_choose_country_btn);
+			
+			ImageView flagView = (ImageView) setBindNumberPopupWindow.getContentView()
+					.findViewById(R.id.country_flag);
+			
+			Map<String, Object> country = countryCodeManager.getCountry(0);
+			String countryName = (String) country.get(Country.countryname.name());
+			Integer countryFlag = (Integer) country.get(Country.flag.name());
+			countryNameTV.setText(countryName);
+			flagView.setImageResource(countryFlag);
+			
+//			countryButton.setText(countryCodeManager.getCountryName(0));
 			phoneET.setText("");
 			setBindNumberPopupWindow.showAtLocation(
 					findViewById(R.id.setting_main_layout), Gravity.CENTER, 0,
@@ -326,9 +360,11 @@ public class SettingActivity extends NavigationActivity {
 				.getValue(TelUser.dialCountryCode.name());
 		int dialCountryIndex = countryCodeManager
 				.getCountryIndex(dialcountrycode);
+		Map<String, Object> country = countryCodeManager.getCountry(dialCountryIndex);
+		String countryName = (String) country.get(Country.countryname.name());
 		((Button) (setDialCountryCodePopupWindow.getContentView()
 				.findViewById(R.id.set_dial_country_btn)))
-				.setText(countryCodeManager.getCountryName(dialCountryIndex));
+				.setText(countryName);
 		setDialCountryCodePopupWindow
 				.setSelectDialCountryCode(dialCountryIndex);
 		setDialCountryCodePopupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
@@ -372,7 +408,7 @@ public class SettingActivity extends NavigationActivity {
 		public void onFinished(HttpResponseResult responseResult) {
 
 			inviteLink = responseResult.getResponseText();
-			dismiss();
+			dismissProgressDlg();
 			HashMap<String, Object> params = new HashMap<String, Object>();
 			params.put("inviteLink", inviteLink);
 			SettingActivity.this.pushActivity(InviteFriendActivity.class,
@@ -381,7 +417,7 @@ public class SettingActivity extends NavigationActivity {
 
 		@Override
 		public void onFailed(HttpResponseResult responseResult) {
-			dismiss();
+			dismissProgressDlg();
 
 			if (responseResult.getStatusCode() == -1) {
 				MyToast.show(SettingActivity.this,
@@ -453,7 +489,7 @@ public class SettingActivity extends NavigationActivity {
 
 	};
 
-	private void dismiss() {
+	private void dismissProgressDlg() {
 		if (progressDialog != null)
 			progressDialog.dismiss();
 	}
@@ -512,7 +548,7 @@ public class SettingActivity extends NavigationActivity {
 
 		@Override
 		public void onFinished(HttpResponseResult responseResult) {
-			dismiss();
+			dismissProgressDlg();
 
 			if (modifyPSWPopupWindow == null) {
 				return;
@@ -543,7 +579,7 @@ public class SettingActivity extends NavigationActivity {
 
 		@Override
 		public void onFailed(HttpResponseResult responseResult) {
-			dismiss();
+			dismissProgressDlg();
 			int code = responseResult.getStatusCode();
 			if (code == 401) {
 				MyToast.show(SettingActivity.this, R.string.auth_not_pass,
@@ -585,7 +621,7 @@ public class SettingActivity extends NavigationActivity {
 		@Override
 		public void onFinished(HttpResponseResult responseResult) {
 			// TODO Auto-generated method stub
-			dismiss();
+			dismissProgressDlg();
 			int result = responseResult.getStatusCode();
 
 			if (result == 200 || result == 201) {
@@ -601,7 +637,7 @@ public class SettingActivity extends NavigationActivity {
 		public void onFailed(HttpResponseResult responseResult) {
 			// TODO Auto-generated method stub
 			// Log.d(SystemConstants.TAG, responseResult.getStatusCode()+"");
-			dismiss();
+			dismissProgressDlg();
 			MyToast.show(SettingActivity.this, R.string.phone_number_not_exist,
 					Toast.LENGTH_SHORT);
 		}
@@ -929,10 +965,12 @@ public class SettingActivity extends NavigationActivity {
 			int dialCountryIndex = countryCodeManager
 					.getCountryIndex(dialcountrycode);
 			lastDialCountryCodeSelect = dialCountryIndex;
+			Map<String, Object> country = countryCodeManager.getCountry(dialCountryIndex);
+			String countryName = (String) country.get(Country.countryname.name());
 			((Button) (this.getContentView()
 					.findViewById(R.id.set_dial_country_btn)))
-					.setText(countryCodeManager
-							.getCountryName(dialCountryIndex));
+					.setText(countryName);
+			
 		}
 
 		@Override
@@ -973,9 +1011,11 @@ public class SettingActivity extends NavigationActivity {
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
 				lastDialCountryCodeSelect = which;
+				Map<String, Object> country = countryCodeManager.getCountry(which);
+				String countryName = (String) country.get(Country.countryname.name());
 				((Button) (SetDialCountryCodePopupWindow.this.getContentView()
 						.findViewById(R.id.set_dial_country_btn)))
-						.setText(countryCodeManager.getCountryName(which));
+						.setText(countryName);
 				chooseCountryDialog.dismiss();
 			}
 		}
@@ -1133,9 +1173,20 @@ public class SettingActivity extends NavigationActivity {
 
 		public SetBindNumberPopupWindow(int resource, int width, int height) {
 			super(resource, width, height);
-			((Button) (this.getContentView()
-					.findViewById(R.id.setAuth_choose_country_btn)))
-					.setText(countryCodeManager.getCountryName(0));
+//			((Button) (this.getContentView()
+//					.findViewById(R.id.setAuth_choose_country_btn)))
+//					.setText(countryCodeManager.getCountryName(0));
+			
+			Map<String, Object> country = countryCodeManager.getCountry(0);
+			String countryName = (String) country.get(Country.countryname.name());
+			Integer countryFlag = (Integer) country.get(Country.flag.name());
+			TextView countryNameTV = (TextView) SetBindNumberPopupWindow.this.getContentView()
+					.findViewById(R.id.setAuth_choose_country_btn);
+			countryNameTV.setText(countryName);
+			ImageView flagView = (ImageView) SetBindNumberPopupWindow.this.getContentView()
+					.findViewById(R.id.country_flag);
+			flagView.setImageResource(countryFlag);
+			
 			// Log.d("Setting Dial Preference", dialPattern+":"+answerPattern);
 		}
 
@@ -1146,8 +1197,8 @@ public class SettingActivity extends NavigationActivity {
 					.setOnClickListener(new SetBindNumberConfirmBtnOnClickListener());
 			((Button) getContentView().findViewById(R.id.set_auth_cancelBtn))
 					.setOnClickListener(new SetBindNumberCancelBtnOnClickListener());
-			((Button) (this.getContentView()
-					.findViewById(R.id.setAuth_choose_country_btn)))
+			((LinearLayout) (this.getContentView()
+					.findViewById(R.id.bind_number_choose_country)))
 					.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
@@ -1168,9 +1219,10 @@ public class SettingActivity extends NavigationActivity {
 			AlertDialog.Builder chooseCountryDialogBuilder = new AlertDialog.Builder(
 					SettingActivity.this);
 			chooseCountryDialogBuilder.setTitle(R.string.countrycode_list);
-			chooseCountryDialogBuilder.setSingleChoiceItems(
-					countryCodeManager.getCountryNameList(),
-					lastSelectCountryCode, new chooseCountryListener());
+//			chooseCountryDialogBuilder.setSingleChoiceItems(
+//					countryCodeManager.getCountryNameList(),
+//					lastSelectCountryCode, new chooseCountryListener());
+			chooseCountryDialogBuilder.setAdapter(new CountryCodeListAdapter(SettingActivity.this), new chooseCountryListener());
 			chooseCountryDialogBuilder.setNegativeButton(R.string.cancel, null);
 			chooseCountryDialog = chooseCountryDialogBuilder.create();
 			chooseCountryDialog.show();
@@ -1200,6 +1252,7 @@ public class SettingActivity extends NavigationActivity {
 		
 			@Override
 			public void onFinished(HttpResponseResult responseResult) {
+				dismissProgressDlg();
 				MyToast.show(SettingActivity.this,
 						R.string.set_bind_number_success, Toast.LENGTH_SHORT);
 				UserBean user = UserManager.getInstance().getUser();
@@ -1207,12 +1260,12 @@ public class SettingActivity extends NavigationActivity {
 				user.setValue(TelUser.bindphone.name(), newBindPhone);
 				DataStorageUtils.putObject(TelUser.bindphone_country_code.name(), newBindCountryCode);
 				DataStorageUtils.putObject(TelUser.bindphone.name(), newBindPhone);
-				dismiss();
+				
 			}
 		
 			@Override
 			public void onFailed(HttpResponseResult responseResult) {
-				dismiss();
+				dismissProgressDlg();
 				MyToast.show(SettingActivity.this, R.string.server_error,
 						Toast.LENGTH_SHORT);
 			}
@@ -1223,9 +1276,18 @@ public class SettingActivity extends NavigationActivity {
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
 				lastSelectCountryCode = which;
-				((Button) (SetBindNumberPopupWindow.this.getContentView()
-						.findViewById(R.id.setAuth_choose_country_btn)))
-						.setText(countryCodeManager.getCountryName(which));
+//				((Button) (SetBindNumberPopupWindow.this.getContentView()
+//						.findViewById(R.id.setAuth_choose_country_btn)))
+//						.setText(countryCodeManager.getCountryName(which));
+				Map<String, Object> country = countryCodeManager.getCountry(which);
+				String countryName = (String) country.get(Country.countryname.name());
+				Integer countryFlag = (Integer) country.get(Country.flag.name());
+				TextView countryNameTV = (TextView) SetBindNumberPopupWindow.this.getContentView()
+						.findViewById(R.id.setAuth_choose_country_btn);
+				countryNameTV.setText(countryName);
+				ImageView flagView = (ImageView) SetBindNumberPopupWindow.this.getContentView()
+						.findViewById(R.id.country_flag);
+				flagView.setImageResource(countryFlag);
 				chooseCountryDialog.dismiss();
 			}
 		}
@@ -1243,7 +1305,7 @@ public class SettingActivity extends NavigationActivity {
 						.findViewById(R.id.set_auth_number_editText)))
 						.getText().toString().trim();
 				String countrycode = countryCodeManager
-						.getCountryCode(((Button) SetBindNumberPopupWindow.this
+						.getCountryCode(((TextView) SetBindNumberPopupWindow.this
 								.getContentView().findViewById(
 										R.id.setAuth_choose_country_btn))
 								.getText().toString().trim());

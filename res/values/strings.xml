@@ -271,7 +271,7 @@
     <string name="getting_charge_money_list">正在获取充值金额列表…</string>
     <!-- account setting -->
     <string name="forget_psw"><u>忘记密码</u></string>
-    <string name="welcome">安中通欢迎您登录</string>
+    <string name="welcome">欢迎使用安中通</string>
     <string name="country_code">国家代码：</string>
     <string name="account_name">手机号：</string>
     <string name="account_psw">密   码：</string>

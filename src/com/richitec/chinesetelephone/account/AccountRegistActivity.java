@@ -1,18 +1,10 @@
 package com.richitec.chinesetelephone.account;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.json.JSONObject;
 
-import com.richitec.chinesetelephone.R;
-import com.richitec.chinesetelephone.utils.AppDataSaveRestoreUtil;
-import com.richitec.chinesetelephone.utils.CountryCodeManager;
-import com.richitec.commontoolkit.utils.HttpUtils;
-import com.richitec.commontoolkit.utils.MyToast;
-import com.richitec.commontoolkit.utils.HttpUtils.HttpRequestType;
-import com.richitec.commontoolkit.utils.HttpUtils.HttpResponseResult;
-import com.richitec.commontoolkit.utils.HttpUtils.OnHttpRequestListener;
-import com.richitec.commontoolkit.utils.HttpUtils.PostRequestFormat;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -21,14 +13,25 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.richitec.chinesetelephone.R;
+import com.richitec.chinesetelephone.constant.Country;
+import com.richitec.chinesetelephone.utils.AppDataSaveRestoreUtil;
+import com.richitec.chinesetelephone.utils.CountryCodeManager;
+import com.richitec.commontoolkit.utils.HttpUtils;
+import com.richitec.commontoolkit.utils.HttpUtils.HttpRequestType;
+import com.richitec.commontoolkit.utils.HttpUtils.HttpResponseResult;
+import com.richitec.commontoolkit.utils.HttpUtils.OnHttpRequestListener;
+import com.richitec.commontoolkit.utils.HttpUtils.PostRequestFormat;
+import com.richitec.commontoolkit.utils.MyToast;
 
 public class AccountRegistActivity extends Activity {
 	private AlertDialog chooseCountryDialog;
-	private int lastSelect = 0;
 	CountryCodeManager countryCodeManager;
 	private ProgressDialog progressDlg;
 
@@ -40,16 +43,13 @@ public class AccountRegistActivity extends Activity {
 
 		countryCodeManager = CountryCodeManager.getInstance();
 
-		// ((Button)findViewById(R.id.regist_choose_country_btn)).setText(countryCodeManager.getCountryName(0));
 	}
 
 	public void chooseCountry(View v) {
 		AlertDialog.Builder chooseCountryDialogBuilder = new AlertDialog.Builder(
 				this);
 		chooseCountryDialogBuilder.setTitle(R.string.countrycode_list);
-		chooseCountryDialogBuilder.setSingleChoiceItems(
-				countryCodeManager.getCountryNameList(), lastSelect,
-				new chooseCountryListener());
+		chooseCountryDialogBuilder.setAdapter(new CountryCodeListAdapter(this), new chooseCountryListener());
 		chooseCountryDialogBuilder.setNegativeButton(R.string.cancel, null);
 		chooseCountryDialog = chooseCountryDialogBuilder.create();
 		chooseCountryDialog.show();
@@ -210,7 +210,7 @@ public class AccountRegistActivity extends Activity {
 		String phone = ((EditText) (findViewById(R.id.regist_phone_edittext)))
 				.getText().toString().trim();
 		String countrycode = countryCodeManager
-				.getCountryCode(((Button) findViewById(R.id.regist_choose_country_btn))
+				.getCountryCode(((TextView) findViewById(R.id.regist_choose_country_btn))
 						.getText().toString().trim());
 		if (countrycode == null) {
 			MyToast.show(this, R.string.pls_select_country, Toast.LENGTH_SHORT);
@@ -307,11 +307,15 @@ public class AccountRegistActivity extends Activity {
 
 		@Override
 		public void onClick(DialogInterface dialog, int which) {
-			// TODO Auto-generated method stub
-			lastSelect = which;
-			((Button) (AccountRegistActivity.this
-					.findViewById(R.id.regist_choose_country_btn)))
-					.setText(countryCodeManager.getCountryName(which));
+			Map<String, Object> country = countryCodeManager.getCountry(which);
+			String countryName = (String) country.get(Country.countryname.name());
+			Integer flag = (Integer) country.get(Country.flag.name());
+			TextView countryNameTV = (TextView) findViewById(R.id.regist_choose_country_btn);
+			countryNameTV.setText(countryName);
+			ImageView countryFlag = (ImageView) findViewById(R.id.country_flag);
+			countryFlag.setVisibility(View.VISIBLE);
+			countryFlag.setImageResource(flag);
+			
 			chooseCountryDialog.dismiss();
 		}
 

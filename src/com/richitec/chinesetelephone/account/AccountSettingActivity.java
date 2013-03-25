@@ -1,6 +1,7 @@
 package com.richitec.chinesetelephone.account;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,15 +21,16 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.richitec.chinesetelephone.R;
 import com.richitec.chinesetelephone.assist.SettingActivity;
+import com.richitec.chinesetelephone.constant.Country;
 import com.richitec.chinesetelephone.constant.SystemConstants;
 import com.richitec.chinesetelephone.constant.TelUser;
 import com.richitec.chinesetelephone.sip.SipUtils;
@@ -179,15 +181,21 @@ public class AccountSettingActivity extends Activity {
 		UserBean user = UserManager.getInstance().getUser();
 		String countryCode = (String) user.getValue(TelUser.countryCode.name());
 		if (countryCode == null || countryCode.equals("")) {
-			((Button) findViewById(R.id.account_choose_country_btn))
+			((TextView) findViewById(R.id.account_choose_country_btn))
 					.setText(R.string.pls_select_country);
 		} else {
 			lastSelectCountryCode = countryCodeManager
 					.getCountryIndex((String) user.getValue(TelUser.countryCode
 							.name()));
-			((Button) findViewById(R.id.account_choose_country_btn))
-					.setText(countryCodeManager
-							.getCountryName(lastSelectCountryCode));
+
+			Map<String, Object> country = countryCodeManager.getCountry(lastSelectCountryCode);
+			String countryName = (String) country.get(Country.countryname.name());
+			Integer flag = (Integer) country.get(Country.flag.name());
+			TextView countryNameTV = (TextView) findViewById(R.id.account_choose_country_btn);
+			countryNameTV.setText(countryName);
+			ImageView countryFlag = (ImageView) findViewById(R.id.country_flag);
+			countryFlag.setVisibility(View.VISIBLE);
+			countryFlag.setImageResource(flag);
 		}
 
 		EditText userEditText = (EditText) findViewById(R.id.account_user_edittext);
@@ -232,9 +240,6 @@ public class AccountSettingActivity extends Activity {
 		AlertDialog.Builder chooseCountryDialogBuilder = new AlertDialog.Builder(
 				this);
 		chooseCountryDialogBuilder.setTitle(R.string.countrycode_list);
-//		chooseCountryDialogBuilder.setSingleChoiceItems(
-//				countryCodeManager.getCountryNameList(), lastSelectCountryCode,
-//				new ChooseCountryListener());
 		chooseCountryDialogBuilder.setAdapter(new CountryCodeListAdapter(this), new ChooseCountryListener());
 		chooseCountryDialogBuilder.setNegativeButton(R.string.cancel, null);
 		chooseCountryDialog = chooseCountryDialogBuilder.create();
@@ -253,7 +258,7 @@ public class AccountSettingActivity extends Activity {
 		String psw = ((EditText) (findViewById(R.id.account_psw_edittext)))
 				.getText().toString().trim();
 		String countrycode = countryCodeManager
-				.getCountryCode(((Button) findViewById(R.id.account_choose_country_btn))
+				.getCountryCode(((TextView) findViewById(R.id.account_choose_country_btn))
 						.getText().toString().trim());
 
 		boolean isRemember = ((CheckBox) (findViewById(R.id.account_remember_psw_cbtn)))
@@ -417,11 +422,17 @@ public class AccountSettingActivity extends Activity {
 
 		@Override
 		public void onClick(DialogInterface dialog, int which) {
-			// TODO Auto-generated method stub
 			lastSelectCountryCode = which;
-			((Button) (AccountSettingActivity.this
-					.findViewById(R.id.account_choose_country_btn)))
-					.setText(countryCodeManager.getCountryName(which));
+
+			Map<String, Object> country = countryCodeManager.getCountry(which);
+			String countryName = (String) country.get(Country.countryname.name());
+			Integer flag = (Integer) country.get(Country.flag.name());
+			TextView countryNameTV = (TextView) findViewById(R.id.account_choose_country_btn);
+			countryNameTV.setText(countryName);
+			ImageView countryFlag = (ImageView) findViewById(R.id.country_flag);
+			countryFlag.setVisibility(View.VISIBLE);
+			countryFlag.setImageResource(flag);
+			
 			chooseCountryDialog.dismiss();
 		}
 

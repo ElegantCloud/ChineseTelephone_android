@@ -37,12 +37,12 @@ public class CountryCodeManager {
 	private void getCountryCode() {
 		Context context = CTApplication.getContext();
 		HashMap<String, Object> data = new HashMap<String, Object>();
-		data.put(Country.contryname.name(), context.getString(R.string.china));
+		data.put(Country.countryname.name(), context.getString(R.string.china));
 		data.put(Country.code.name(), "0086");
 		data.put(Country.flag.name(), R.drawable.china_flat);
 		datas.add(data);
 		HashMap<String, Object> data1 = new HashMap<String, Object>();
-		data1.put(Country.contryname.name(), context.getString(R.string.angola));
+		data1.put(Country.countryname.name(), context.getString(R.string.angola));
 		data1.put(Country.code.name(), "00244");
 		data1.put(Country.flag.name(), R.drawable.angola_flat);
 		datas.add(data1);
@@ -56,21 +56,20 @@ public class CountryCodeManager {
 	public String[] getCountryNameList() {
 		ArrayList<String> names = new ArrayList<String>();
 		for (Map<String, Object> data : datas) {
-			names.add((String) data.get(Country.contryname.name()));
+			names.add((String) data.get(Country.countryname.name()));
 		}
 		String[] result = new String[names.size()];
 		return names.toArray(result);
 	}
 
-	public String getCountryName(int index) {
-		Map<String, Object> data = datas.get(index);
-		return (String) data.get(Country.contryname.name());
+	public Map<String, Object> getCountry(int index) {
+		return datas.get(index);
 	}
 
 	public String getCountryCode(String countryname) {
 		String code = null;
 		for (Map<String, Object> data : datas) {
-			String name = (String) data.get(Country.contryname.name());
+			String name = (String) data.get(Country.countryname.name());
 			String c = (String) data.get(Country.code.name());
 			if (countryname.equals(name)) {
 				code = c;

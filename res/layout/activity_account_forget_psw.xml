@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-	android:background="@drawable/commonbg"	
+    android:background="@drawable/commonbg"
     android:gravity="center"
     android:orientation="vertical" >
 
@@ -27,19 +27,37 @@
                 android:text="@string/getpsw"
                 android:textSize="25sp" />
 
-            <Button
-                android:id="@+id/getpsw_choose_country_btn"
+            <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:background="@drawable/select_country_btn_bg"
-                android:drawableRight="@drawable/down_into_icon"
-                android:gravity="left|center_vertical"
+                android:clickable="true"
+                android:gravity="center_vertical"
                 android:onClick="chooseCountry"
-                android:padding="10dp"
-                android:text="@string/pls_select_country"
-                android:textColor="@drawable/select_country_btn_fg"
-                android:textSize="18sp" />
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/country_flag"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/china_flat"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/getpsw_choose_country_btn"
+                    android:layout_width="fill_parent"
+                    android:layout_height="45dp"
+                    android:background="@android:color/transparent"
+                    android:drawableRight="@drawable/down_into_icon"
+                    android:gravity="left|center_vertical"
+                    android:padding="10dp"
+                    android:text="@string/pls_select_country"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="fill_parent"

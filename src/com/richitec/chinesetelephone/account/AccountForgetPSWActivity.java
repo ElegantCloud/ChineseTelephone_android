@@ -1,36 +1,37 @@
 package com.richitec.chinesetelephone.account;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.richitec.chinesetelephone.R;
+import com.richitec.chinesetelephone.constant.Country;
 import com.richitec.chinesetelephone.utils.AppDataSaveRestoreUtil;
 import com.richitec.chinesetelephone.utils.CountryCodeManager;
-import com.richitec.commontoolkit.user.UserManager;
 import com.richitec.commontoolkit.utils.HttpUtils;
 import com.richitec.commontoolkit.utils.HttpUtils.HttpRequestType;
 import com.richitec.commontoolkit.utils.HttpUtils.HttpResponseResult;
 import com.richitec.commontoolkit.utils.HttpUtils.OnHttpRequestListener;
 import com.richitec.commontoolkit.utils.HttpUtils.PostRequestFormat;
 import com.richitec.commontoolkit.utils.MyToast;
-import android.os.Bundle;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 public class AccountForgetPSWActivity extends Activity {
 	private AlertDialog chooseCountryDialog;
-	private int lastSelectCountryCode = 0;
 	private ProgressDialog progressDlg;
 	private CountryCodeManager countryCodeManager;
 
@@ -47,9 +48,10 @@ public class AccountForgetPSWActivity extends Activity {
 		AlertDialog.Builder chooseCountryDialogBuilder = new AlertDialog.Builder(
 				this);
 		chooseCountryDialogBuilder.setTitle(R.string.countrycode_list);
-		chooseCountryDialogBuilder.setSingleChoiceItems(
-				countryCodeManager.getCountryNameList(), lastSelectCountryCode,
-				new chooseCountryListener());
+//		chooseCountryDialogBuilder.setSingleChoiceItems(
+//				countryCodeManager.getCountryNameList(), lastSelectCountryCode,
+//				new chooseCountryListener());
+		chooseCountryDialogBuilder.setAdapter(new CountryCodeListAdapter(this), new chooseCountryListener());
 		chooseCountryDialogBuilder.setNegativeButton(R.string.cancel, null);
 		chooseCountryDialog = chooseCountryDialogBuilder.create();
 		chooseCountryDialog.show();
@@ -59,11 +61,15 @@ public class AccountForgetPSWActivity extends Activity {
 
 		@Override
 		public void onClick(DialogInterface dialog, int which) {
-			// TODO Auto-generated method stub
-			lastSelectCountryCode = which;
-			((Button) (AccountForgetPSWActivity.this
-					.findViewById(R.id.getpsw_choose_country_btn)))
-					.setText(countryCodeManager.getCountryName(which));
+			Map<String, Object> country = countryCodeManager.getCountry(which);
+			String countryName = (String) country.get(Country.countryname.name());
+			Integer flag = (Integer) country.get(Country.flag.name());
+			TextView countryNameTV = (TextView) findViewById(R.id.getpsw_choose_country_btn);
+			countryNameTV.setText(countryName);
+			ImageView countryFlag = (ImageView) findViewById(R.id.country_flag);
+			countryFlag.setVisibility(View.VISIBLE);
+			countryFlag.setImageResource(flag);
+			
 			chooseCountryDialog.dismiss();
 		}
 
@@ -87,7 +93,7 @@ public class AccountForgetPSWActivity extends Activity {
 
 		EditText phoneEdit = (EditText) findViewById(R.id.get_phone_editText);
 		String countryCode = countryCodeManager
-				.getCountryCode(((Button) findViewById(R.id.getpsw_choose_country_btn))
+				.getCountryCode(((TextView) findViewById(R.id.getpsw_choose_country_btn))
 						.getText().toString().trim());
 
 		if (countryCode == null) {
