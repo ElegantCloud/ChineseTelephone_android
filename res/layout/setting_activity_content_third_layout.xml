@@ -71,7 +71,6 @@
             android:clickable="true"
             android:gravity="center_vertical"
             android:onClick="setDialCountryCode"
-            android:visibility="gone"
             android:orientation="horizontal" >
 
             <ImageView
@@ -86,7 +85,7 @@
                 android:layout_marginLeft="10.0dp"
                 android:layout_weight="1.0"
                 android:gravity="center_vertical"
-                android:text="@string/setting_countrycode_item"
+                android:text="@string/set_dialcountry_code"
                 android:textColor="@color/dark_dim_gray"
                 android:textSize="18.0sp" />
 
@@ -100,7 +99,6 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="1.0dp"
-            android:visibility="gone"
             android:background="@drawable/setting_line_img" />
 
         <LinearLayout

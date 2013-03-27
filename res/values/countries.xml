@@ -3,7 +3,7 @@
 
     <string name="china">中国 0086</string>
     <string name="angola">安哥拉 00244</string>
-
+	<string name="default_dial_country_code">0086</string>
     <string-array name="country_codes">
         <item>0086</item>
         <item>086</item>

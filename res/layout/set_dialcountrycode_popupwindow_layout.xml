@@ -32,9 +32,9 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:orientation="vertical" >
+            android:paddingRight="10dp" >
 
             <TextView
                 android:layout_width="fill_parent"
@@ -48,26 +48,39 @@
                 android:textSize="16sp" />
 
             <LinearLayout
+                android:id="@+id/set_dial_country_code_layout"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                android:clickable="true"
                 android:gravity="center_vertical"
+                android:background="@drawable/select_country_btn_bg"
                 android:orientation="horizontal" >
 
-                <Button
+                <ImageView
+                    android:id="@+id/country_flag"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="5dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/china_flat"
+                    android:visibility="visible" />
+
+                <TextView
                     android:id="@+id/set_dial_country_btn"
                     android:layout_width="fill_parent"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:background="@drawable/select_country_btn_bg"
+                    android:background="@android:color/transparent"
                     android:drawableRight="@drawable/down_into_icon"
                     android:gravity="left|center_vertical"
                     android:paddingLeft="10dp"
                     android:paddingRight="5dp"
-                    android:textColor="@drawable/select_country_btn_fg"
-                    android:text=""
+                    android:singleLine="true"
+                    android:text="@string/pls_select_country"
+                    android:textColor="@android:color/black"
                     android:textSize="17dp" />
             </LinearLayout>
         </LinearLayout>

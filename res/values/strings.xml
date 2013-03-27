@@ -154,7 +154,6 @@
     <string name="back">返回</string>
     <string name="setting_dial_item">拨打设置</string>
     <string name="setting_areacode_item">本地区号设置</string>
-    <string name="setting_countrycode_item">默认国家号设置</string>
     <string name="setting_setup_item">启动设置</string>
     <string name="setting_set_auth_number">回拨号码设置</string>
     <string name="setting_logout_item">注销登录并退出</string>
@@ -163,8 +162,8 @@
     <string name="help_update_item">软件升级</string>
     <string name="help_about_item">关于我们</string>
     <string name="change_account_title">切换账户</string>
-    <string name="set_dialcountry_code">默认国家号设置</string>
-    <string name="dialcountry_country_code_inform">提示：当您在拨打电话时未加国家号码，将会自动在您拨打的号码前添加默认国家号。</string>
+    <string name="set_dialcountry_code">默认拨出国家号</string>
+    <string name="dialcountry_country_code_inform">提示：当您在拨打电话时未加国家号码，将会自动在您拨打的号码前添加默认拨出国家号。</string>
     <string name="bind_number_inform">提示：通过设置回拨号码，使用回拨功能时将会回拨绑定的号码</string>
     <string name="is_auto_launch">是否开机启动?</string>
     <string name="yes">是</string>

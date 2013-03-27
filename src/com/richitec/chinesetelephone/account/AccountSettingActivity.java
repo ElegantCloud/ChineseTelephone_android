@@ -304,7 +304,7 @@ public class AccountSettingActivity extends Activity {
 		String dialCountryCode = (String) telUserBean
 				.getValue(TelUser.dialCountryCode.name());
 		if (dialCountryCode == null || dialCountryCode.trim().equals("")) {
-			telUserBean.setValue(TelUser.dialCountryCode.name(), countrycode);
+			telUserBean.setValue(TelUser.dialCountryCode.name(), getString(R.string.default_dial_country_code));
 		}
 
 		// unregitst sip account first

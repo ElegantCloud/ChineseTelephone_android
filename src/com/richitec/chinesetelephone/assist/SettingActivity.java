@@ -31,11 +31,9 @@ import com.richitec.chinesetelephone.R;
 import com.richitec.chinesetelephone.account.AccountForgetPSWActivity;
 import com.richitec.chinesetelephone.account.AccountSettingActivity;
 import com.richitec.chinesetelephone.account.CountryCodeListAdapter;
-import com.richitec.chinesetelephone.bean.DialPreferenceBean;
 import com.richitec.chinesetelephone.call.SipCallModeSelector;
 import com.richitec.chinesetelephone.call.SipCallModeSelector.SipCallModeSelectPattern;
 import com.richitec.chinesetelephone.constant.Country;
-import com.richitec.chinesetelephone.constant.DialPreference;
 import com.richitec.chinesetelephone.constant.LaunchSetting;
 import com.richitec.chinesetelephone.constant.SystemConstants;
 import com.richitec.chinesetelephone.constant.TelUser;
@@ -44,7 +42,6 @@ import com.richitec.chinesetelephone.sip.listeners.SipRegistrationStateListenerI
 import com.richitec.chinesetelephone.utils.AppDataSaveRestoreUtil;
 import com.richitec.chinesetelephone.utils.AppUpdateManager;
 import com.richitec.chinesetelephone.utils.CountryCodeManager;
-import com.richitec.chinesetelephone.utils.DialPreferenceManager;
 import com.richitec.commontoolkit.activityextension.NavigationActivity;
 import com.richitec.commontoolkit.addressbook.AddressBookManager;
 import com.richitec.commontoolkit.customcomponent.CTPopupWindow;
@@ -88,18 +85,6 @@ public class SettingActivity extends NavigationActivity {
 		setContentView(R.layout.activity_setting);
 
 		countryCodeManager = CountryCodeManager.getInstance();
-
-		// modifyPSWPopupWindow = new ModifyPSWPopupWindow(
-		// R.layout.modify_psw_popupwindow_layout, LayoutParams.FILL_PARENT,
-		// LayoutParams.FILL_PARENT);
-
-		// getPSWPopupWindow = new GetPSWPopupWindow(
-		// R.layout.get_psw_popupwindow_layout, LayoutParams.FILL_PARENT,
-		// LayoutParams.FILL_PARENT);
-
-		// setDialCountryCodePopupWindow = new SetDialCountryCodePopupWindow(
-		// R.layout.set_dialcountrycode_popupwindow_layout,
-		// LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
 
 		setDialPreferencePopupWin = new SetDialPreferencePopupWindow(
 				R.layout.dial_preference_popupwindow_layout,
@@ -362,9 +347,11 @@ public class SettingActivity extends NavigationActivity {
 				.getCountryIndex(dialcountrycode);
 		Map<String, Object> country = countryCodeManager.getCountry(dialCountryIndex);
 		String countryName = (String) country.get(Country.countryname.name());
-		((Button) (setDialCountryCodePopupWindow.getContentView()
+		Integer flag = (Integer) country.get(Country.flag.name());
+		((TextView) (setDialCountryCodePopupWindow.getContentView()
 				.findViewById(R.id.set_dial_country_btn)))
 				.setText(countryName);
+		((ImageView) (setDialCountryCodePopupWindow.getContentView().findViewById(R.id.country_flag))).setImageResource(flag);
 		setDialCountryCodePopupWindow
 				.setSelectDialCountryCode(dialCountryIndex);
 		setDialCountryCodePopupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
@@ -681,19 +668,19 @@ public class SettingActivity extends NavigationActivity {
 	// 拨打设置
 	private void saveDialPreference() {
 		int dialPatternId = this.dialGroup.getCheckedRadioButtonId();
-		int answerPatternId = this.answerGroup.getCheckedRadioButtonId();
+//		int answerPatternId = this.answerGroup.getCheckedRadioButtonId();
 
 		SipCallModeSelectPattern dialPattern = getDialPattern(dialPatternId);
 		SipCallModeSelector.setSipCallModeSelectPattern(dialPattern);
 
-		String answerPattern = getAnswerPattern(answerPatternId);
-		
-		DialPreferenceBean dialBean = DialPreferenceManager.getInstance()
-				.getDialPreferenceBean();
-		dialBean.setAnswerPattern(answerPattern);
-		
-		DataStorageUtils.putObject(
-				DialPreference.DialSetting.answerPattern.name(), answerPattern);
+//		String answerPattern = getAnswerPattern(answerPatternId);
+//		
+//		DialPreferenceBean dialBean = DialPreferenceManager.getInstance()
+//				.getDialPreferenceBean();
+//		dialBean.setAnswerPattern(answerPattern);
+//		
+//		DataStorageUtils.putObject(
+//				DialPreference.DialSetting.answerPattern.name(), answerPattern);
 	}
 
 	private SipCallModeSelectPattern getDialPattern(int id) {
@@ -714,18 +701,18 @@ public class SettingActivity extends NavigationActivity {
 		return result;
 	}
 
-	private String getAnswerPattern(int id) {
-		String result = "";
-		switch (id) {
-		case R.id.answer_auto_btn:
-			result = DialPreference.AUTO_ANSWER;
-			break;
-		case R.id.answer_manual_btn:
-			result = DialPreference.MANUAL_ANSWER;
-			break;
-		}
-		return result;
-	}
+//	private String getAnswerPattern(int id) {
+//		String result = "";
+//		switch (id) {
+//		case R.id.answer_auto_btn:
+//			result = DialPreference.AUTO_ANSWER;
+//			break;
+//		case R.id.answer_manual_btn:
+//			result = DialPreference.MANUAL_ANSWER;
+//			break;
+//		}
+//		return result;
+//	}
 
 	class ModifyPSWPopupWindow extends CTPopupWindow {
 
@@ -967,10 +954,9 @@ public class SettingActivity extends NavigationActivity {
 			lastDialCountryCodeSelect = dialCountryIndex;
 			Map<String, Object> country = countryCodeManager.getCountry(dialCountryIndex);
 			String countryName = (String) country.get(Country.countryname.name());
-			((Button) (this.getContentView()
-					.findViewById(R.id.set_dial_country_btn)))
-					.setText(countryName);
-			
+			Integer flag = (Integer) country.get(Country.flag.name());
+			((TextView) (this.getContentView().findViewById(R.id.set_dial_country_btn))).setText(countryName);
+			((ImageView) (this.getContentView().findViewById(R.id.country_flag))).setImageResource(flag);
 		}
 
 		@Override
@@ -983,8 +969,8 @@ public class SettingActivity extends NavigationActivity {
 			((Button) getContentView().findViewById(
 					R.id.set_countrycode_cancelBtn))
 					.setOnClickListener(new SetDialCountryCodeCancelBtnOnClickListener());
-			((Button) (this.getContentView()
-					.findViewById(R.id.set_dial_country_btn)))
+			((LinearLayout) (this.getContentView()
+					.findViewById(R.id.set_dial_country_code_layout)))
 					.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
@@ -998,9 +984,7 @@ public class SettingActivity extends NavigationActivity {
 			AlertDialog.Builder chooseCountryDialogBuilder = new AlertDialog.Builder(
 					SettingActivity.this);
 			chooseCountryDialogBuilder.setTitle(R.string.countrycode_list);
-			chooseCountryDialogBuilder.setSingleChoiceItems(
-					countryCodeManager.getCountryNameList(),
-					lastDialCountryCodeSelect, new chooseCountryListener());
+			chooseCountryDialogBuilder.setAdapter(new CountryCodeListAdapter(SettingActivity.this), new chooseCountryListener());
 			chooseCountryDialogBuilder.setNegativeButton(R.string.cancel, null);
 			chooseCountryDialog = chooseCountryDialogBuilder.create();
 			chooseCountryDialog.show();
@@ -1013,9 +997,11 @@ public class SettingActivity extends NavigationActivity {
 				lastDialCountryCodeSelect = which;
 				Map<String, Object> country = countryCodeManager.getCountry(which);
 				String countryName = (String) country.get(Country.countryname.name());
-				((Button) (SetDialCountryCodePopupWindow.this.getContentView()
+				Integer flag = (Integer) country.get(Country.flag.name());
+				((TextView) (SetDialCountryCodePopupWindow.this.getContentView()
 						.findViewById(R.id.set_dial_country_btn)))
 						.setText(countryName);
+				((ImageView) (SetDialCountryCodePopupWindow.this.getContentView().findViewById(R.id.country_flag))).setImageResource(flag);
 				chooseCountryDialog.dismiss();
 			}
 		}
@@ -1038,7 +1024,7 @@ public class SettingActivity extends NavigationActivity {
 			public void onClick(View v) {
 				// dismiss contact phone select popup window
 				String dialcountrycode = countryCodeManager
-						.getCountryCode(((Button) SetDialCountryCodePopupWindow.this
+						.getCountryCode(((TextView) SetDialCountryCodePopupWindow.this
 								.getContentView().findViewById(
 										R.id.set_dial_country_btn)).getText()
 								.toString().trim());
@@ -1073,24 +1059,7 @@ public class SettingActivity extends NavigationActivity {
 
 		public SetDialPreferencePopupWindow(int resource, int width, int height) {
 			super(resource, width, height);
-			// DialPreferenceBean dialBean = DialPreferenceManager.getInstance()
-			// .getDialPreferenceBean();
-			// String dialPattern = dialBean.getDialPattern();
-			// String answerPattern = dialBean.getAnswerPattern();
-
-			// Log.d("Setting Dial Preference", dialPattern+":"+answerPattern);
-
 			initUI();
-
-			// if (answerPattern != null) {
-			// if (answerPattern.equals(DialPreference.AUTO_ANSWER)) {
-			// ((RadioButton) getContentView().findViewById(
-			// R.id.answer_auto_btn)).setChecked(true);
-			// } else if (answerPattern.equals(DialPreference.MANUAL_ANSWER)) {
-			// ((RadioButton) getContentView().findViewById(
-			// R.id.answer_manual_btn)).setChecked(true);
-			// }
-			// }
 		}
 		
 		private void initUI() {

@@ -3,10 +3,10 @@ package com.richitec.chinesetelephone.utils;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.richitec.chinesetelephone.bean.DialPreferenceBean;
-import com.richitec.chinesetelephone.constant.DialPreference;
+import com.richitec.chinesetelephone.R;
 import com.richitec.chinesetelephone.constant.SystemConstants;
 import com.richitec.chinesetelephone.constant.TelUser;
+import com.richitec.commontoolkit.CTApplication;
 import com.richitec.commontoolkit.addressbook.AddressBookManager;
 import com.richitec.commontoolkit.user.User;
 import com.richitec.commontoolkit.user.UserBean;
@@ -59,9 +59,9 @@ public class AppDataSaveRestoreUtil {
 		user.setValue(TelUser.bindphone.name(), bindPhone);
 		user.setValue(TelUser.bindphone_country_code.name(), bindPhoneCountryCode);
 		
-		
+		Log.d(SystemConstants.TAG, "load account - dial country code: " + dialcountrycode);
 		if (dialcountrycode == null || dialcountrycode.trim().equals("")) {
-			user.setValue(TelUser.dialCountryCode.name(), countrycode);
+			user.setValue(TelUser.dialCountryCode.name(), CTApplication.getContext().getResources().getString(R.string.default_dial_country_code));
 		} else {
 			user.setValue(TelUser.dialCountryCode.name(), dialcountrycode);
 		}
@@ -73,17 +73,6 @@ public class AppDataSaveRestoreUtil {
 		user.setValue(TelUser.vosphone_pwd.name(), vosphone_psw);
 		UserManager.getInstance().setUser(user);
 		Log.d(SystemConstants.TAG, " load account: " + user.toString());
-		// 保存拨打设置属性
-		DialPreferenceBean dialBean = DialPreferenceManager.getInstance()
-				.getDialPreferenceBean();
-//		String dialPattern = DataStorageUtils
-//				.getString(DialPreference.DialSetting.dialPattern.name());
-//		if (dialPattern != null)
-//			dialBean.setDialPattern(dialPattern);
-		String answerPattern = DataStorageUtils
-				.getString(DialPreference.DialSetting.answerPattern.name());
-		if (answerPattern != null)
-			dialBean.setAnswerPattern(answerPattern);
 
 	}
 }
