@@ -138,6 +138,7 @@
     <string name="back4waitingCallbackCall_imageButton_content_description">back for waiting callback call image button</string>
     <string name="endCall_imageButton_content_description">end call image button</string>
     <string name="keyboardBtn_imageButton_content_description">keyboard image button</string>
+    <string name="makeDirectDialSipVoiceCallFailed">网络繁忙，请稍后重试或改用回拨</string>
 
     <!-- version upgrade -->
     <string name="detect_new_version" formatted="false">发现新版本%s，\n是否升级？\n本次更新说明：\n%s</string>
@@ -189,9 +190,9 @@
     <string name="add_exist_contact_item">添加现有联系人</string>
     <string name="no_sms_number">无号码，请重新选择</string>
     <string name="invite_message">使用环宇通直拨中国大陆，最低只要4分钱每分钟,点击 *** 可注册账户，扫描二维码可下载安装</string>
-    <string name="share_to_qzone_title">环宇通网络电话</string> 
-    <string name="share_to_qzone_link_url">http://www.uu-talk.com</string> 
-    <string name="share_to_qzone_images">http://www.uu-talk.com/templets/uutalk/images/dwqrcode.jpg</string> 
+    <string name="share_to_qzone_title">环宇通网络电话</string>
+    <string name="share_to_qzone_link_url">http://www.uu-talk.com</string>
+    <string name="share_to_qzone_images">http://www.uu-talk.com/templets/uutalk/images/dwqrcode.jpg</string>
     <string name="choose_sms_number">请选择号码</string>
     <string name="pls_input_phone">请输入电话号码</string>
     <string name="set_bind_number_title">设置回拨号码</string>
