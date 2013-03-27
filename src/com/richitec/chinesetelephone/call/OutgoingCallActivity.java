@@ -170,6 +170,9 @@ public class OutgoingCallActivity extends Activity implements
 								.getString(OUTGOING_CALL_OWNERSHIP) ? _data
 								.getString(OUTGOING_CALL_OWNERSHIP)
 								: _mCalleePhone);
+				
+				TextView callStateTV = (TextView) findViewById(R.id.callState_textView);
+				callStateTV.setText(getString(R.string.outgoing_call_trying) + _mCalleePhone);
 			}
 		}
 

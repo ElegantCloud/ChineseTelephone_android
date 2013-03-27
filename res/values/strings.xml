@@ -72,6 +72,8 @@
     <string name="title_activity_dial_tab_content">DialTabContentActivity</string>
     <string name="dial_tab_title">拨号</string>
     <string name="dialPhone_tipText">拨打中国请加拨0086\n拨打安哥拉请加拨00244</string>
+    <string name="dialphone_current_china">当前默认拨出国家是中国\n拨打安哥拉请加拨00244</string>
+    <string name="dialphone_current_angola">当前默认拨出国家是安哥拉\n拨打中国请加拨0086</string>
     <string name="dialBtn_imageView_content_description">dial button image view</string>
     <string name="dialBtn_imageButton_content_description">dial button image button</string>
     <string name="dial_phone_callee_unknown">未知联系人</string>
@@ -107,7 +109,7 @@
     <string name="title_activity_outgoing_call">OutgoingCallActivity</string>
     <string name="outgoingCallBG_imageView_content_description">outgoing call background image view</string>
     <string name="outgoing_call_unknownState">未知</string>
-    <string name="outgoing_call_trying">正在呼叫中  &#8230;</string>
+    <string name="outgoing_call_trying">正在呼叫</string>
     <string name="outgoing_call_earlyMedia7RemoteRing">等待对方接听 &#8230;</string>
     <string name="outgoing_call_failed">拨打失败</string>
     <string name="end_outgoing_call">正在结束通话</string>

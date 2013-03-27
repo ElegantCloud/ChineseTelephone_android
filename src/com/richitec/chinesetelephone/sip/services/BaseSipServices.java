@@ -18,6 +18,7 @@ import com.richitec.chinesetelephone.call.SipCallMode;
 import com.richitec.chinesetelephone.constant.TelUser;
 import com.richitec.chinesetelephone.sip.listeners.SipInviteStateListener;
 import com.richitec.chinesetelephone.sip.listeners.SipRegistrationStateListener;
+import com.richitec.chinesetelephone.utils.CountryCodeManager;
 import com.richitec.commontoolkit.CTApplication;
 import com.richitec.commontoolkit.addressbook.AddressBookManager;
 import com.richitec.commontoolkit.call.CallLogManager;
@@ -70,7 +71,7 @@ public abstract class BaseSipServices implements ISipServices {
 	private Boolean _mIsSipVoiceCallUsingLoudspeaker;
 
 	private boolean sipRegisterCalled;
-	
+
 	public BaseSipServices() {
 		super();
 
@@ -80,22 +81,23 @@ public abstract class BaseSipServices implements ISipServices {
 		// init audio manager
 		_mAudioManager = (AudioManager) _appContext
 				.getSystemService(Context.AUDIO_SERVICE);
-		
+
 		sipRegisterCalled = false;
 	}
-	
+
 	protected void setSipRegisterCalled(boolean flag) {
 		sipRegisterCalled = flag;
 	}
 
 	/**
 	 * whether the sip service registration method has been called
+	 * 
 	 * @return
 	 */
 	public boolean isSipRegisterCalled() {
 		return sipRegisterCalled;
 	}
-	
+
 	// make direct dial sip voice call
 	public abstract boolean makeDirectDialSipVoiceCall(String calleeName,
 			String calleePhone);
@@ -106,8 +108,31 @@ public abstract class BaseSipServices implements ISipServices {
 	@Override
 	public void makeSipVoiceCall(final String calleeName,
 			final String calleePhone, final SipCallMode callMode) {
+		// process callee phone number
+		String checkedTmpCalleePhone = new String(calleePhone);
+		checkedTmpCalleePhone = AddressBookManager.filterNumber(
+				checkedTmpCalleePhone,
+				AddressBookManager.FILTER_ONLY_IP_PREFIX);
+		for (String prefix : PhoneNumberFilterPrefix) {
+			int index = calleePhone.indexOf(prefix);
+			if (index == 0 && prefix.length() < calleePhone.length()) {
+				checkedTmpCalleePhone = calleePhone.substring(prefix
+						.length());
+			}
+		}
+		CountryCodeManager ccm = CountryCodeManager.getInstance();
+		if (ccm.hasCountryCodePrefix(calleePhone)) {
+			checkedTmpCalleePhone = calleePhone;
+		} else {
+			UserBean telUser = UserManager.getInstance().getUser();
+			checkedTmpCalleePhone = (String) telUser
+					.getValue(TelUser.dialCountryCode.name())
+					+ calleePhone;
+		}
+		final String checkedCalleePhone = checkedTmpCalleePhone;
+		
 		// before make sip voice call
-		beforeMakeSipVoiceCall(calleeName, calleePhone, callMode);
+		beforeMakeSipVoiceCall(calleeName, checkedCalleePhone, callMode);
 
 		// new handle post delay 0.5 second to execute make sip voice call
 		new Handler().postDelayed(new Runnable() {
@@ -116,24 +141,6 @@ public abstract class BaseSipServices implements ISipServices {
 			public void run() {
 				// check call mode and get make sip voice call result
 				boolean _makeSipVoiceCallResult = false;
-				String checkedCalleePhone = new String(calleePhone);
-				checkedCalleePhone = AddressBookManager.filterNumber(
-						checkedCalleePhone,
-						AddressBookManager.FILTER_ONLY_IP_PREFIX);
-				for (String prefix : PhoneNumberFilterPrefix) {
-					int index = calleePhone.indexOf(prefix);
-					if (index == 0 && prefix.length() < calleePhone.length()) {
-						checkedCalleePhone = calleePhone.substring(prefix
-								.length());
-					}
-				}
-				if (calleePhone
-						.matches("(^[0]\\d{2,3}\\d{7,8})|(^[1][\\d]{10})|(\\d{9})")) {
-					UserBean telUser = UserManager.getInstance().getUser();
-					checkedCalleePhone = (String) telUser
-							.getValue(TelUser.dialCountryCode.name())
-							+ calleePhone;
-				}
 
 				switch (callMode) {
 				case CALLBACK:

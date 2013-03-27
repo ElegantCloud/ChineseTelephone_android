@@ -31,11 +31,14 @@ import android.widget.TextView;
 import com.richitec.chinesetelephone.R;
 import com.richitec.chinesetelephone.call.OutgoingCallGenerator;
 import com.richitec.chinesetelephone.constant.SystemConstants;
+import com.richitec.chinesetelephone.constant.TelUser;
 import com.richitec.chinesetelephone.utils.AppDataSaveRestoreUtil;
 import com.richitec.commontoolkit.activityextension.NavigationActivity;
 import com.richitec.commontoolkit.addressbook.AddressBookManager;
 import com.richitec.commontoolkit.customadapter.CTListAdapter;
 import com.richitec.commontoolkit.customcomponent.CTPopupWindow;
+import com.richitec.commontoolkit.user.UserBean;
+import com.richitec.commontoolkit.user.UserManager;
 import com.richitec.commontoolkit.utils.CommonUtils;
 import com.richitec.commontoolkit.utils.DisplayScreenUtils;
 import com.richitec.commontoolkit.utils.ToneGeneratorUtils;
@@ -747,5 +750,13 @@ public class DialTabContentActivity extends NavigationActivity {
 	protected void onResume() {
 		Log.d(SystemConstants.TAG, "DialTabContentActivity - onResume");
 		super.onResume();
+		UserBean user = UserManager.getInstance().getUser();
+		String dialCountryCode = (String) user.getValue(TelUser.dialCountryCode.name());
+		if ("0086".equals(dialCountryCode)) {
+			_mDialPhoneHintTextView.setHint(R.string.dialphone_current_china);
+		} else if ("00244".equals(dialCountryCode)) {
+			_mDialPhoneHintTextView.setHint(R.string.dialphone_current_angola);
+		}
+		
 	}
 }
