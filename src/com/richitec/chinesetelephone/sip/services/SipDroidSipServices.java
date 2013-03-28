@@ -44,7 +44,7 @@ public class SipDroidSipServices extends BaseSipServices implements
 	public void registerSipAccount(SipRegisterBean sipAccount,
 			SipRegistrationStateListener sipRegistrationStateListener) {
 		// update sip registration state listener
-		_mSipRegistrationStateListener = sipRegistrationStateListener;
+//		_mSipRegistrationStateListener = sipRegistrationStateListener;
 
 		// register
 		// init sip registration state broadcast receiver
