@@ -17,6 +17,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.richitec.commontoolkit.utils.MyToast;
 import com.richitec.uutalk.R;
 import com.richitec.uutalk.sip.SipRegisterBean;
 import com.richitec.uutalk.sip.listeners.SipInviteStateListener;
@@ -161,9 +162,7 @@ public class SipDroidSipServices extends BaseSipServices implements
 							getSipInviteStateListener().onCallFailed();
 
 							// show call failed toast
-							Toast.makeText(_appContext,
-									R.string.makeDirectDialSipVoiceCallFailed,
-									Toast.LENGTH_LONG).show();
+							MyToast.show(_appContext, R.string.makeDirectDialSipVoiceCallFailed, Toast.LENGTH_SHORT);
 						}
 					});
 
