@@ -26,7 +26,6 @@ import com.richitec.uutalk.call.OutgoingCallActivity;
 import com.richitec.uutalk.call.SipCallMode;
 import com.richitec.uutalk.constant.TelUser;
 import com.richitec.uutalk.sip.listeners.SipInviteStateListener;
-import com.richitec.uutalk.sip.listeners.SipRegistrationStateListener;
 
 public abstract class BaseSipServices implements ISipServices {
 
@@ -35,9 +34,6 @@ public abstract class BaseSipServices implements ISipServices {
 
 	// application context
 	protected static Context _appContext;
-
-	// sip registration state listener
-	protected SipRegistrationStateListener _mSipRegistrationStateListener;
 
 	// sip registration state broadcast receiver
 	protected BroadcastReceiver _mRegistrationStateBroadcastReceiver;

@@ -42,13 +42,11 @@ public class SipDroidSipServices extends BaseSipServices implements
 	@Override
 	public void registerSipAccount(SipRegisterBean sipAccount,
 			SipRegistrationStateListener sipRegistrationStateListener) {
-		// update sip registration state listener
-		_mSipRegistrationStateListener = sipRegistrationStateListener;
-
 		// register
 		// init sip registration state broadcast receiver
 		_mRegistrationStateBroadcastReceiver = new RegistrationStateBroadcastReceiver();
-
+		((RegistrationStateBroadcastReceiver) _mRegistrationStateBroadcastReceiver).addSipRegistrationStateListener(sipRegistrationStateListener);
+		
 		// register sip registration state broadcast receiver
 		_appContext.registerReceiver(_mRegistrationStateBroadcastReceiver,
 				SIPEGISTER_INTENTFILTER);
