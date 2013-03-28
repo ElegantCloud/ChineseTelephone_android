@@ -37,7 +37,7 @@ public abstract class BaseSipServices implements ISipServices {
 	protected static Context _appContext;
 
 	// sip registration state listener
-	protected SipRegistrationStateListener _mSipRegistrationStateListener;
+//	protected SipRegistrationStateListener _mSipRegistrationStateListener;
 
 	// sip registration state broadcast receiver
 	protected BroadcastReceiver _mRegistrationStateBroadcastReceiver;
