@@ -14,5 +14,7 @@ public interface SipRegistrationStateListener {
 	// unregister failed
 	public void onUnRegisterFailed();
 
+	// registering
 	public void onRegistering();
+
 }

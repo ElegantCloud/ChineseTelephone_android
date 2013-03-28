@@ -1,10 +1,12 @@
 package com.richitec.chinesetelephone.sip.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.sipdroid.sipua.SipdroidEngine;
 import org.sipdroid.sipua.ui.Receiver;
 import org.sipdroid.sipua.ui.RegisterService;
 import org.sipdroid.sipua.ui.Settings;
-import org.sipdroid.sipua.ui.Sipdroid;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -13,10 +15,13 @@ import android.content.SharedPreferences.Editor;
 import android.media.AudioManager;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.richitec.chinesetelephone.R;
 import com.richitec.chinesetelephone.sip.SipRegisterBean;
 import com.richitec.chinesetelephone.sip.listeners.SipInviteStateListener;
 import com.richitec.chinesetelephone.sip.listeners.SipRegistrationStateListener;
+import com.richitec.commontoolkit.utils.MyToast;
 
 public class SipDroidSipServices extends BaseSipServices implements
 		ISipServices {
@@ -44,6 +49,8 @@ public class SipDroidSipServices extends BaseSipServices implements
 		// register
 		// init sip registration state broadcast receiver
 		_mRegistrationStateBroadcastReceiver = new RegistrationStateBroadcastReceiver();
+		((RegistrationStateBroadcastReceiver) _mRegistrationStateBroadcastReceiver)
+				.addSipRegistrationStateListener(sipRegistrationStateListener);
 
 		// register sip registration state broadcast receiver
 		_appContext.registerReceiver(_mRegistrationStateBroadcastReceiver,
@@ -57,7 +64,7 @@ public class SipDroidSipServices extends BaseSipServices implements
 		_edit.putBoolean(Settings.PREF_WLAN, true);
 		_edit.putBoolean(Settings.PREF_3G, true);
 		_edit.putBoolean(Settings.PREF_EDGE, true);
-		
+
 		// set credentials
 		_edit.putString(Settings.PREF_USERNAME, sipAccount.getSipUserName());
 		_edit.putString(Settings.PREF_PASSWORD, sipAccount.getSipPwd());
@@ -67,14 +74,14 @@ public class SipDroidSipServices extends BaseSipServices implements
 		_edit.putString(Settings.PREF_PORT, sipAccount.getSipPort().toString());
 
 		_edit.putBoolean(Settings.PREF_ON, true);
-		
+
 		// commit changes
 		_edit.commit();
-		
+
 		Receiver.mSipdroidEngine = null;
 		// sip account register
 		Receiver.engine(_appContext).registerMore();
-		
+
 		setSipRegisterCalled(true);
 	}
 
@@ -90,13 +97,13 @@ public class SipDroidSipServices extends BaseSipServices implements
 
 			_mRegistrationStateBroadcastReceiver = null;
 		}
-		
+
 		setSipRegisterCalled(false);
 	}
 
 	@Override
 	public boolean makeDirectDialSipVoiceCall(String calleeName,
-			String calleePhone) {
+			final String calleePhone) {
 		// define return result
 		boolean _ret = false;
 
@@ -113,8 +120,63 @@ public class SipDroidSipServices extends BaseSipServices implements
 			// sipdroid make an new sip voice call
 			_ret = Receiver.engine(_appContext).call(calleePhone, true);
 		} else {
+			// add sip account register again listener to register sip
+			// registration state broadcast receiver handle list
+			((RegistrationStateBroadcastReceiver) _mRegistrationStateBroadcastReceiver)
+					.addSipRegistrationStateListener(new SipRegistrationStateListener() {
+
+						@Override
+						public void onUnRegisterSuccess() {
+						}
+
+						@Override
+						public void onUnRegisterFailed() {
+						}
+
+						@Override
+						public void onRegistering() {
+						}
+
+						@Override
+						public void onRegisterSuccess() {
+							// remove sip account register again listener to
+							// register sip registration state broadcast
+							// receiver handle list
+							((RegistrationStateBroadcastReceiver) _mRegistrationStateBroadcastReceiver)
+									.removeSipRegistrationStateListener(this);
+
+							// sipdroid make an new sip voice
+							// call
+							if (false == Receiver.engine(_appContext).call(
+									calleePhone, true)) {
+								// call failed
+								getSipInviteStateListener().onCallFailed();
+							}
+						}
+
+						@Override
+						public void onRegisterFailed() {
+							// remove sip account register again listener to
+							// register sip registration state broadcast
+							// receiver handle list
+							((RegistrationStateBroadcastReceiver) _mRegistrationStateBroadcastReceiver)
+									.removeSipRegistrationStateListener(this);
+
+							// call failed
+							getSipInviteStateListener().onCallFailed();
+
+							// show call failed toast
+							MyToast.show(_appContext,
+									R.string.makeDirectDialSipVoiceCallFailed,
+									Toast.LENGTH_SHORT);
+						}
+					});
+
 			// register again
 			Receiver.engine(_appContext).registerMore();
+
+			// flag return result
+			_ret = true;
 		}
 
 		return _ret;
@@ -169,7 +231,7 @@ public class SipDroidSipServices extends BaseSipServices implements
 				_appContext).edit();
 		_edit.putBoolean(Settings.PREF_ON, false);
 		_edit.commit();
-		
+
 		// process receiver
 		Receiver.pos(true);
 		Receiver.engine(_appContext).halt();
@@ -202,6 +264,40 @@ public class SipDroidSipServices extends BaseSipServices implements
 	// sipdroid registration state broadcast receiver
 	class RegistrationStateBroadcastReceiver extends BroadcastReceiver {
 
+		// sip register listener list
+		private List<SipRegistrationStateListener> _mSipRegisterListenerList = new ArrayList<SipRegistrationStateListener>();
+
+		// add sip registration state listener
+		public List<SipRegistrationStateListener> addSipRegistrationStateListener(
+				SipRegistrationStateListener sipRegistrationStateListener) {
+			// add sip registration state listener to handle list
+			_mSipRegisterListenerList.add(sipRegistrationStateListener);
+
+			return _mSipRegisterListenerList;
+		}
+
+		// remove sip registration state listener
+		public boolean removeSipRegistrationStateListener(
+				SipRegistrationStateListener sipRegistrationStateListener) {
+			boolean _ret = true;
+
+			if (_mSipRegisterListenerList
+					.contains(sipRegistrationStateListener)) {
+				// remove sip registration state listener from handle list
+				_mSipRegisterListenerList.remove(_mSipRegisterListenerList
+						.indexOf(sipRegistrationStateListener));
+			} else {
+				Log.w(LOG_TAG, "Sip registration state listener = "
+						+ sipRegistrationStateListener
+						+ " not existed in handle list = "
+						+ _mSipRegisterListenerList);
+
+				_ret = false;
+			}
+
+			return _ret;
+		}
+
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			// check the action for sipdroid registration Event
@@ -220,15 +316,23 @@ public class SipDroidSipServices extends BaseSipServices implements
 					if (_registrationEventArgs.equalsIgnoreCase("succeed")) {
 						Log.d(LOG_TAG, "You are now registered :)");
 
-						_mSipRegistrationStateListener.onRegisterSuccess();
+						for (SipRegistrationStateListener sipRegisterListener : _mSipRegisterListenerList) {
+							sipRegisterListener.onRegisterSuccess();
+						}
 					} else if (_registrationEventArgs
 							.equalsIgnoreCase("failed")) {
 						Log.d(LOG_TAG, "Failed to register :(");
 
-						_mSipRegistrationStateListener.onRegisterFailed();
-					} else if (_registrationEventArgs.equalsIgnoreCase("registering")) {
+						for (SipRegistrationStateListener sipRegisterListener : _mSipRegisterListenerList) {
+							sipRegisterListener.onRegisterFailed();
+						}
+					} else if (_registrationEventArgs
+							.equalsIgnoreCase("registering")) {
 						Log.d(LOG_TAG, "registering");
-						_mSipRegistrationStateListener.onRegistering();
+
+						for (SipRegistrationStateListener sipRegisterListener : _mSipRegisterListenerList) {
+							sipRegisterListener.onRegistering();
+						}
 					}
 				}
 			}

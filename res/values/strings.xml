@@ -134,6 +134,7 @@
     <string name="back4waitingCallbackCall_imageButton_content_description">back for waiting callback call image button</string>
     <string name="endCall_imageButton_content_description">end call image button</string>
     <string name="keyboardBtn_imageButton_content_description">keyboard image button</string>
+    <string name="makeDirectDialSipVoiceCallFailed">网络繁忙，请稍后重试或改用回拨</string>
 
     <!-- version upgrade -->
     <string name="detect_new_version" formatted="false">发现新版本%s，\n是否升级？\n本次更新说明：\n%s</string>
@@ -283,7 +284,7 @@
     <string name="remember_psw">记住密码</string>
     <string name="regist_btn_title">新用户注册</string>
     <string name="login_btn_title">登   录</string>
-	<string name="getpsw">找回密码</string> 
+    <string name="getpsw">找回密码</string>
     <string name="getpsw_phone">手机号：</string>
     <string name="getpsw_phone_hint">请输入手机号</string>
     <string name="pls_select_country">请选择您号码所属的国家</string>
@@ -291,7 +292,7 @@
     <string name="ok">确   定</string>
     <string name="countrycode_list">国家代码列表</string>
     <string name="number_cannot_be_null">请输入手机号</string>
-	<string name="phone_number_cannot_start_with_countrycode">请直接输入手机号码，不要以国家代码开头！</string>
+    <string name="phone_number_cannot_start_with_countrycode">请直接输入手机号码，不要以国家代码开头！</string>
     <string name="psw_cannot_be_null">请输入密码</string>
     <string name="phone_wrong_format">号码格式有误，请检查</string>
     <string name="logining">正在登录</string>
@@ -377,45 +378,45 @@
     <string name="delete_notice">删除</string>
     <!-- other -->
     <string name="currency_sign">￥</string>
-	<string name="online">%s(在线)</string>
-	<string name="offline">%s(离线)</string>
-	<string name="registering">%s(正在登录…)</string>
-	
-	<!-- email setting -->
-	<string name="email_setting_desc" formatted="false">现在绑定您的电子邮箱，即刻领取%.2f元话费，可直拨中国%d分钟！</string>
-	<string name="wanna_bind_email">现在绑定您的电子邮箱吗？可供日后找回您的密码。</string>
-	<string name="input_ur_email">输入您的电子邮箱地址</string>
-	<string name="u_havent_got_ur_money_yet">您还未领取系统赠送的%.2f元话费！进入您绑定的电子邮箱查看话费领取邮件。</string>
-	<string name="bind_email">绑定邮箱</string>
-	<string name="email_setting_title">邮箱绑定</string>
-	<string name="pls_input_valid_email_address">请输入有效的邮箱地址！</string>
-	<string name="binding_email_address">正在绑定电子邮箱…</string>
-	<string name="bind_email_failed">邮箱绑定失败，请稍后重试！</string>
-	<string name="bind_email_success">邮箱绑定成功！</string>
-	<string name="money_get_mail_send_ok_check_ur_mail">话费领取邮件已发送到您的绑定邮箱，现在赶紧去邮箱查收吧！部分邮箱可能会将邮件放入垃圾箱。</string>
-	<string name="verify_mail_send_ok">邮箱绑定成功，请到您的邮箱里查收验证邮件，验证后绑定邮箱才能生效！部分邮箱可能会将邮件放入垃圾箱。</string>
-	<string name="email_already_binded">该邮箱已被绑定！请换一个邮箱绑定。</string>
-	<string name="email_modify_desc">如果您更改了邮箱地址，您需要对邮箱地址重新进行验证。</string>
-	<string name="save">保存</string>
-	<string name="modify_email">修改邮箱</string>
-	<string name="send_money_gain_mail">发送领取话费邮件</string>
-	<string name="failed_to_get_email_info">获取绑定邮箱失败！</string>
-	<string name="getting_binded_email">正在获取绑定的邮箱信息</string>
-	<string name="you_havent_binded_email_now_you_can_gain_money" formatted="false">您现在尚未绑定电子邮箱，现在绑定电子邮箱，可领取%.2f元话费，可直拨中国%d分钟！</string>
-	<string name="you_havent_binded_email_wanna_bind">您现在尚未绑定电子邮箱，绑定后可供日后找回您的密码！</string>
-	<string name="click_send_money_gain_to_send_mail">您还未领取系统赠送的%.2f元话费，进入您绑定的电子邮箱查看话费领取邮件吧。点击发送领取话费邮件按钮可重新发送。</string>
-	<string name="you_have_money_to_get_after_set_email">您现在还可领取%.2f元话费，成功绑定邮箱后，请注意查收话费领取邮件。</string>
-	<string name="email_unverified">邮箱未验证</string>
-	<string name="email_verified">邮箱已验证</string>
-	<string name="sending_mail">正在发送邮件…</string>
-	<string name="mail_send_ok">邮件发送成功！部分邮箱可能会将邮件放入垃圾箱。</string>
-	<string name="mail_send_failed">邮件发送失败，请稍后重试！</string>
-	<string name="sending_pwd_reset_mail">正在发送密码重置邮件…</string>
-	<string name="pwd_reset_mail_send_failed">密码重置邮件发送失败，请稍后重试！</string>
-	<string name="pwd_reset_mail_send_ok">密码重置邮件已经成功发送到您绑定的邮箱%s，赶紧查收邮件来重置密码吧！</string>
-	<string name="you_havnt_bind_email">您没有绑定电子邮箱，无法发送密码重置邮件。</string>
-	<string name="you_havnt_verify_email">您绑定的邮箱%s还没有通过验证，无法发送密码重置邮件。您可以去您的邮箱找到最新的话费领取邮件或邮箱验证邮件，点击链接完成验证。</string>
-	<string name="user_not_found">:( 用户不存在！</string>
+    <string name="online">%s(在线)</string>
+    <string name="offline">%s(离线)</string>
+    <string name="registering">%s(正在登录…)</string>
+
+    <!-- email setting -->
+    <string name="email_setting_desc" formatted="false">现在绑定您的电子邮箱，即刻领取%.2f元话费，可直拨中国%d分钟！</string>
+    <string name="wanna_bind_email">现在绑定您的电子邮箱吗？可供日后找回您的密码。</string>
+    <string name="input_ur_email">输入您的电子邮箱地址</string>
+    <string name="u_havent_got_ur_money_yet">您还未领取系统赠送的%.2f元话费！进入您绑定的电子邮箱查看话费领取邮件。</string>
+    <string name="bind_email">绑定邮箱</string>
+    <string name="email_setting_title">邮箱绑定</string>
+    <string name="pls_input_valid_email_address">请输入有效的邮箱地址！</string>
+    <string name="binding_email_address">正在绑定电子邮箱…</string>
+    <string name="bind_email_failed">邮箱绑定失败，请稍后重试！</string>
+    <string name="bind_email_success">邮箱绑定成功！</string>
+    <string name="money_get_mail_send_ok_check_ur_mail">话费领取邮件已发送到您的绑定邮箱，现在赶紧去邮箱查收吧！部分邮箱可能会将邮件放入垃圾箱。</string>
+    <string name="verify_mail_send_ok">邮箱绑定成功，请到您的邮箱里查收验证邮件，验证后绑定邮箱才能生效！部分邮箱可能会将邮件放入垃圾箱。</string>
+    <string name="email_already_binded">该邮箱已被绑定！请换一个邮箱绑定。</string>
+    <string name="email_modify_desc">如果您更改了邮箱地址，您需要对邮箱地址重新进行验证。</string>
+    <string name="save">保存</string>
+    <string name="modify_email">修改邮箱</string>
+    <string name="send_money_gain_mail">发送领取话费邮件</string>
+    <string name="failed_to_get_email_info">获取绑定邮箱失败！</string>
+    <string name="getting_binded_email">正在获取绑定的邮箱信息</string>
+    <string name="you_havent_binded_email_now_you_can_gain_money" formatted="false">您现在尚未绑定电子邮箱，现在绑定电子邮箱，可领取%.2f元话费，可直拨中国%d分钟！</string>
+    <string name="you_havent_binded_email_wanna_bind">您现在尚未绑定电子邮箱，绑定后可供日后找回您的密码！</string>
+    <string name="click_send_money_gain_to_send_mail">您还未领取系统赠送的%.2f元话费，进入您绑定的电子邮箱查看话费领取邮件吧。点击发送领取话费邮件按钮可重新发送。</string>
+    <string name="you_have_money_to_get_after_set_email">您现在还可领取%.2f元话费，成功绑定邮箱后，请注意查收话费领取邮件。</string>
+    <string name="email_unverified">邮箱未验证</string>
+    <string name="email_verified">邮箱已验证</string>
+    <string name="sending_mail">正在发送邮件…</string>
+    <string name="mail_send_ok">邮件发送成功！部分邮箱可能会将邮件放入垃圾箱。</string>
+    <string name="mail_send_failed">邮件发送失败，请稍后重试！</string>
+    <string name="sending_pwd_reset_mail">正在发送密码重置邮件…</string>
+    <string name="pwd_reset_mail_send_failed">密码重置邮件发送失败，请稍后重试！</string>
+    <string name="pwd_reset_mail_send_ok">密码重置邮件已经成功发送到您绑定的邮箱%s，赶紧查收邮件来重置密码吧！</string>
+    <string name="you_havnt_bind_email">您没有绑定电子邮箱，无法发送密码重置邮件。</string>
+    <string name="you_havnt_verify_email">您绑定的邮箱%s还没有通过验证，无法发送密码重置邮件。您可以去您的邮箱找到最新的话费领取邮件或邮箱验证邮件，点击链接完成验证。</string>
+    <string name="user_not_found">:( 用户不存在！</string>
     <!-- others -->
     <!-- there is no active and available network currently -->
     <string name="noActiveAvailableNetwork_alertDialog_title">无可用网络</string>
