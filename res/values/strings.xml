@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Chinese telephone project -->
-    <string name="app_name">环宇通</string>
+    <string name="app_name">悠聊电话</string>
 
     <!-- About -->
     <string name="about_nav_title_text">关于我们</string>
@@ -11,13 +11,11 @@
     <string name="website_url">http://www.uu-talk.com</string>
     <string name="service_qq_desc">客服QQ</string>
     <string name="service_qq">1622122511</string>
+    <string name="service_phone_desc">客服电话\n（使用直拨方式拨打）</string>
+    <string name="service_phone">8000</string>
     <string name="product_version">版本号:</string>
-    <string name="programming_design">程序设计</string>
-    <string name="programming_authors">翟绍虎\t\t路辉\t\t王星</string>
     <string name="copyright">Copyright</string>
-    <string name="copyright_ownership">（香港）寰宇通科技有限公司</string>
-    <string name="acknowledgement">鸣谢</string>
-    <string name="acknowledgement_organizations">合肥优云信息技术有限公司</string>
+    <string name="copyright_ownership">（香港）悠聊科技有限公司</string>
     <!-- Chinese telephone tab activity -->
 
     <string name="title_activity_chinese_telephone_tab">ChineseTelephoneTabActivity</string>
@@ -123,8 +121,8 @@
     <string name="contactslist_slidingDrawer_handleBtn_text">contacts list sliding drawer handle button text</string>
     <string name="hidecontactslist_button_text">返回</string>
     <string name="exportedOutgoingCall_tipTextView_text">选择拨打方式</string>
-    <string name="exportedOutgoingCall_directDialTextView_text">环宇通直拨</string>
-    <string name="exportedOutgoingCall_callbackTextView_text">环宇通回拨</string>
+    <string name="exportedOutgoingCall_directDialTextView_text">悠聊直拨</string>
+    <string name="exportedOutgoingCall_callbackTextView_text">悠聊回拨</string>
     <string name="exportedOutgoingCall_autoSelectTextView_text">自动选择直拨或回拨</string>
     <string name="hideKeyboard_imageView_content_description">hide keyboard image button</string>
     <string name="sending_request">正在发送请求</string>
@@ -189,8 +187,8 @@
     <string name="add_new_contact_item">添加新联系人</string>
     <string name="add_exist_contact_item">添加现有联系人</string>
     <string name="no_sms_number">无号码，请重新选择</string>
-    <string name="invite_message">使用环宇通直拨中国大陆，最低只要4分钱每分钟,点击 *** 可注册账户，扫描二维码可下载安装</string>
-    <string name="share_to_qzone_title">环宇通网络电话</string>
+    <string name="invite_message">使用悠聊直拨中国大陆，话费便宜优惠大,点击 *** 可注册账户，扫描二维码可下载安装</string>
+    <string name="share_to_qzone_title">悠聊电话</string>
     <string name="share_to_qzone_link_url">http://www.uu-talk.com</string>
     <string name="share_to_qzone_images">http://www.uu-talk.com/templets/uutalk/images/dwqrcode.jpg</string>
     <string name="choose_sms_number">请选择号码</string>
@@ -206,7 +204,7 @@
     <string name="no_new_version">当前版本为***，已经是最新版本</string>
     <string name="phone_not_null">手机号不能为空</string>
     <string name="no_user_shared_reg">现在还没有成功推荐好友注册，赶快分享吧！</string>
-    <string name="current_user_shared_reg_count">您已成功推荐%s个好友使用环宇通</string>
+    <string name="current_user_shared_reg_count">您已成功推荐%s个好友使用悠聊</string>
     <string name="invite_pattern_title">请选择分享方式</string>
     <string name="sms_invite_pattern">短信分享</string>
     <string name="share_to_qzone">分享到QQ空间</string>
@@ -254,7 +252,7 @@
     <string name="charge_textfield_popwin">充值金额：</string>
     <string name="charge_pattern_title">请选择充值方式</string>
     <string name="alipay_pattern">支付宝</string>
-    <string name="card_charge">环宇通充值卡</string>
+    <string name="card_charge">悠聊充值卡</string>
     <string name="charge_back">其他充值方式</string>
     <string name="input_card_number">请输入充值卡卡号</string>
     <string name="input_card_pwd">请输入充值卡密码</string>
@@ -282,7 +280,7 @@
     <string name="pay_success">您已成功付款%s元！话费会在几分钟后到账。</string>
     <!-- account setting -->
     <string name="forget_psw"><u>忘记密码</u></string>
-    <string name="welcome">欢迎使用环宇通</string>
+    <string name="welcome">欢迎使用悠聊</string>
     <string name="country_code">国家代码：</string>
     <string name="account_name">手机号：</string>
     <string name="account_psw">密   码：</string>
