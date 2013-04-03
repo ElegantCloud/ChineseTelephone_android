@@ -11,13 +11,11 @@
     <string name="website_url">http://www.00244dh.com</string>
     <string name="service_qq_desc">客服QQ</string>
     <string name="service_qq">1622122511</string>
+    <string name="service_phone_desc">客户电话\n(可通过直拨方式拨打)</string>
+    <string name="service_phone">8001</string>
     <string name="product_version">版本号:</string>
-    <string name="programming_design">程序设计</string>
-    <string name="programming_authors">翟绍虎\t\t路辉\t\t王星</string>
     <string name="copyright">Copyright</string>
-    <string name="copyright_ownership">（香港）寰宇通科技有限公司</string>
-    <string name="acknowledgement">鸣谢</string>
-    <string name="acknowledgement_organizations">合肥优云信息技术有限公司</string>
+    <string name="copyright_ownership">（香港）悠聊科技有限公司</string>
     <!-- Chinese telephone tab activity -->
 
     <string name="title_activity_chinese_telephone_tab">ChineseTelephoneTabActivity</string>
@@ -72,8 +70,8 @@
     <string name="title_activity_dial_tab_content">DialTabContentActivity</string>
     <string name="dial_tab_title">拨号</string>
     <string name="dialPhone_tipText">拨打中国请加拨0086\n拨打安哥拉请加拨00244</string>
-    <string name="dialphone_current_china">当前默认拨出国家是中国\n拨打安哥拉请加拨00244</string>
-    <string name="dialphone_current_angola">当前默认拨出国家是安哥拉\n拨打中国请加拨0086</string>
+    <string name="dialphone_current_china">当前默认拨打国家是中国\n拨打安哥拉请加拨00244</string>
+    <string name="dialphone_current_angola">当前默认拨打国家是安哥拉\n拨打中国请加拨0086</string>
     <string name="dialBtn_imageView_content_description">dial button image view</string>
     <string name="dialBtn_imageButton_content_description">dial button image button</string>
     <string name="dial_phone_callee_unknown">未知联系人</string>
@@ -165,8 +163,8 @@
     <string name="help_update_item">软件升级</string>
     <string name="help_about_item">关于我们</string>
     <string name="change_account_title">切换账户</string>
-    <string name="set_dialcountry_code">默认拨出国家号</string>
-    <string name="dialcountry_country_code_inform">提示：当您在拨打电话时未加国家号码，将会自动在您拨打的号码前添加默认拨出国家号。</string>
+    <string name="set_dialcountry_code">默认拨打国家号</string>
+    <string name="dialcountry_country_code_inform">提示：如果经常拨打中国电话，请设置为0086，如果经常拨打安哥拉电话，请设置为00244。</string>
     <string name="bind_number_inform">提示：通过设置回拨号码，使用回拨功能时将会回拨绑定的号码</string>
     <string name="is_auto_launch">是否开机启动?</string>
     <string name="yes">是</string>

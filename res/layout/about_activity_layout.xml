@@ -101,16 +101,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/website"
+                    android:gravity="center_horizontal"
+                    android:text="@string/service_phone_desc"
                     android:textColor="@color/light_dim_gray" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/website_url"
-                    android:linksClickable="true"
-					android:autoLink="web"
-                    android:textColor="@color/dodger_blue" />
+                    android:text="@string/service_phone"
+                    android:textColor="@color/light_dim_gray" />
             </LinearLayout>
 
             <LinearLayout
@@ -123,14 +122,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/programming_design"
+                    android:text="@string/website"
                     android:textColor="@color/light_dim_gray" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/programming_authors"
-                    android:textColor="@color/light_dim_gray" />
+                    android:autoLink="web"
+                    android:linksClickable="true"
+                    android:text="@string/website_url"
+                    android:textColor="@color/dodger_blue" />
             </LinearLayout>
 
             <LinearLayout
@@ -150,27 +151,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/copyright_ownership"
-                    android:textColor="@color/light_dim_gray" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
-                android:layout_marginTop="24dp"
-                android:gravity="center"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/acknowledgement"
-                    android:textColor="@color/light_dim_gray" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/acknowledgement_organizations"
                     android:textColor="@color/light_dim_gray" />
             </LinearLayout>
         </LinearLayout>
