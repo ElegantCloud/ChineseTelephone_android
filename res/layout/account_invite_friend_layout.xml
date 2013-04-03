@@ -36,10 +36,10 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
                 android:padding="8dp"
-                android:visibility="gone"
-                android:textColor="@color/dodger_blue"
                 android:text="@string/no_user_shared_reg"
-                android:textSize="18dp" />
+                android:textColor="@color/dodger_blue"
+                android:textSize="18dp"
+                android:visibility="gone" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -100,15 +100,16 @@
                     android:layout_width="fill_parent"
                     android:layout_height="1.0dp"
                     android:background="@drawable/setting_line_img" />
-                
-                 <LinearLayout
+
+                <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/setting_middle_item_bg"
                     android:clickable="true"
                     android:gravity="center_vertical"
                     android:onClick="onShareToQQzone"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal"
+                    android:visibility="gone" >
 
                     <ImageView
                         android:layout_width="30dp"
@@ -137,7 +138,8 @@
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1.0dp"
-                    android:background="@drawable/setting_line_img" />
+                    android:background="@drawable/setting_line_img"
+                    android:visibility="gone" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
