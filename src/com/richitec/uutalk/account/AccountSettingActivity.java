@@ -97,19 +97,19 @@ public class AccountSettingActivity extends Activity {
 					Log.d("Error Result", result);
 					loginFailed();
 				} else {
-					loginError();
+					loginError(responseResult.getStatusCode());
 				}
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				loginError();
+				loginError(responseResult.getStatusCode());
 			}
 
 		}
 
 		@Override
 		public void onFailed(HttpResponseResult responseResult) {
-			loginError();
+			loginError(responseResult.getStatusCode());
 		}
 	};
 
@@ -347,9 +347,13 @@ public class AccountSettingActivity extends Activity {
 				null, HttpRequestType.ASYNCHRONOUS, onFinishedLogin);
 	}
 
-	public void loginError() {
+	public void loginError(int code) {
 		closeProgressDialog();
-		MyToast.show(this, R.string.login_error, Toast.LENGTH_LONG);
+		if (code == -1) {
+			MyToast.show(this, R.string.cannot_connet_server, Toast.LENGTH_LONG);
+		} else {
+			MyToast.show(this, R.string.login_error, Toast.LENGTH_LONG);
+		}
 		processError();
 	}
 
