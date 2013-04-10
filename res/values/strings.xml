@@ -241,6 +241,8 @@
     <string name="change_psw_success">修改密码成功</string>
     <!-- get remain money -->
     <string name="account_info">余额查询</string>
+    <string name="getting_balance">余额查询中…</string>
+    <string name="get_balance_failed">查询失败</string>
     <string name="get_balance_error">查询出错，请重试</string>
     <string name="remain_balance_textfield">账户余额：</string>
     <string name="yuan">元</string>

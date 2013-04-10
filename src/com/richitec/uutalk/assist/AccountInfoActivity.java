@@ -6,7 +6,6 @@ import java.util.HashMap;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,8 +30,8 @@ import com.richitec.uutalk.utils.AppDataSaveRestoreUtil;
 public class AccountInfoActivity extends NavigationActivity {
 	public static String BALANCE = "balance";
 	private double balance;
-	private ProgressDialog progressDialog;
 
+	private TextView balanceTV;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -50,6 +49,8 @@ public class AccountInfoActivity extends NavigationActivity {
 		String countryCode = (String) user.getValue(TelUser.countryCode.name());
 		TextView countryCodeTV = (TextView) findViewById(R.id.country_code_tv);
 		countryCodeTV.setText(countryCode);
+		
+		balanceTV = (TextView) findViewById(R.id.remain_money);
 	}
 
 	@Override
@@ -70,8 +71,7 @@ public class AccountInfoActivity extends NavigationActivity {
 		String countryCode = (String) userBean.getValue(TelUser.countryCode
 				.name());
 
-		progressDialog = ProgressDialog.show(this, null,
-				getString(R.string.sending_request), true);
+		balanceTV.setText(R.string.getting_balance);
 
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("username", username);
@@ -81,11 +81,6 @@ public class AccountInfoActivity extends NavigationActivity {
 				+ getString(R.string.account_balance_url),
 				PostRequestFormat.URLENCODED, params, null,
 				HttpRequestType.ASYNCHRONOUS, onFinishedGetBalance);
-	}
-
-	private void dismiss() {
-		if (progressDialog != null)
-			progressDialog.dismiss();
 	}
 
 	private OnClickListener chargeBtnListener = new OnClickListener() {
@@ -99,24 +94,24 @@ public class AccountInfoActivity extends NavigationActivity {
 
 		@Override
 		public void onFinished(HttpResponseResult responseResult) {
-			dismiss();
 			JSONObject data;
 			try {
 				data = new JSONObject(responseResult.getResponseText());
 				balance = AccountInfoActivity.formatRemainMoney(data
 						.getDouble("balance") + "");
 
-				((TextView) findViewById(R.id.remain_money)).setText(String
+				balanceTV.setText(String
 						.valueOf(balance) + getString(R.string.yuan));
 
 			} catch (JSONException e) {
 				e.printStackTrace();
+				balanceTV.setText(R.string.get_balance_failed);
 			}
 		}
 
 		@Override
 		public void onFailed(HttpResponseResult responseResult) {
-			dismiss();
+			balanceTV.setText(R.string.get_balance_failed);
 			MyToast.show(AccountInfoActivity.this, R.string.get_balance_error,
 					Toast.LENGTH_SHORT);
 		}
