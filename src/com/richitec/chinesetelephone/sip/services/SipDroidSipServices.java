@@ -2,6 +2,7 @@ package com.richitec.chinesetelephone.sip.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.sipdroid.sipua.SipdroidEngine;
 import org.sipdroid.sipua.ui.Receiver;
@@ -265,7 +266,7 @@ public class SipDroidSipServices extends BaseSipServices implements
 	class RegistrationStateBroadcastReceiver extends BroadcastReceiver {
 
 		// sip register listener list
-		private List<SipRegistrationStateListener> _mSipRegisterListenerList = new ArrayList<SipRegistrationStateListener>();
+		private List<SipRegistrationStateListener> _mSipRegisterListenerList = new CopyOnWriteArrayList<SipRegistrationStateListener>();
 
 		// add sip registration state listener
 		public List<SipRegistrationStateListener> addSipRegistrationStateListener(

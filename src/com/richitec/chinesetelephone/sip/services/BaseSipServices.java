@@ -38,7 +38,7 @@ public abstract class BaseSipServices implements ISipServices {
 	protected static Context _appContext;
 
 	// sip registration state listener
-//	protected SipRegistrationStateListener _mSipRegistrationStateListener;
+	// protected SipRegistrationStateListener _mSipRegistrationStateListener;
 
 	// sip registration state broadcast receiver
 	protected BroadcastReceiver _mRegistrationStateBroadcastReceiver;
@@ -110,27 +110,31 @@ public abstract class BaseSipServices implements ISipServices {
 			final String calleePhone, final SipCallMode callMode) {
 		// process callee phone number
 		String checkedTmpCalleePhone = new String(calleePhone);
-		checkedTmpCalleePhone = AddressBookManager.filterNumber(
-				checkedTmpCalleePhone,
-				AddressBookManager.FILTER_ONLY_IP_PREFIX);
+		checkedTmpCalleePhone = AddressBookManager
+				.filterNumber(checkedTmpCalleePhone,
+						AddressBookManager.FILTER_ONLY_IP_PREFIX);
 		for (String prefix : PhoneNumberFilterPrefix) {
 			int index = calleePhone.indexOf(prefix);
 			if (index == 0 && prefix.length() < calleePhone.length()) {
-				checkedTmpCalleePhone = calleePhone.substring(prefix
-						.length());
+				checkedTmpCalleePhone = calleePhone.substring(prefix.length());
 			}
 		}
 		CountryCodeManager ccm = CountryCodeManager.getInstance();
-		if (ccm.hasCountryCodePrefix(calleePhone)) {
-			checkedTmpCalleePhone = calleePhone;
+		if (!calleePhone.equals(CTApplication.getContext().getResources()
+				.getString(R.string.service_phone))) {
+
+			if (ccm.hasCountryCodePrefix(calleePhone)) {
+				checkedTmpCalleePhone = calleePhone;
+			} else {
+				UserBean telUser = UserManager.getInstance().getUser();
+				checkedTmpCalleePhone = (String) telUser
+						.getValue(TelUser.dialCountryCode.name()) + calleePhone;
+			}
 		} else {
-			UserBean telUser = UserManager.getInstance().getUser();
-			checkedTmpCalleePhone = (String) telUser
-					.getValue(TelUser.dialCountryCode.name())
-					+ calleePhone;
+			checkedTmpCalleePhone = calleePhone;
 		}
 		final String checkedCalleePhone = checkedTmpCalleePhone;
-		
+
 		// before make sip voice call
 		beforeMakeSipVoiceCall(calleeName, checkedCalleePhone, callMode);
 

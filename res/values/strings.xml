@@ -11,7 +11,8 @@
     <string name="website_url">http://www.00244dh.com</string>
     <string name="service_qq_desc">客服QQ</string>
     <string name="service_qq">1622122511</string>
-    <string name="service_phone_desc">客户电话\n(可通过直拨方式拨打)</string>
+    <string name="service_phone_desc">客服电话</string>
+    <string name="contact_service">免费客服电话</string>
     <string name="service_phone">8001</string>
     <string name="product_version">版本号:</string>
     <string name="copyright">Copyright</string>
