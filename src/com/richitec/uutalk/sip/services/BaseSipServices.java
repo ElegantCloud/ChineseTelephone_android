@@ -130,25 +130,34 @@ public abstract class BaseSipServices implements ISipServices {
 				String _defaultCountryCode = CTApplication.getContext()
 						.getResources()
 						.getString(R.string.default_country_code);
-				if (calleePhone.startsWith("00") && calleePhone.length() > 2) {
-					checkedCalleePhone = calleePhone.substring(2);
+				if (!calleePhone.equals(CTApplication.getContext()
+						.getResources().getString(R.string.service_phone))) {
+
+					if (calleePhone.startsWith("00")
+							&& calleePhone.length() > 2) {
+						checkedCalleePhone = calleePhone.substring(2);
+					} else {
+						if (calleePhone.matches("^[2-9]{1}\\d{2,7}")) {
+							UserBean telUser = UserManager.getInstance()
+									.getUser();
+							checkedCalleePhone = _defaultCountryCode
+									+ (String) telUser
+											.getValue(TelUser.local_area_code
+													.name()) + calleePhone;
+						}
+						if (calleePhone
+								.matches("(^[0]\\d{2,3}\\d{7,8})|(^[1][\\d]{10})")) {
+							checkedCalleePhone = _defaultCountryCode
+									+ calleePhone;
+							// UserBean telUser =
+							// UserManager.getInstance().getUser();
+							// checkedCalleePhone = (String) telUser
+							// .getValue(TelUser.dialCountryCode.name())
+							// + calleePhone;
+						}
+					}
 				} else {
-					if (calleePhone.matches("^[2-9]{1}\\d{2,7}")) {
-						UserBean telUser = UserManager.getInstance().getUser();
-						checkedCalleePhone = _defaultCountryCode
-								+ (String) telUser
-										.getValue(TelUser.local_area_code
-												.name()) + calleePhone;
-					}
-					if (calleePhone
-							.matches("(^[0]\\d{2,3}\\d{7,8})|(^[1][\\d]{10})")) {
-						checkedCalleePhone = _defaultCountryCode + calleePhone;
-						// UserBean telUser =
-						// UserManager.getInstance().getUser();
-						// checkedCalleePhone = (String) telUser
-						// .getValue(TelUser.dialCountryCode.name())
-						// + calleePhone;
-					}
+					checkedCalleePhone = calleePhone;
 				}
 
 				Log.d(LOG_TAG, "checkedCalleePhone = "
