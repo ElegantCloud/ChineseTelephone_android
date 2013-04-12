@@ -109,7 +109,7 @@
                     android:gravity="center_vertical"
                     android:onClick="onShareToQQzone"
                     android:orientation="horizontal"
-                    android:visibility="gone" >
+                    android:visibility="visible" >
 
                     <ImageView
                         android:layout_width="30dp"
@@ -139,7 +139,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="1.0dp"
                     android:background="@drawable/setting_line_img"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
