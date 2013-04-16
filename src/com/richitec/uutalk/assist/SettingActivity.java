@@ -211,7 +211,7 @@ public class SettingActivity extends NavigationActivity {
 
 		@Override
 		public void onFinished(HttpResponseResult responseResult) {
-			dismiss();
+			dismissProgressDlg();
 			Button countryButton = (Button) setBindNumberPopupWindow
 					.getContentView().findViewById(
 							R.id.setAuth_choose_country_btn);
@@ -244,7 +244,7 @@ public class SettingActivity extends NavigationActivity {
 
 		@Override
 		public void onFailed(HttpResponseResult responseResult) {
-			dismiss();
+			dismissProgressDlg();
 			MyToast.show(SettingActivity.this, R.string.get_bindphone_failed,
 					Toast.LENGTH_SHORT);
 			Button countryButton = (Button) setBindNumberPopupWindow
@@ -374,7 +374,7 @@ public class SettingActivity extends NavigationActivity {
 		public void onFinished(HttpResponseResult responseResult) {
 
 			inviteLink = responseResult.getResponseText();
-			dismiss();
+			dismissProgressDlg();
 			HashMap<String, Object> params = new HashMap<String, Object>();
 			params.put("inviteLink", inviteLink);
 			SettingActivity.this.pushActivity(InviteFriendActivity.class,
@@ -383,7 +383,7 @@ public class SettingActivity extends NavigationActivity {
 
 		@Override
 		public void onFailed(HttpResponseResult responseResult) {
-			dismiss();
+			dismissProgressDlg();
 
 			if (responseResult.getStatusCode() == -1) {
 				MyToast.show(SettingActivity.this,
@@ -455,7 +455,7 @@ public class SettingActivity extends NavigationActivity {
 
 	};
 
-	private void dismiss() {
+	private void dismissProgressDlg() {
 		if (progressDialog != null)
 			progressDialog.dismiss();
 	}
@@ -514,7 +514,7 @@ public class SettingActivity extends NavigationActivity {
 
 		@Override
 		public void onFinished(HttpResponseResult responseResult) {
-			dismiss();
+			dismissProgressDlg();
 
 			if (modifyPSWPopupWindow == null) {
 				return;
@@ -545,7 +545,7 @@ public class SettingActivity extends NavigationActivity {
 
 		@Override
 		public void onFailed(HttpResponseResult responseResult) {
-			dismiss();
+			dismissProgressDlg();
 			int code = responseResult.getStatusCode();
 			if (code == 401) {
 				MyToast.show(SettingActivity.this, R.string.auth_not_pass,
@@ -600,7 +600,7 @@ public class SettingActivity extends NavigationActivity {
 		@Override
 		public void onFinished(HttpResponseResult responseResult) {
 			// TODO Auto-generated method stub
-			dismiss();
+			dismissProgressDlg();
 			int result = responseResult.getStatusCode();
 
 			if (result == 200 || result == 201) {
@@ -616,7 +616,7 @@ public class SettingActivity extends NavigationActivity {
 		public void onFailed(HttpResponseResult responseResult) {
 			// TODO Auto-generated method stub
 			// Log.d(SystemConstants.TAG, responseResult.getStatusCode()+"");
-			dismiss();
+			dismissProgressDlg();
 			MyToast.show(SettingActivity.this, R.string.phone_number_not_exist,
 					Toast.LENGTH_SHORT);
 		}
@@ -1211,6 +1211,9 @@ public class SettingActivity extends NavigationActivity {
 	class SetBindNumberPopupWindow extends CTPopupWindow {
 		private int lastSelectCountryCode = 0;
 
+		private String newBindCountryCode;
+		private String newBindPhone;
+
 		public SetBindNumberPopupWindow(int resource, int width, int height,
 				boolean focusable, boolean isBindDefListener) {
 			super(resource, width, height, focusable, isBindDefListener);
@@ -1260,6 +1263,52 @@ public class SettingActivity extends NavigationActivity {
 			chooseCountryDialog = chooseCountryDialogBuilder.create();
 			chooseCountryDialog.show();
 		}
+
+		private void setBindNumber(String phone, String country) {
+			progressDialog = ProgressDialog.show(SettingActivity.this, null,
+					getString(R.string.sending_request), true);
+			UserBean userBean = UserManager.getInstance().getUser();
+			String username = userBean.getName();
+			String countryCode = (String) userBean.getValue(TelUser.countryCode
+					.name());
+			newBindCountryCode = countryCode;
+			newBindPhone = phone;
+			HashMap<String, String> params = new HashMap<String, String>();
+			params.put("username", username);
+			params.put("countryCode", countryCode);
+			params.put("bindphone_country_code", country);
+			params.put("bindphone", phone);
+			HttpUtils.postSignatureRequest(getString(R.string.server_url)
+					+ getString(R.string.setBindPhone),
+					PostRequestFormat.URLENCODED, params, null,
+					HttpRequestType.ASYNCHRONOUS, onFinishedSetBindPhone);
+		}
+
+		private OnHttpRequestListener onFinishedSetBindPhone = new OnHttpRequestListener() {
+
+			@Override
+			public void onFinished(HttpResponseResult responseResult) {
+				MyToast.show(SettingActivity.this,
+						R.string.set_bind_number_success, Toast.LENGTH_SHORT);
+				dismissProgressDlg();
+				UserBean user = UserManager.getInstance().getUser();
+				user.setValue(TelUser.bindphone_country_code.name(),
+						newBindCountryCode);
+				user.setValue(TelUser.bindphone.name(), newBindPhone);
+				DataStorageUtils.putObject(
+						TelUser.bindphone_country_code.name(),
+						newBindCountryCode);
+				DataStorageUtils.putObject(TelUser.bindphone.name(),
+						newBindPhone);
+			}
+
+			@Override
+			public void onFailed(HttpResponseResult responseResult) {
+				dismissProgressDlg();
+				MyToast.show(SettingActivity.this, R.string.server_error,
+						Toast.LENGTH_SHORT);
+			}
+		};
 
 		class chooseCountryListener implements DialogInterface.OnClickListener {
 			@Override
@@ -1311,41 +1360,6 @@ public class SettingActivity extends NavigationActivity {
 			}
 		}
 	}
-
-	private void setBindNumber(String phone, String country) {
-		progressDialog = ProgressDialog.show(this, null,
-				getString(R.string.sending_request), true);
-		UserBean userBean = UserManager.getInstance().getUser();
-		String username = userBean.getName();
-		String countryCode = (String) userBean.getValue(TelUser.countryCode
-				.name());
-		HashMap<String, String> params = new HashMap<String, String>();
-		params.put("username", username);
-		params.put("countryCode", countryCode);
-		params.put("bindphone_country_code", country);
-		params.put("bindphone", phone);
-		HttpUtils.postSignatureRequest(getString(R.string.server_url)
-				+ getString(R.string.setBindPhone),
-				PostRequestFormat.URLENCODED, params, null,
-				HttpRequestType.ASYNCHRONOUS, onFinishedSetBindPhone);
-	}
-
-	private OnHttpRequestListener onFinishedSetBindPhone = new OnHttpRequestListener() {
-
-		@Override
-		public void onFinished(HttpResponseResult responseResult) {
-			MyToast.show(SettingActivity.this,
-					R.string.set_bind_number_success, Toast.LENGTH_SHORT);
-			dismiss();
-		}
-
-		@Override
-		public void onFailed(HttpResponseResult responseResult) {
-			dismiss();
-			MyToast.show(SettingActivity.this, R.string.server_error,
-					Toast.LENGTH_SHORT);
-		}
-	};
 
 	public void onClickMySuiteAction(View v) {
 		pushActivity(MySuitesActivity.class);

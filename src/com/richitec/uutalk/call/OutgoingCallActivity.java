@@ -1618,6 +1618,12 @@ public class OutgoingCallActivity extends Activity implements
 		// check send callback sip voice call request response
 		private void checkSendCallbackSipVoiceCallRequestResponse(
 				HttpResponseResult responseResult) {
+			_sendCallbackSipVoiceCallStateTipTextId = R.string.send_callbackCallRequest_failed;
+			_callbackCallWaitingImageViewImgResId = R.drawable.img_sendcallbackcall_failed;
+			_callbackCallWaitingTextViewText = CTApplication.getContext()
+			.getResources()
+			.getString(R.string.callbackWaiting_textView_failed);
+			
 			// update send callback sip voice call state tip text id, callback
 			// waiting imageView image resource id and callback waiting textView
 			// text
@@ -1679,6 +1685,8 @@ public class OutgoingCallActivity extends Activity implements
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
+				} else if (responseResult.getStatusCode() == -1) {
+					_sendCallbackSipVoiceCallStateTipTextId = R.string.network_timeout;
 				}
 			}
 
