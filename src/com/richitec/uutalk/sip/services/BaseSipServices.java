@@ -114,17 +114,18 @@ public abstract class BaseSipServices implements ISipServices {
 			public void run() {
 				// check call mode and get make sip voice call result
 				boolean _makeSipVoiceCallResult = false;
-				String checkedCalleePhone = new String(calleePhone);
-				checkedCalleePhone = AddressBookManager.filterNumber(
-						checkedCalleePhone,
+				String filteredPhone = new String(calleePhone);
+				filteredPhone = AddressBookManager.filterNumber(
+						filteredPhone,
 						AddressBookManager.FILTER_ONLY_IP_PREFIX);
 				for (String prefix : PhoneNumberFilterPrefix) {
-					int index = calleePhone.indexOf(prefix);
-					if (index == 0 && prefix.length() < calleePhone.length()) {
-						checkedCalleePhone = calleePhone.substring(prefix
+					int index = filteredPhone.indexOf(prefix);
+					if (index == 0 && prefix.length() < filteredPhone.length()) {
+						filteredPhone = filteredPhone.substring(prefix
 								.length());
 					}
 				}
+				String checkedCalleePhone = filteredPhone;
 				// get default country code
 				String _defaultCountryCode = CTApplication.getContext()
 						.getResources()
@@ -132,22 +133,22 @@ public abstract class BaseSipServices implements ISipServices {
 				if (!calleePhone.equals(CTApplication.getContext()
 						.getResources().getString(R.string.service_phone))) {
 
-					if (calleePhone.startsWith("00")
-							&& calleePhone.length() > 2) {
-						checkedCalleePhone = calleePhone.substring(2);
+					if (filteredPhone.startsWith("00")
+							&& filteredPhone.length() > 2) {
+						checkedCalleePhone = filteredPhone.substring(2);
 					} else {
-						if (calleePhone.matches("^[2-9]{1}\\d{2,7}")) {
+						if (filteredPhone.matches("^[2-9]{1}\\d{2,7}")) {
 							UserBean telUser = UserManager.getInstance()
 									.getUser();
 							checkedCalleePhone = _defaultCountryCode
 									+ (String) telUser
 											.getValue(TelUser.local_area_code
-													.name()) + calleePhone;
+													.name()) + filteredPhone;
 						}
-						if (calleePhone
+						if (filteredPhone
 								.matches("(^[0]\\d{2,3}\\d{7,8})|(^[1][\\d]{10})")) {
 							checkedCalleePhone = _defaultCountryCode
-									+ calleePhone;
+									+ filteredPhone;
 							// UserBean telUser =
 							// UserManager.getInstance().getUser();
 							// checkedCalleePhone = (String) telUser
