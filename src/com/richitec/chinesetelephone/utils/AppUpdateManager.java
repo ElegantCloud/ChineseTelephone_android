@@ -1,6 +1,7 @@
 package com.richitec.chinesetelephone.utils;
 
 import org.json.JSONObject;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,39 +19,38 @@ import com.richitec.commontoolkit.utils.VersionUtils;
 public class AppUpdateManager {
 	private Context context;
 	private boolean isFromSetting;
-	
+
 	public AppUpdateManager(Context context) {
 		this.context = context;
 	}
-	
+
 	public void checkVersion(boolean isFromSetting) {
 		this.isFromSetting = isFromSetting;
 		if (VersionUtils.checkVersion) {
 			checkVersion();
-		}
-		else{
-			if(isFromSetting){
+		} else {
+			if (isFromSetting) {
 				checkVersion();
 			}
 		}
 	}
-	
-	private void checkVersion(){
+
+	private void checkVersion() {
 		VersionUtils.localVersion = VersionUtils.versionName();
-		VersionUtils.updateURL = context.getString(R.string.appvcenter_url) + context.getString(R.string.app_download_url);
+		VersionUtils.updateURL = context.getString(R.string.appvcenter_url)
+				+ context.getString(R.string.app_download_url);
 		HttpUtils.getRequest(context.getString(R.string.appvcenter_url)
 				+ context.getString(R.string.app_version_url), null, null,
 				HttpRequestType.ASYNCHRONOUS, onFinishedGetVersion);
 	}
-	
-	private void noNewVersionDialog(){
+
+	private void noNewVersionDialog() {
 		new AlertDialog.Builder(context)
-		.setTitle(R.string.alert_title)
-		.setMessage(context.getString(R.string.no_new_version).
-					replace("***", VersionUtils.localVersion))
-		.setPositiveButton(context.getString(R.string.ok),
-				null)
-		.show();
+				.setTitle(R.string.alert_title)
+				.setMessage(
+						context.getString(R.string.no_new_version).replace(
+								"***", VersionUtils.localVersion))
+				.setPositiveButton(context.getString(R.string.ok), null).show();
 	}
 
 	private OnHttpRequestListener onFinishedGetVersion = new OnHttpRequestListener() {
@@ -58,18 +58,21 @@ public class AppUpdateManager {
 		@Override
 		public void onFinished(HttpResponseResult responseResult) {
 			try {
-				JSONObject data = new JSONObject(responseResult.getResponseText());
+				JSONObject data = new JSONObject(
+						responseResult.getResponseText());
 				String comment = data.getString("comment");
 				VersionUtils.serverVerion = data.getString("version");
-				
-				Log.d("check version", "success : " + comment + ":" + VersionUtils.serverVerion);
-				
+
+				Log.d("check version", "success : " + comment + ":"
+						+ VersionUtils.serverVerion);
+
 				if (VersionUtils.compareVersion(VersionUtils.serverVerion,
 						VersionUtils.localVersion) > 0
 						&& VersionUtils.updateURL != null
 						&& !VersionUtils.updateURL.equals("")) {
 					// prompt update dialog
-					String detectNewVersion = context.getString(R.string.detect_new_version);
+					String detectNewVersion = context
+							.getString(R.string.detect_new_version);
 					detectNewVersion = String.format(detectNewVersion,
 							VersionUtils.serverVerion, comment);
 
@@ -96,10 +99,11 @@ public class AppUpdateManager {
 												int which) {
 											VersionUtils.checkVersion = false;
 										}
-									}).show();
+									})/* .show() */; // hide version checked alert
+													// dialog @chelsea zhai
 				} else {
 					VersionUtils.checkVersion = false;
-					if(isFromSetting){
+					if (isFromSetting) {
 						noNewVersionDialog();
 					}
 				}
