@@ -109,26 +109,28 @@ public abstract class BaseSipServices implements ISipServices {
 	public void makeSipVoiceCall(final String calleeName,
 			final String calleePhone, final SipCallMode callMode) {
 		// process callee phone number
-		String checkedTmpCalleePhone = new String(calleePhone);
-		checkedTmpCalleePhone = AddressBookManager
-				.filterNumber(checkedTmpCalleePhone,
+		String filteredPhone = new String(calleePhone);
+		filteredPhone = AddressBookManager
+				.filterNumber(filteredPhone,
 						AddressBookManager.FILTER_ONLY_IP_PREFIX);
 		for (String prefix : PhoneNumberFilterPrefix) {
-			int index = calleePhone.indexOf(prefix);
-			if (index == 0 && prefix.length() < calleePhone.length()) {
-				checkedTmpCalleePhone = calleePhone.substring(prefix.length());
+			int index = filteredPhone.indexOf(prefix);
+			if (index == 0 && prefix.length() < filteredPhone.length()) {
+				filteredPhone = filteredPhone.substring(prefix.length());
 			}
 		}
+		String checkedTmpCalleePhone = filteredPhone;
+		
 		CountryCodeManager ccm = CountryCodeManager.getInstance();
 		if (!calleePhone.equals(CTApplication.getContext().getResources()
 				.getString(R.string.service_phone))) {
 
-			if (ccm.hasCountryCodePrefix(calleePhone)) {
-				checkedTmpCalleePhone = calleePhone;
+			if (ccm.hasCountryCodePrefix(filteredPhone)) {
+				checkedTmpCalleePhone = filteredPhone;
 			} else {
 				UserBean telUser = UserManager.getInstance().getUser();
 				checkedTmpCalleePhone = (String) telUser
-						.getValue(TelUser.dialCountryCode.name()) + calleePhone;
+						.getValue(TelUser.dialCountryCode.name()) + filteredPhone;
 			}
 		} else {
 			checkedTmpCalleePhone = calleePhone;
