@@ -359,7 +359,11 @@ public class AccountSettingActivity extends Activity {
 			String bindPhone = data.getString("bindphone");
 			String bindPhoneCountryCode = data
 					.getString("bindphone_country_code");
-			String emailStatus = data.getString("email_status");
+			String emailStatus = /* data.getString("email_status") */null; // forced
+																			// set
+																			// email
+																			// status
+																			// null
 			String email = null;
 			try {
 				email = data.getString("email");
