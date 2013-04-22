@@ -137,7 +137,6 @@
 
                 <View
                     android:layout_width="fill_parent"
-                    android:visibility="gone"
                     android:layout_height="1.0dp"
                     android:background="@drawable/setting_line_img"
                     android:visibility="visible" />
