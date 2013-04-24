@@ -29,9 +29,9 @@
     <uses-permission android:name="android.permission.INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
 
     <application
         android:name="com.richitec.commontoolkit.CTApplication"
@@ -234,10 +234,57 @@
             android:name=".assist.share.QzoneShareActivity"
             android:screenOrientation="portrait" >
         </activity>
-        <activity android:label="@string/app_name" android:name="com.adsmogo.adview.AdsMogoWebView" android:screenOrientation="portrait"></activity>
-        <service android:name="com.adsmogo.controller.service.UpdateService"></service>
-        <service android:name="com.adsmogo.controller.service.CountService"></service>
-        <activity android:name=".assist.AdShowActivity" android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".assist.AdShowActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- 声明Mogo的Activity -->
+        <activity
+            android:name="com.adsmogo.adview.AdsMogoWebView"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 注册Service，应用下载所需 -->
+        <service
+            android:name="com.adsmogo.controller.service.UpdateService"
+            android:exported="true"
+            android:process=":remote" />
+        <!-- 注册Service，应用被安装所用 -->
+        <service
+            android:name="com.adsmogo.controller.service.CountService"
+            android:exported="true"
+            android:process=":remote" />
+
+        <!-- 声明艾德思奇的Activity和Service -->
+        <activity
+            android:name="com.mobisage.android.MobiSageActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name" >
+        </activity>
+        <!-- 注册com.mobisage.android.MobiSageApkService -->
+        <service
+            android:name="com.mobisage.android.MobiSageApkService"
+            android:enabled="true" >
+        </service>
+        <!-- 注册com.mobisage.android.MobiSageAdReceiver -->
+        <receiver android:name="com.mobisage.android.MobiSageAdReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+
+                <data android:scheme="package" >
+                </data>
+            </intent-filter>
+        </receiver>
+
+        <!-- 声明安沃的Activity -->
+        <activity
+            android:name="com.adwo.adsdk.AdwoAdBrowserActivity"
+            android:label="@string/app_name" />
+        <!-- 安沃全屏广告 -->
+        <activity
+            android:name="com.adwo.adsdk.AdwoSplashAdActivity"
+            android:label="@string/app_name" />
     </application>
 
 </manifest>

@@ -2,6 +2,7 @@ package com.richitec.uutalk.assist;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -20,11 +21,42 @@ public class AdShowActivity extends NavigationActivity implements AdsMogoListene
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.adshow_activity_layout);
-		setTitle(R.string.click_ad_to_earn_money);
+		setTitle(R.string.earn_money);
+		
+//		LinearLayout adBody = (LinearLayout) findViewById(R.id.ad_body);
+//		adsMogoLayoutFull = new AdsMogoLayout(this, getString(R.string.mogo_id),
+//				AdsMogoTargeting.FULLSCREEN_AD);
+//		adsMogoLayoutFull.setAdsMogoListener(this);
+//		FrameLayout.LayoutParams paramsFull = new FrameLayout.LayoutParams(
+//				FrameLayout.LayoutParams.WRAP_CONTENT,
+//				FrameLayout.LayoutParams.WRAP_CONTENT);
+//		adsMogoLayoutFull.setLayoutParams(paramsFull);
+//		adBody.addView(adsMogoLayoutFull);
+		
+//		adsMogoLayoutFull = new AdsMogoLayout(this, getString(R.string.mogo_id), AdsMogoTargeting.GETINFO_FULLSCREEN_AD);
+//		adsMogoLayoutFull.setAdsMogoListener(this);
+//		adsMogoLayoutFull.startFullAD(this);
+	}
+	
+	
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		
+//		adsMogoLayoutFull = new AdsMogoLayout(this, getString(R.string.mogo_id), AdsMogoTargeting.GETINFO_FULLSCREEN_AD);
+//		adsMogoLayoutFull.setAdsMogoListener(this);
+//		adsMogoLayoutFull.startFullAD(this);
+		
+		if (adsMogoLayoutFull != null) {
+			adsMogoLayoutFull.setVisibility(View.GONE);
+		}
 		
 		LinearLayout adBody = (LinearLayout) findViewById(R.id.ad_body);
+		adBody.removeAllViews();
 		adsMogoLayoutFull = new AdsMogoLayout(this, getString(R.string.mogo_id),
-				AdsMogoTargeting.FULLSCREEN_AD);
+				AdsMogoTargeting.GETINFO_FULLSCREEN_AD);
 		adsMogoLayoutFull.setAdsMogoListener(this);
 		FrameLayout.LayoutParams paramsFull = new FrameLayout.LayoutParams(
 				FrameLayout.LayoutParams.WRAP_CONTENT,
@@ -32,7 +64,9 @@ public class AdShowActivity extends NavigationActivity implements AdsMogoListene
 		adsMogoLayoutFull.setLayoutParams(paramsFull);
 		adBody.addView(adsMogoLayoutFull);
 	}
-	
+
+
+
 	@Override
 	public Class getCustomEvemtPlatformAdapterClass(
 			AdsMogoCustomEventPlatformEnum arg0) {
