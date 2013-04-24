@@ -149,8 +149,8 @@
     <string name="notice_center">消息中心</string>
     <string name="view_notice">查看消息</string>
     <string name="account">账户</string>
-    <string name="account_invite_friend_item">分享赚话费</string>
-    <string name="click_ad_to_earn_money">点击广告赚话费</string>
+    <string name="earn_money">赚话费</string>
+    <string name="click_ad_to_earn_money">点击广告即可获赠话费，赶快行动吧！</string>
     <string name="account_setting_item">切换账户</string>
     <string name="account_changePSW_item">修改密码</string>
     <string name="account_getPSW_item">找回密码</string>
@@ -201,7 +201,6 @@
     <string name="set_bind_number_success">回拨号码设置成功！</string>
     <string name="get_bind_country_message">国家号：</string>
     <string name="setup_popwin_title">启动方式设置</string>
-    <string name="invite_friend_title">分享</string>
     <string name="select_phone_to_invite">请选择***的号码：</string>
     <string name="pls_choose_invite_people">请选择分享给哪个好友</string>
     <string name="no_new_version">当前版本为***，已经是最新版本</string>

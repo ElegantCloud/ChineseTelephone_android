@@ -1,9 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:adsmogo="http://www.adsmogo.com"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/ad_section"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/earn_money_ad_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="@string/click_ad_to_earn_money"
+            android:textColor="@color/dodger_blue"
+            android:textSize="16sp" />
+
+        <com.adsmogo.adview.AdsMogoLayout
+            android:id="@+id/adsMogoView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            adsmogo:appid="4d481579276b43cf839ab3e6fa9917ca"
+            adsmogo:express_mode="false" >
+        </com.adsmogo.adview.AdsMogoLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1.0dp"
+            android:background="@drawable/setting_line_img" />
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"

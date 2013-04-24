@@ -8,8 +8,13 @@ import org.json.JSONObject;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.adsmogo.adapters.AdsMogoCustomEventPlatformEnum;
+import com.adsmogo.adview.AdsMogoLayout;
+import com.adsmogo.controller.listener.AdsMogoListener;
 import com.richitec.commontoolkit.activityextension.NavigationActivity;
 import com.richitec.commontoolkit.user.UserBean;
 import com.richitec.commontoolkit.user.UserManager;
@@ -21,12 +26,15 @@ import com.richitec.commontoolkit.utils.HttpUtils.PostRequestFormat;
 import com.richitec.uutalk.R;
 import com.richitec.uutalk.assist.share.ContactLisInviteFriendActivity;
 import com.richitec.uutalk.assist.share.QzoneShareActivity;
+import com.richitec.uutalk.constant.SystemConstants;
 import com.richitec.uutalk.constant.TelUser;
 import com.richitec.uutalk.utils.AppDataSaveRestoreUtil;
 
-public class InviteFriendActivity extends NavigationActivity {
+public class InviteFriendActivity extends NavigationActivity implements
+		AdsMogoListener {
 	private String inviteLink;
-
+	private AdsMogoLayout adsMogoLayout;
+	private LinearLayout adSection;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,8 +43,12 @@ public class InviteFriendActivity extends NavigationActivity {
 		inviteLink = getIntent().getStringExtra("inviteLink");
 		Log.d("inviteLink", inviteLink);
 
-		setTitle(R.string.invite_friend_title);
+		setTitle(R.string.earn_money);
 
+		adsMogoLayout = (AdsMogoLayout) findViewById(R.id.adsMogoView);
+		adsMogoLayout.setAdsMogoListener(this);
+		adSection = (LinearLayout) findViewById(R.id.ad_section);
+		
 		loadDescription();
 		getRegedUserCountViaShare();
 	}
@@ -144,5 +156,56 @@ public class InviteFriendActivity extends NavigationActivity {
 	protected void onSaveInstanceState(Bundle outState) {
 		AppDataSaveRestoreUtil.onSaveInstanceState(outState);
 		super.onSaveInstanceState(outState);
+	}
+
+	@Override
+	public Class getCustomEvemtPlatformAdapterClass(
+			AdsMogoCustomEventPlatformEnum arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void onClickAd(String arg0) {
+		Log.d(SystemConstants.TAG, "AdShowActivity - onClickAd");
+
+	}
+
+	@Override
+	public boolean onCloseAd() {
+		Log.d(SystemConstants.TAG, "AdShowActivity - onCloseAd");
+		adSection.setVisibility(View.GONE);
+		return false;
+	}
+
+	@Override
+	public void onCloseMogoDialog() {
+		Log.d(SystemConstants.TAG, "AdShowActivity - onCloseMogoDialog");
+	}
+
+	@Override
+	public void onFailedReceiveAd() {
+		// TODO Auto-generated method stub
+		Log.d(SystemConstants.TAG, "AdShowActivity - onFailedReceiveAd");
+		
+	}
+
+	@Override
+	public void onRealClickAd() {
+		// TODO Auto-generated method stub
+		Log.d(SystemConstants.TAG, "AdShowActivity - onRealClickAd");
+	}
+
+	@Override
+	public void onReceiveAd(ViewGroup arg0, String arg1) {
+		// TODO Auto-generated method stub
+		Log.d(SystemConstants.TAG, "AdShowActivity - onReceiveAd: " + arg1);
+		adSection.setVisibility(View.VISIBLE);
+	}
+
+	@Override
+	public void onRequestAd(String arg0) {
+		// TODO Auto-generated method stub
+		Log.d(SystemConstants.TAG, "AdShowActivity - onRequestAd: " + arg0);
 	}
 }
