@@ -10,6 +10,7 @@
         android:id="@+id/ad_section"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:orientation="vertical" >
 
         <TextView
@@ -17,6 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:visibility="visible"
             android:text="@string/click_ad_to_earn_money"
             android:textColor="@color/dodger_blue"
             android:textSize="16sp" />
