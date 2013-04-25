@@ -23,7 +23,6 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.adsmogo.adview.AdsMogoLayout;
 import com.richitec.commontoolkit.addressbook.AddressBookManager;
 import com.richitec.commontoolkit.customcomponent.CTTabSpecIndicator;
 import com.richitec.commontoolkit.user.UserBean;

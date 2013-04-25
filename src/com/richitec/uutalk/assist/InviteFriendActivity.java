@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.adsmogo.adapters.AdsMogoCustomEventPlatformEnum;
 import com.adsmogo.adview.AdsMogoLayout;
@@ -19,6 +20,7 @@ import com.richitec.commontoolkit.activityextension.NavigationActivity;
 import com.richitec.commontoolkit.user.UserBean;
 import com.richitec.commontoolkit.user.UserManager;
 import com.richitec.commontoolkit.utils.HttpUtils;
+import com.richitec.commontoolkit.utils.MyToast;
 import com.richitec.commontoolkit.utils.HttpUtils.HttpRequestType;
 import com.richitec.commontoolkit.utils.HttpUtils.HttpResponseResult;
 import com.richitec.commontoolkit.utils.HttpUtils.OnHttpRequestListener;
@@ -35,6 +37,7 @@ public class InviteFriendActivity extends NavigationActivity implements
 	private String inviteLink;
 	private AdsMogoLayout adsMogoLayout;
 	private LinearLayout adSection;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,7 +51,7 @@ public class InviteFriendActivity extends NavigationActivity implements
 		adsMogoLayout = (AdsMogoLayout) findViewById(R.id.adsMogoView);
 		adsMogoLayout.setAdsMogoListener(this);
 		adSection = (LinearLayout) findViewById(R.id.ad_section);
-		
+
 		loadDescription();
 		getRegedUserCountViaShare();
 	}
@@ -167,9 +170,46 @@ public class InviteFriendActivity extends NavigationActivity implements
 
 	@Override
 	public void onClickAd(String arg0) {
-		Log.d(SystemConstants.TAG, "AdShowActivity - onClickAd");
+		Log.d(SystemConstants.TAG, "AdShowActivity - onClickAd: " + arg0);
 
+		UserBean user = UserManager.getInstance().getUser();
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put(TelUser.countryCode.name(),
+				(String) user.getValue(TelUser.countryCode.name()));
+		HttpUtils.postSignatureRequest(getString(R.string.server_url)
+				+ getString(R.string.ad_click_url),
+				PostRequestFormat.URLENCODED, params, null,
+				HttpRequestType.ASYNCHRONOUS, onFinishedAdClick);
 	}
+
+	private OnHttpRequestListener onFinishedAdClick = new OnHttpRequestListener() {
+
+		@Override
+		public void onFinished(HttpResponseResult responseResult) {
+			try {
+				JSONObject data = new JSONObject(
+						responseResult.getResponseText());
+				boolean result = data.getBoolean("result");
+				Double money = data.getDouble("money");
+				if (result) {
+					MyToast.show(InviteFriendActivity.this, String.format(
+							getString(R.string.u_got_gift_money),
+							String.format("%.2f", money.floatValue())),
+							Toast.LENGTH_SHORT);
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+
+		@Override
+		public void onFailed(HttpResponseResult responseResult) {
+			// TODO Auto-generated method stub
+
+		}
+	};
 
 	@Override
 	public boolean onCloseAd() {
@@ -187,7 +227,7 @@ public class InviteFriendActivity extends NavigationActivity implements
 	public void onFailedReceiveAd() {
 		// TODO Auto-generated method stub
 		Log.d(SystemConstants.TAG, "AdShowActivity - onFailedReceiveAd");
-		
+
 	}
 
 	@Override

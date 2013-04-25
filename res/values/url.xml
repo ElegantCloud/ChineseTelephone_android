@@ -27,6 +27,7 @@
     <string name="sendActivateFrozenMoneyMail_url">/profile/sendActivateFrozenMoneyMail</string>
     <string name="getAccountInfo_url">/profile/getAccountInfo</string>
     <string name="yeepaySign_url">/profile/yeepaySign</string>
+    <string name="ad_click_url">/profile/adclick</string>
     <string name="alipay_wap_charge_url">/alipayWapCharge</string>
     <string name="callback_url">/callop/callback</string>
     <string name="card_charge_url">/cardCharge</string>

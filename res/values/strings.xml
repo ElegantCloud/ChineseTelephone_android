@@ -426,6 +426,8 @@
     <string name="you_havnt_bind_email">您没有绑定电子邮箱，无法发送密码重置邮件。</string>
     <string name="you_havnt_verify_email">您绑定的邮箱%s还没有通过验证，无法发送密码重置邮件。您可以去您的邮箱找到最新的话费领取邮件或邮箱验证邮件，点击链接完成验证。</string>
     <string name="user_not_found">:( 用户不存在！</string>
+    <!-- earn money -->
+    <string name="u_got_gift_money">您已获赠%s元话费！</string>
     <!-- others -->
     <!-- there is no active and available network currently -->
     <string name="noActiveAvailableNetwork_alertDialog_title">无可用网络</string>
