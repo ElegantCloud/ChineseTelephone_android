@@ -1381,6 +1381,10 @@ public class SettingActivity extends NavigationActivity {
 		pushActivity(EmailSettingActivity.class);
 	}
 
+	public void onEarnMoneyButtonClick(View v) {
+		pushActivity(AdShowActivity.class);
+	}
+	
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
 		AppDataSaveRestoreUtil.onRestoreInstanceState(savedInstanceState);

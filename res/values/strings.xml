@@ -150,6 +150,7 @@
     <string name="view_notice">查看消息</string>
     <string name="account">账户</string>
     <string name="account_invite_friend_item">分享赚话费</string>
+    <string name="click_ad_to_earn_money">点击广告赚话费</string>
     <string name="account_setting_item">切换账户</string>
     <string name="account_changePSW_item">修改密码</string>
     <string name="account_getPSW_item">找回密码</string>
