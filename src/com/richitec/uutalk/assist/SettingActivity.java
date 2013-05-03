@@ -372,13 +372,23 @@ public class SettingActivity extends NavigationActivity {
 
 		@Override
 		public void onFinished(HttpResponseResult responseResult) {
-
-			inviteLink = responseResult.getResponseText();
 			dismissProgressDlg();
-			HashMap<String, Object> params = new HashMap<String, Object>();
-			params.put("inviteLink", inviteLink);
-			SettingActivity.this.pushActivity(InviteFriendActivity.class,
-					params);
+
+			try {
+				JSONObject ret = new JSONObject(
+						responseResult.getResponseText());
+				inviteLink = ret.getString("url");
+				HashMap<String, Object> params = new HashMap<String, Object>();
+				params.put("inviteLink", inviteLink);
+				SettingActivity.this.pushActivity(InviteFriendActivity.class,
+						params);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				MyToast.show(SettingActivity.this,
+						R.string.cannot_connet_server, Toast.LENGTH_SHORT);
+			}
+
 		}
 
 		@Override
@@ -1384,7 +1394,7 @@ public class SettingActivity extends NavigationActivity {
 	public void onEarnMoneyButtonClick(View v) {
 		pushActivity(AdShowActivity.class);
 	}
-	
+
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
 		AppDataSaveRestoreUtil.onRestoreInstanceState(savedInstanceState);

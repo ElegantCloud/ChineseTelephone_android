@@ -5,6 +5,8 @@ import java.util.HashMap;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -131,9 +133,16 @@ public class InviteFriendActivity extends NavigationActivity implements
 	};
 
 	public void smsInvite(View v) {
-		HashMap<String, Object> params = new HashMap<String, Object>();
-		params.put("inviteLink", inviteLink);
-		pushActivity(ContactLisInviteFriendActivity.class, params);
+//		HashMap<String, Object> params = new HashMap<String, Object>();
+//		params.put("inviteLink", inviteLink);
+//		pushActivity(ContactLisInviteFriendActivity.class, params);
+		
+		Uri uri = Uri.parse("smsto:");
+		Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
+		String inviteMessage = getString(R.string.invite_message).replace(
+				"***", inviteLink);
+		intent.putExtra("sms_body", inviteMessage);
+		startActivity(intent);
 	}
 
 	public void onShareToQQzone(View v) {
