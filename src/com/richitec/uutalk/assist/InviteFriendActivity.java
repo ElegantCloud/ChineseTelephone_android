@@ -22,13 +22,12 @@ import com.richitec.commontoolkit.activityextension.NavigationActivity;
 import com.richitec.commontoolkit.user.UserBean;
 import com.richitec.commontoolkit.user.UserManager;
 import com.richitec.commontoolkit.utils.HttpUtils;
-import com.richitec.commontoolkit.utils.MyToast;
 import com.richitec.commontoolkit.utils.HttpUtils.HttpRequestType;
 import com.richitec.commontoolkit.utils.HttpUtils.HttpResponseResult;
 import com.richitec.commontoolkit.utils.HttpUtils.OnHttpRequestListener;
 import com.richitec.commontoolkit.utils.HttpUtils.PostRequestFormat;
+import com.richitec.commontoolkit.utils.MyToast;
 import com.richitec.uutalk.R;
-import com.richitec.uutalk.assist.share.ContactLisInviteFriendActivity;
 import com.richitec.uutalk.assist.share.QzoneShareActivity;
 import com.richitec.uutalk.constant.SystemConstants;
 import com.richitec.uutalk.constant.TelUser;
@@ -133,10 +132,10 @@ public class InviteFriendActivity extends NavigationActivity implements
 	};
 
 	public void smsInvite(View v) {
-//		HashMap<String, Object> params = new HashMap<String, Object>();
-//		params.put("inviteLink", inviteLink);
-//		pushActivity(ContactLisInviteFriendActivity.class, params);
-		
+		// HashMap<String, Object> params = new HashMap<String, Object>();
+		// params.put("inviteLink", inviteLink);
+		// pushActivity(ContactLisInviteFriendActivity.class, params);
+
 		Uri uri = Uri.parse("smsto:");
 		Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
 		String inviteMessage = getString(R.string.invite_message).replace(
@@ -199,12 +198,19 @@ public class InviteFriendActivity extends NavigationActivity implements
 				JSONObject data = new JSONObject(
 						responseResult.getResponseText());
 				boolean result = data.getBoolean("result");
-				Double money = data.getDouble("money");
 				if (result) {
+					Double money = data.getDouble("money");
 					MyToast.show(InviteFriendActivity.this, String.format(
 							getString(R.string.u_got_gift_money),
 							String.format("%.2f", money.floatValue())),
 							Toast.LENGTH_SHORT);
+				} else {
+					String reason = data.getString("reason");
+					if ("reach max gift value".equals(reason)) {
+						MyToast.show(InviteFriendActivity.this,
+								R.string.u_have_reached_max_gift_value,
+								Toast.LENGTH_SHORT);
+					}
 				}
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block

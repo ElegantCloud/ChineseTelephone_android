@@ -428,6 +428,7 @@
     <string name="user_not_found">:( 用户不存在！</string>
     <!-- earn money -->
     <string name="u_got_gift_money">您已获赠%s元话费！</string>
+    <string name="u_have_reached_max_gift_value">您今日领取的话费已达最大，明日可继续领取！</string>
     <!-- others -->
     <!-- there is no active and available network currently -->
     <string name="noActiveAvailableNetwork_alertDialog_title">无可用网络</string>
