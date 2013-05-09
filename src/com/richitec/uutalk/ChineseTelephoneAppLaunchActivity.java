@@ -39,13 +39,14 @@ public class ChineseTelephoneAppLaunchActivity extends AppLaunchActivity {
 	}
 
 	@Override
-	public void didFinishLaunching() {
+	public boolean didFinishLaunching() {
 		// traversal address book
 		AddressBookManager.setFilterMode(AddressBookManager.FILTER_DEFAULT);
 		AddressBookManager.getInstance().traversalAddressBook();
 
 		// init all name phonetic sorted contacts info array
 		ContactListTabContentActivity.initNamePhoneticSortedContactsInfoArray();
+		return false;
 	}
 
 	@Override
