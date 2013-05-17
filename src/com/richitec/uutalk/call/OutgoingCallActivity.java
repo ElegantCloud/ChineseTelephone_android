@@ -82,9 +82,9 @@ import com.richitec.uutalk.sip.listeners.SipRegistrationStateListener;
 import com.richitec.uutalk.sip.listeners.SipRegistrationStateListenerImp;
 import com.richitec.uutalk.sip.services.BaseSipServices;
 import com.richitec.uutalk.sip.services.ISipServices.SipCallSponsor;
+import com.richitec.uutalk.tab7tabcontent.CTContactListViewQuickAlphabetToast;
 import com.richitec.uutalk.tab7tabcontent.ChineseTelephoneTabActivity;
 import com.richitec.uutalk.tab7tabcontent.ContactListTabContentActivity;
-import com.richitec.uutalk.tab7tabcontent.ContactListTabContentActivity.CTContactListViewQuickAlphabetToast;
 import com.richitec.uutalk.tab7tabcontent.ContactListTabContentActivity.ContactsInABListViewQuickAlphabetBarOnTouchListener;
 import com.richitec.uutalk.utils.AppDataSaveRestoreUtil;
 import com.richitec.uutalk.utils.SipRegisterManager;
@@ -295,7 +295,7 @@ public class OutgoingCallActivity extends Activity implements
 		new ListViewQuickAlphabetBar(
 				_abContactsListView,
 				_mContactListViewQuickAlphabetToast = new CTContactListViewQuickAlphabetToast(
-						_abContactsListView.getContext()))
+						this))
 				.setOnTouchListener(new ContactsInABListViewQuickAlphabetBarOnTouchListener());
 
 		// init keyboard gridView
@@ -1621,9 +1621,9 @@ public class OutgoingCallActivity extends Activity implements
 			_sendCallbackSipVoiceCallStateTipTextId = R.string.send_callbackCallRequest_failed;
 			_callbackCallWaitingImageViewImgResId = R.drawable.img_sendcallbackcall_failed;
 			_callbackCallWaitingTextViewText = CTApplication.getContext()
-			.getResources()
-			.getString(R.string.callbackWaiting_textView_failed);
-			
+					.getResources()
+					.getString(R.string.callbackWaiting_textView_failed);
+
 			// update send callback sip voice call state tip text id, callback
 			// waiting imageView image resource id and callback waiting textView
 			// text
@@ -1783,4 +1783,16 @@ public class OutgoingCallActivity extends Activity implements
 		AppDataSaveRestoreUtil.onSaveInstanceState(outState);
 		super.onSaveInstanceState(outState);
 	}
+
+	@Override
+	protected void onPause() {
+		Log.d(SystemConstants.TAG, "outgoingcall on pause");
+		if (_mContactListViewQuickAlphabetToast != null
+				&& _mContactListViewQuickAlphabetToast.isShowing()) {
+			Log.d(SystemConstants.TAG, "cancel toast");
+			_mContactListViewQuickAlphabetToast.cancel();
+		}
+		super.onPause();
+	}
+
 }
