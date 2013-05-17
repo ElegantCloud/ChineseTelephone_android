@@ -436,21 +436,6 @@ public class ContactListTabContentActivity extends NavigationActivity {
 		NONESEARCH, SEARCHBYNAME, SEARCHBYCHINESENAME, SEARCHBYPHONE
 	}
 
-	// Chinese Telephone contact list quick alphabet toast
-	public static class CTContactListViewQuickAlphabetToast extends CTToast {
-
-		public CTContactListViewQuickAlphabetToast(Context context) {
-			super(context,
-					R.layout.contactlist_quickalphabet_toast_content_layout);
-
-			// set text, duration and gravity
-			setText("");
-			setDuration(LENGTH_TRANSIENT);
-			setGravity(Gravity.CENTER, 0, 0);
-		}
-
-	}
-
 	// contacts in address book listView quick alphabet bar on touch listener
 	public static class ContactsInABListViewQuickAlphabetBarOnTouchListener
 			extends OnTouchListener {
