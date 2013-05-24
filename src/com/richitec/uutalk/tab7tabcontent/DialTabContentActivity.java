@@ -383,10 +383,12 @@ public class DialTabContentActivity extends NavigationActivity {
 			AddressBookManager _addressBookManager = AddressBookManager
 					.getInstance();
 
+			String searchNumber = AddressBookManager.filterNumber(s.toString(),
+					getResources().getStringArray(R.array.country_codes));
 			// get dial phone has ownership
 			@SuppressWarnings("unchecked")
 			Long _dialPhoneOwnershipId = _addressBookManager
-					.isContactWithPhoneInAddressBook(s.toString());
+					.isContactWithPhoneInAddressBook(searchNumber);
 
 			// check dial phone has ownership
 			if (null != _dialPhoneOwnershipId) {

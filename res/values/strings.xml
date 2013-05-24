@@ -108,7 +108,7 @@
     <string name="title_activity_outgoing_call">OutgoingCallActivity</string>
     <string name="outgoingCallBG_imageView_content_description">outgoing call background image view</string>
     <string name="outgoing_call_unknownState">未知</string>
-    <string name="outgoing_call_trying">正在呼叫中  &#8230;</string>
+    <string name="outgoing_call_trying">正在呼叫</string>
     <string name="outgoing_call_earlyMedia7RemoteRing">等待对方接听 &#8230;</string>
     <string name="outgoing_call_failed">拨打失败</string>
     <string name="end_outgoing_call">正在结束通话</string>
