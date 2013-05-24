@@ -266,7 +266,8 @@ public class OutgoingCallActivity extends Activity implements
 
 		// get call state textView
 		_mCallStateTextView = (TextView) findViewById(R.id.callState_textView);
-
+		_mCallStateTextView.setText(getString(R.string.outgoing_call_trying) + _mCalleePhone);
+		
 		// get center content relativeLayout
 		_mCenterContentRelativeLayout = (RelativeLayout) findViewById(R.id.outgoingCall_centerRelativeLayout);
 
