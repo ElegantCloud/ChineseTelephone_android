@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.richitec.commontoolkit.utils.MyToast;
 import com.richitec.uutalk.R;
+import com.richitec.uutalk.constant.SystemConstants;
 import com.richitec.uutalk.sip.SipRegisterBean;
 import com.richitec.uutalk.sip.listeners.SipInviteStateListener;
 import com.richitec.uutalk.sip.listeners.SipRegistrationStateListener;
@@ -43,6 +44,7 @@ public class SipDroidSipServices extends BaseSipServices implements
 	@Override
 	public void registerSipAccount(SipRegisterBean sipAccount,
 			SipRegistrationStateListener sipRegistrationStateListener) {
+		Log.d(SystemConstants.TAG, "SipDroidSipServices registerSipAccount");
 		// register
 		// init sip registration state broadcast receiver
 		_mRegistrationStateBroadcastReceiver = new RegistrationStateBroadcastReceiver();
@@ -91,7 +93,7 @@ public class SipDroidSipServices extends BaseSipServices implements
 			_appContext
 					.unregisterReceiver(_mRegistrationStateBroadcastReceiver);
 
-			_mRegistrationStateBroadcastReceiver = null;
+//			_mRegistrationStateBroadcastReceiver = null;
 		}
 
 		setSipRegisterCalled(false);
