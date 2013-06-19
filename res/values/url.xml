@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- <string name="server_url">http://192.168.1.105:8080/uutalk</string> -->
-    <string name="server_url">http://www.uu-talk.com/uutalk</string>
-    <string name="retrieve_auth_code_url">/user/getPhoneCode</string>
-    <string name="check_auth_code_url">/user/checkPhoneCode</string>
-    <string name="direct_reg_url">/user/clientdirectreg</string>
-    <string name="user_register_url">/user/regUser</string>
-    <string name="login_url">/user/login</string>
-    <string name="getpsw_url">/user/getUserPwd</string>
-    <string name="sendResetPwdEmail_url">/user/sendResetPwdEmail</string>
-    <string name="modify_psw_url">/profile/changePwd</string>
-    <string name="account_balance_url">/accountBalance</string>
-    <string name="get_seller_partner_key">/profile/alipayinfo</string>
-    <string name="alipay_sign">/profile/alipaysign</string>
-    <string name="getInviteLink">/profile/getRegInviteLink2</string>
-    <string name="setBindPhone">/profile/setBindPhone</string>
-    <string name="getBindPhone">/profile/getBindPhone</string>
-    <string name="getRegInviteDescription_url">/profile/regInviteDesc</string>
-    <string name="getRegedUserCountViaShare_url">/profile/getRegedUserCountViaShare</string>
-    <string name="getChargeMoneyList_url">/profile/getChargeMoneyList</string>
-    <string name="getSuites_url">/profile/getSuites</string>
-    <string name="subscribe_suite_url">/profile/subscribeSuite</string>
-    <string name="unsubscribe_suite_url">/profile/unsubscribeSuite</string>
-    <string name="setEmail_url">/profile/setEmail</string>
-    <string name="sendActivateFrozenMoneyMail_url">/profile/sendActivateFrozenMoneyMail</string>
-    <string name="getAccountInfo_url">/profile/getAccountInfo</string>
-    <string name="yeepaySign_url">/profile/yeepaySign</string>
-    <string name="ad_click_url">/profile/adclick</string>
-    <string name="alipay_wap_charge_url">/alipayWapCharge</string>
-    <string name="callback_url">/callop/callback</string>
-    <string name="card_charge_url">/cardCharge</string>
-    <string name="app_download_url">/downloadapp/4/android</string>
-    <string name="app_version_url">/version/4/android</string>
-    <string name="getNewNotice_url">/getNewNotice</string>
-    <string name="share_to_qzone_url">/share_assist/share_to_qzone</string> 
-    <string name="appvcenter_url">http://www.uu-talk.com/appvcenter</string>
-    <string name="vos_server">vos.uu-talk.com</string>
-    <string name="fee_query_url">http://www.uu-talk.com/a/zifeishuoming/mobile/</string>
+    <!-- <string name="server_url" translatable="false">http://192.168.1.105:8080/uutalk</string> -->
+    <string name="server_url" translatable="false">http://www.uu-talk.com/uutalk</string>
+    <string name="retrieve_auth_code_url" translatable="false">/user/getPhoneCode</string>
+    <string name="check_auth_code_url" translatable="false">/user/checkPhoneCode</string>
+    <string name="direct_reg_url" translatable="false">/user/clientdirectreg</string>
+    <string name="user_register_url" translatable="false">/user/regUser</string>
+    <string name="login_url" translatable="false">/user/login</string>
+    <string name="getpsw_url" translatable="false">/user/getUserPwd</string>
+    <string name="sendResetPwdEmail_url" translatable="false">/user/sendResetPwdEmail</string>
+    <string name="modify_psw_url" translatable="false">/profile/changePwd</string>
+    <string name="account_balance_url" translatable="false">/accountBalance</string>
+    <string name="get_seller_partner_key" translatable="false">/profile/alipayinfo</string>
+    <string name="alipay_sign" translatable="false">/profile/alipaysign</string>
+    <string name="getInviteLink" translatable="false">/profile/getRegInviteLink2</string>
+    <string name="setBindPhone" translatable="false">/profile/setBindPhone</string>
+    <string name="getBindPhone" translatable="false">/profile/getBindPhone</string>
+    <string name="getRegInviteDescription_url" translatable="false">/profile/regInviteDesc</string>
+    <string name="getRegedUserCountViaShare_url" translatable="false">/profile/getRegedUserCountViaShare</string>
+    <string name="getChargeMoneyList_url" translatable="false">/profile/getChargeMoneyList</string>
+    <string name="getSuites_url" translatable="false">/profile/getSuites</string>
+    <string name="subscribe_suite_url" translatable="false">/profile/subscribeSuite</string>
+    <string name="unsubscribe_suite_url" translatable="false">/profile/unsubscribeSuite</string>
+    <string name="setEmail_url" translatable="false">/profile/setEmail</string>
+    <string name="sendActivateFrozenMoneyMail_url" translatable="false">/profile/sendActivateFrozenMoneyMail</string>
+    <string name="getAccountInfo_url" translatable="false">/profile/getAccountInfo</string>
+    <string name="yeepaySign_url" translatable="false">/profile/yeepaySign</string>
+    <string name="ad_click_url" translatable="false">/profile/adclick</string>
+    <string name="alipay_wap_charge_url" translatable="false">/alipayWapCharge</string>
+    <string name="callback_url" translatable="false">/callop/callback</string>
+    <string name="card_charge_url" translatable="false">/cardCharge</string>
+    <string name="app_download_url" translatable="false">/downloadapp/4/android</string>
+    <string name="app_version_url" translatable="false">/version/4/android</string>
+    <string name="getNewNotice_url" translatable="false">/getNewNotice</string>
+    <string name="share_to_qzone_url" translatable="false">/share_assist/share_to_qzone</string> 
+    <string name="appvcenter_url" translatable="false">http://www.uu-talk.com/appvcenter</string>
+    <string name="vos_server" translatable="false">vos.uu-talk.com</string>
+    <string name="fee_query_url" translatable="false">http://www.uu-talk.com/a/zifeishuoming/mobile/</string>
 
 </resources>

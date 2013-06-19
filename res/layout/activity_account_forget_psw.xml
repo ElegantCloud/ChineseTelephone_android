@@ -61,6 +61,7 @@
                     android:id="@+id/get_phone_editText"
                     android:layout_width="fill_parent"
                     android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
                     android:background="@null"
                     android:ellipsize="end"
                     android:hint="@string/getpsw_phone_hint"

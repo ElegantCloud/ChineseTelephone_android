@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="client_source">s</string>
-    <string name="mogo_id">4d481579276b43cf839ab3e6fa9917ca</string>
+    <string name="client_source" translatable="false">s</string>
+    <string name="mogo_id" translatable="false">4d481579276b43cf839ab3e6fa9917ca</string>
 </resources>
