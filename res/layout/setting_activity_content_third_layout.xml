@@ -60,7 +60,8 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="1.0dp"
-            android:background="@drawable/setting_line_img" />
+            android:background="@drawable/setting_line_img"
+            android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/setting_countrycode_btn"
@@ -70,7 +71,8 @@
             android:clickable="true"
             android:gravity="center_vertical"
             android:onClick="setDialCountryCode"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:visibility="gone" >
 
             <ImageView
                 android:layout_width="30.0dp"
