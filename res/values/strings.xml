@@ -264,7 +264,7 @@
     <string name="charging_now">Finishing…</string>
     <string name="charge_successfully">Top up successfully!</string>
     <string name="charge_failed_no_account_exist">Top-up failed, account doesn\'t exist!</string>
-    <string name="charge_failed_invalid_card_number">Top-up failed, card number or password is incorrent!</string>
+    <string name="charge_failed_invalid_card_number">Top-up failed, card number or password is incorrect!</string>
     <string name="card_already_used">Sorry, the card has been used!</string>
     <string name="charge_failed">Top-up failed, please try later!</string>
     <string name="input_valid_charge_money">Please input correct amount.</string>
@@ -327,9 +327,9 @@
     <string name="next">Next</string>
     <string name="auth_code_cannot_be_null">Please input auth code</string>
     <string name="verifying_auth_code">Verifying</string>
-    <string name="wrong_auth_code">Error auth code, pls re-input!</string>
+    <string name="wrong_auth_code">Wrong auth code, pls re-input!</string>
     <string name="auth_code_timeout">Auth code timeout, pls re-get again!</string>
-    <string name="auth_error">Wrong auth code, pls try again!</string>
+    <string name="auth_error">Fail to verify auth code, pls try again!</string>
     <string name="authcode_wrong_format">Wrong auth code format!</string>
 
     <!-- step3 -->
