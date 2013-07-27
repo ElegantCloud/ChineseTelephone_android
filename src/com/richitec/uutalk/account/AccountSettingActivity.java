@@ -241,7 +241,7 @@ public class AccountSettingActivity extends Activity {
 	}
 
 	public void onRegist(View v) {
-		Intent intent = new Intent(this, AccountRegistActivity.class);
+		Intent intent = new Intent(this, AccountDirectRegisterActivity.class);
 		startActivity(intent);
 		finish();
 	}

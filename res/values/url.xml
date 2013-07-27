@@ -2,7 +2,7 @@
 <resources>
 
    	<!-- <string name="server_url" translatable="false">http://192.168.1.126:8080/uutalk</string> -->
-    <string name="server_url" translatable="false">http://www.uu-talk.com/uutalk</string>
+    <string name="server_url" translatable="false">http://www.00244dh.com/angola</string>
     <string name="retrieve_auth_code_url" translatable="false">/user/getPhoneCode</string>
     <string name="check_auth_code_url" translatable="false">/user/checkPhoneCode</string>
     <string name="direct_reg_url" translatable="false">/user/clientdirectreg</string>

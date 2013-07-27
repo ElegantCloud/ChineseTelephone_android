@@ -38,6 +38,7 @@
                 android:gravity="left|center_vertical"
                 android:onClick="chooseCountry"
                 android:padding="10dp"
+                android:visibility="gone"
                 android:textColor="@drawable/select_country_btn_fg"
                 android:text="@string/pls_select_country"
                 android:textSize="18sp" >
@@ -53,7 +54,7 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:layout_width="80dp"
+                    android:layout_width="90dp"
                     android:layout_height="40dp"
                     android:gravity="center|right"
                     android:text="@string/getpsw_phone"
@@ -78,7 +79,7 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:layout_width="80dp"
+                    android:layout_width="90dp"
                     android:layout_height="40dp"
                     android:gravity="center|right"
                     android:text="@string/account_psw"
@@ -103,7 +104,7 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:layout_width="80dp"
+                    android:layout_width="90dp"
                     android:layout_height="40dp"
                     android:gravity="center|right"
                     android:text="@string/verify_psw"
@@ -131,7 +132,7 @@
                 <Button
                     android:id="@+id/get_authcode_btn"
                     android:layout_width="fill_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:background="@drawable/green_btn_bg"
                     android:onClick="onRegisterAction"
                     android:text="@string/register"

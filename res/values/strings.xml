@@ -302,6 +302,7 @@
     <string name="countrycode_list">Country Code List</string>
     <string name="number_cannot_be_null">Please input mobile number</string>
     <string name="phone_number_cannot_start_with_countrycode">Mobile number cannot start with country code!</string>
+    <string name="phone_number_must_be_angola_number">Please input Angola phone number!</string>
     <string name="psw_cannot_be_null">Please input password</string>
     <string name="phone_wrong_format">Wrong number format!</string>
     <string name="logining">Logining…</string>
