@@ -171,24 +171,24 @@ public class OutgoingCallGenerator {
 				TelephonyManagerExtension.genSysOutgoingCall(_mContactPhones
 						.get(0));
 			} else {
-				UserBean telUser = UserManager.getInstance().getUser();
-				if (_mContactPhones.get(0).matches("^[2-9]{1}\\d{2,7}")
-						&& (null == (String) telUser
-								.getValue(TelUser.local_area_code.name()) || ""
-								.equalsIgnoreCase((String) telUser
-										.getValue(TelUser.local_area_code
-												.name())))) {
-					NoLocalAreaCodePopupWindow _noLocalAreaCodePopupWindow = new NoLocalAreaCodePopupWindow(
-							R.layout.no_areacode_popupwindow_layout,
-							LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
-
-					_noLocalAreaCodePopupWindow
-							.setDependentView(_mGenNewOutgoingCallOperationDependentView);
-
-					_noLocalAreaCodePopupWindow.showAtLocation(
-							_mGenNewOutgoingCallOperationDependentView,
-							Gravity.CENTER, 0, 0);
-				} else {
+//				UserBean telUser = UserManager.getInstance().getUser();
+//				if (_mContactPhones.get(0).matches("^[2-9]{1}\\d{2,7}")
+//						&& (null == (String) telUser
+//								.getValue(TelUser.local_area_code.name()) || ""
+//								.equalsIgnoreCase((String) telUser
+//										.getValue(TelUser.local_area_code
+//												.name())))) {
+//					NoLocalAreaCodePopupWindow _noLocalAreaCodePopupWindow = new NoLocalAreaCodePopupWindow(
+//							R.layout.no_areacode_popupwindow_layout,
+//							LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
+//
+//					_noLocalAreaCodePopupWindow
+//							.setDependentView(_mGenNewOutgoingCallOperationDependentView);
+//
+//					_noLocalAreaCodePopupWindow.showAtLocation(
+//							_mGenNewOutgoingCallOperationDependentView,
+//							Gravity.CENTER, 0, 0);
+//				} else {
 					// make sip voice call
 					SipUtils.makeSipVoiceCall(SipCallSponsor.inner,
 							_mContactName, _mContactPhones.get(0), dialMode);
@@ -206,7 +206,7 @@ public class OutgoingCallGenerator {
 						Log.e(LOG_TAG,
 								"Get dial phone textView for clear its text error, dial phone textView is null");
 					}
-				}
+//				}
 			}
 		} else {
 			// define contact phone numbers select popup window, set contact

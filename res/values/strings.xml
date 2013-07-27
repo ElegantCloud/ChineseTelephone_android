@@ -139,7 +139,7 @@
     <string name="endCall_imageButton_content_description" translatable="false">end call image button</string>
     <string name="keyboardBtn_imageButton_content_description" translatable="false">keyboard image button</string>
     <string name="makeDirectDialSipVoiceCallFailed">Network busy, pls retry later or dial by callback</string>
-
+	<string name="phone_number_must_start_with_country_code">Please add country code when making overseas call!</string>
     <!-- version upgrade -->
     <string name="detect_new_version" formatted="false">Version %s found，\nUpdate now？\nDescription：\n%s</string>
     <string name="upgrade">Update</string>

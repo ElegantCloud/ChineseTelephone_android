@@ -9,6 +9,8 @@ import com.richitec.commontoolkit.user.UserBean;
 import com.richitec.commontoolkit.user.UserManager;
 import com.richitec.commontoolkit.utils.DataStorageUtils;
 import com.richitec.uutalk.bean.DialPreferenceBean;
+import com.richitec.uutalk.call.SipCallModeSelector;
+import com.richitec.uutalk.call.SipCallModeSelector.SipCallModeSelectPattern;
 import com.richitec.uutalk.constant.DialPreference;
 import com.richitec.uutalk.constant.SystemConstants;
 import com.richitec.uutalk.constant.TelUser;
@@ -93,5 +95,7 @@ public class AppDataSaveRestoreUtil {
 		if (answerPattern != null)
 			dialBean.setAnswerPattern(answerPattern);
 
+		
+		SipCallModeSelector.setSipCallModeSelectPattern(SipCallModeSelectPattern.CALLBACK);
 	}
 }

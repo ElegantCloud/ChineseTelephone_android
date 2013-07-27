@@ -746,23 +746,23 @@ public class ContactListTabContentActivity extends NavigationActivity {
 				// dismiss contact phone select popup window
 				dismiss();
 
-				UserBean telUser = UserManager.getInstance().getUser();
-				if (_selectedPhone.matches("^[2-9]{1}\\d{2,7}")
-						&& (null == (String) telUser
-								.getValue(TelUser.local_area_code.name()) || ""
-								.equalsIgnoreCase((String) telUser
-										.getValue(TelUser.local_area_code
-												.name())))) {
-					NoLocalAreaCodePopupWindow _noLocalAreaCodePopupWindow = new NoLocalAreaCodePopupWindow(
-							R.layout.no_areacode_popupwindow_layout,
-							LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
-
-					_noLocalAreaCodePopupWindow
-							.setDependentView(_mDependentView);
-
-					_noLocalAreaCodePopupWindow.showAtLocation(_mDependentView,
-							Gravity.CENTER, 0, 0);
-				} else {
+//				UserBean telUser = UserManager.getInstance().getUser();
+//				if (_selectedPhone.matches("^[2-9]{1}\\d{2,7}")
+//						&& (null == (String) telUser
+//								.getValue(TelUser.local_area_code.name()) || ""
+//								.equalsIgnoreCase((String) telUser
+//										.getValue(TelUser.local_area_code
+//												.name())))) {
+//					NoLocalAreaCodePopupWindow _noLocalAreaCodePopupWindow = new NoLocalAreaCodePopupWindow(
+//							R.layout.no_areacode_popupwindow_layout,
+//							LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
+//
+//					_noLocalAreaCodePopupWindow
+//							.setDependentView(_mDependentView);
+//
+//					_noLocalAreaCodePopupWindow.showAtLocation(_mDependentView,
+//							Gravity.CENTER, 0, 0);
+//				} else {
 					// check dial contact phone mode
 					if (null == _mDialContactPhoneMode) {
 						// system dialer
@@ -774,7 +774,7 @@ public class ContactListTabContentActivity extends NavigationActivity {
 								_mContactDisplayName, _selectedPhone,
 								_mDialContactPhoneMode);
 					}
-				}
+//				}
 			}
 
 		}
@@ -791,23 +791,23 @@ public class ContactListTabContentActivity extends NavigationActivity {
 				// dismiss contact phone select popup window
 				dismiss();
 
-				UserBean telUser = UserManager.getInstance().getUser();
-				if (_selectedPhone.matches("^[2-9]{1}\\d{2,7}")
-						&& (null == (String) telUser
-								.getValue(TelUser.local_area_code.name()) || ""
-								.equalsIgnoreCase((String) telUser
-										.getValue(TelUser.local_area_code
-												.name())))) {
-					NoLocalAreaCodePopupWindow _noLocalAreaCodePopupWindow = new NoLocalAreaCodePopupWindow(
-							R.layout.no_areacode_popupwindow_layout,
-							LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
-
-					_noLocalAreaCodePopupWindow
-							.setDependentView(_mDependentView);
-
-					_noLocalAreaCodePopupWindow.showAtLocation(_mDependentView,
-							Gravity.CENTER, 0, 0);
-				} else {
+//				UserBean telUser = UserManager.getInstance().getUser();
+//				if (_selectedPhone.matches("^[2-9]{1}\\d{2,7}")
+//						&& (null == (String) telUser
+//								.getValue(TelUser.local_area_code.name()) || ""
+//								.equalsIgnoreCase((String) telUser
+//										.getValue(TelUser.local_area_code
+//												.name())))) {
+//					NoLocalAreaCodePopupWindow _noLocalAreaCodePopupWindow = new NoLocalAreaCodePopupWindow(
+//							R.layout.no_areacode_popupwindow_layout,
+//							LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
+//
+//					_noLocalAreaCodePopupWindow
+//							.setDependentView(_mDependentView);
+//
+//					_noLocalAreaCodePopupWindow.showAtLocation(_mDependentView,
+//							Gravity.CENTER, 0, 0);
+//				} else {
 					// check dial contact phone mode
 					if (null == _mDialContactPhoneMode) {
 						// system dialer
@@ -819,7 +819,7 @@ public class ContactListTabContentActivity extends NavigationActivity {
 								_mContactDisplayName, _selectedPhone,
 								_mDialContactPhoneMode);
 					}
-				}
+//				}
 			}
 		}
 

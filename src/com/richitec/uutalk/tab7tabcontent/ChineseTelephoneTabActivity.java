@@ -315,8 +315,8 @@ public class ChineseTelephoneTabActivity extends TabActivity {
 	@Override
 	protected void onResume() {
 		Log.d(SystemConstants.TAG, "ChineseTelephoneTabActivity - onResume");
-		SipRegisterManager.registSip(sipRegistrationStateListener,
-				getString(R.string.vos_server));
+//		SipRegisterManager.registSip(sipRegistrationStateListener,
+//				getString(R.string.vos_server));
 		UserManager.getInstance().getUser()
 				.setValue(SystemConstants.logined.name(), true);
 

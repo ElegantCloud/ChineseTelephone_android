@@ -1129,24 +1129,8 @@ public class SettingActivity extends NavigationActivity {
 
 		public SetDialPreferencePopupWindow(int resource, int width, int height) {
 			super(resource, width, height);
-			// DialPreferenceBean dialBean = DialPreferenceManager.getInstance()
-			// .getDialPreferenceBean();
-			// String dialPattern = dialBean.getDialPattern();
-			// String answerPattern = dialBean.getAnswerPattern();
-
-			// Log.d("Setting Dial Preference", dialPattern+":"+answerPattern);
-
 			initUI();
 
-			// if (answerPattern != null) {
-			// if (answerPattern.equals(DialPreference.AUTO_ANSWER)) {
-			// ((RadioButton) getContentView().findViewById(
-			// R.id.answer_auto_btn)).setChecked(true);
-			// } else if (answerPattern.equals(DialPreference.MANUAL_ANSWER)) {
-			// ((RadioButton) getContentView().findViewById(
-			// R.id.answer_manual_btn)).setChecked(true);
-			// }
-			// }
 		}
 
 		private void initUI() {

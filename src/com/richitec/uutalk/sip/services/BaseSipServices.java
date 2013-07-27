@@ -11,6 +11,7 @@ import android.media.AudioManager;
 import android.os.Handler;
 import android.provider.CallLog;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.richitec.commontoolkit.CTApplication;
 import com.richitec.commontoolkit.addressbook.AddressBookManager;
@@ -18,6 +19,7 @@ import com.richitec.commontoolkit.call.CallLogManager;
 import com.richitec.commontoolkit.user.UserBean;
 import com.richitec.commontoolkit.user.UserManager;
 import com.richitec.commontoolkit.utils.HttpUtils;
+import com.richitec.commontoolkit.utils.MyToast;
 import com.richitec.commontoolkit.utils.HttpUtils.HttpRequestType;
 import com.richitec.commontoolkit.utils.HttpUtils.OnHttpRequestListener;
 import com.richitec.commontoolkit.utils.HttpUtils.PostRequestFormat;
@@ -104,8 +106,49 @@ public abstract class BaseSipServices implements ISipServices {
 	public void makeSipVoiceCall(final SipCallSponsor sponsor,
 			final String calleeName, final String calleePhone,
 			final SipCallMode callMode) {
+		String filteredPhone = new String(calleePhone);
+		filteredPhone = AddressBookManager.filterNumber(filteredPhone,
+				AddressBookManager.FILTER_ONLY_IP_PREFIX);
+		for (String prefix : PhoneNumberFilterPrefix) {
+			int index = filteredPhone.indexOf(prefix);
+			if (index == 0 && prefix.length() < filteredPhone.length()) {
+				filteredPhone = filteredPhone.substring(prefix.length());
+			}
+		}
+		String tmpCheckedCalleePhone = filteredPhone;
+		// get default country code
+		String _defaultCountryCode = CTApplication.getContext().getResources()
+				.getString(R.string.default_country_code);
+		if (!calleePhone.equals(CTApplication.getContext().getResources()
+				.getString(R.string.service_phone))) {
+
+			if (filteredPhone.startsWith("00") && filteredPhone.length() > 2) {
+				tmpCheckedCalleePhone = filteredPhone.substring(2);
+			} else if (filteredPhone.startsWith(_defaultCountryCode)) {
+				tmpCheckedCalleePhone = filteredPhone;
+			} else if (filteredPhone.startsWith("9")) {
+				tmpCheckedCalleePhone = _defaultCountryCode + filteredPhone;
+			} else {
+				MyToast.show(CTApplication.getContext(),
+						R.string.phone_number_must_start_with_country_code,
+						Toast.LENGTH_SHORT);
+				return;
+			}
+		} else {
+			tmpCheckedCalleePhone = calleePhone;
+		}
+
+		final String checkedCalleePhone = tmpCheckedCalleePhone;
+		Log.d(LOG_TAG,
+				"checkedCalleePhone = "
+						+ checkedCalleePhone
+						+ " and local area code = "
+						+ (String) UserManager.getInstance().getUser()
+								.getValue(TelUser.local_area_code.name()));
+
 		// before make sip voice call
-		beforeMakeSipVoiceCall(sponsor, calleeName, calleePhone, callMode);
+		beforeMakeSipVoiceCall(sponsor, calleeName, checkedCalleePhone,
+				callMode);
 
 		// new handle post delay 0.5 second to execute make sip voice call
 		new Handler().postDelayed(new Runnable() {
@@ -114,57 +157,6 @@ public abstract class BaseSipServices implements ISipServices {
 			public void run() {
 				// check call mode and get make sip voice call result
 				boolean _makeSipVoiceCallResult = false;
-				String filteredPhone = new String(calleePhone);
-				filteredPhone = AddressBookManager.filterNumber(
-						filteredPhone,
-						AddressBookManager.FILTER_ONLY_IP_PREFIX);
-				for (String prefix : PhoneNumberFilterPrefix) {
-					int index = filteredPhone.indexOf(prefix);
-					if (index == 0 && prefix.length() < filteredPhone.length()) {
-						filteredPhone = filteredPhone.substring(prefix
-								.length());
-					}
-				}
-				String checkedCalleePhone = filteredPhone;
-				// get default country code
-				String _defaultCountryCode = CTApplication.getContext()
-						.getResources()
-						.getString(R.string.default_country_code);
-				if (!calleePhone.equals(CTApplication.getContext()
-						.getResources().getString(R.string.service_phone))) {
-
-					if (filteredPhone.startsWith("00")
-							&& filteredPhone.length() > 2) {
-						checkedCalleePhone = filteredPhone.substring(2);
-					} else {
-						if (filteredPhone.matches("^[2-9]{1}\\d{2,7}")) {
-							UserBean telUser = UserManager.getInstance()
-									.getUser();
-							checkedCalleePhone = _defaultCountryCode
-									+ (String) telUser
-											.getValue(TelUser.local_area_code
-													.name()) + filteredPhone;
-						}
-						if (filteredPhone
-								.matches("(^[0]\\d{2,3}\\d{7,8})|(^[1][\\d]{10})")) {
-							checkedCalleePhone = _defaultCountryCode
-									+ filteredPhone;
-							// UserBean telUser =
-							// UserManager.getInstance().getUser();
-							// checkedCalleePhone = (String) telUser
-							// .getValue(TelUser.dialCountryCode.name())
-							// + calleePhone;
-						}
-					}
-				} else {
-					checkedCalleePhone = calleePhone;
-				}
-
-				Log.d(LOG_TAG, "checkedCalleePhone = "
-						+ checkedCalleePhone
-						+ " and local area code = "
-						+ (String) UserManager.getInstance().getUser()
-								.getValue(TelUser.local_area_code.name()));
 
 				switch (callMode) {
 				case CALLBACK:
