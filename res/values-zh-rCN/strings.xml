@@ -106,7 +106,7 @@
     <string name="network_timeout">网络超时，当前网络状态可能不好</string>
     <string name="no_enough_money">您的余额不足，请尽快充值。</string>
     <string name="makeDirectDialSipVoiceCallFailed">网络繁忙，请稍后重试或改用回拨</string>
-    <string name="phone_number_must_start_with_country_code">拨打国际电话请在号码前加国家代码！</string>
+    <string name="phone_number_must_start_with_country_code">拨打国际电话请在号码前加00开头的国家代码！</string>
 
     <!-- version upgrade -->
     <string name="detect_new_version" formatted="false">发现新版本%s，\n是否升级？\n本次更新说明：\n%s</string>
