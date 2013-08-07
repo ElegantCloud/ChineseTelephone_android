@@ -77,7 +77,7 @@
     <string name="insertPhone2Contact_modeSelectPopupWindow_titleTextView_text">Save ***</string>
     <string name="insertPhone2Contact_modeSelectPopupWindow_insert2NewContact">Create new contact</string>
     <string name="insertPhone2Contact_modeSelectPopupWindow_insert2ExistedContact">Save to existing contact</string>
-    <string name="insertPhone2Contact_modeSelectPopupWindow_cancelBtn_title">取消</string>
+    <string name="insertPhone2Contact_modeSelectPopupWindow_cancelBtn_title">Cancel</string>
 
     <!-- contact list tab content activity -->
     <string name="title_activity_contact_list_tab_content" translatable="false">ContactListTabContentActivity</string>
@@ -387,7 +387,7 @@
     <string name="notice_op">Plese select operation</string>
     <string name="delete_notice">Delete</string>
     <!-- other -->
-    <string name="currency_sign">￥</string>
+    <string name="currency_sign">$</string>
     <string name="online">%s(Online)</string>
     <string name="offline">%s(Offline)</string>
     <string name="registering">%s(Logining…)</string>

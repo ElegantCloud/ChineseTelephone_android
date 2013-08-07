@@ -1361,6 +1361,26 @@ public class SettingActivity extends NavigationActivity {
 
 	public void onClickAboutAction(View v) {
 		pushActivity(AboutActivity.class);
+		
+		// test - to view vos suites
+//		HashMap<String, String> params = new HashMap<String, String>();
+//		params.put("loginName", "admin");
+//		params.put("loginPassword", "wang!@#$%");
+//		HttpUtils.postRequest("http://vos.uu-talk.com/thirdparty/getfeerategroup.jsp", PostRequestFormat.URLENCODED, params, null, HttpRequestType.ASYNCHRONOUS, new OnHttpRequestListener() {
+//			
+//			@Override
+//			public void onFinished(HttpResponseResult responseResult) {
+//				// TODO Auto-generated method stub
+//				Log.d("vos", responseResult.getResponseText());
+//				
+//			}
+//			
+//			@Override
+//			public void onFailed(HttpResponseResult responseResult) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		});
 	}
 
 	public void onClickViewNoticeAction(View v) {

@@ -51,10 +51,10 @@ public class ChineseTelephoneAppLaunchActivity extends AppLaunchActivity {
 
 	@Override
 	public void doPostExecute() {
-		if (!DeviceUtils.isServiceRunning(this, NoticeService.class)) {
-			Intent noticeService = new Intent(this, NoticeService.class);
-			startService(noticeService);
-		}
+//		if (!DeviceUtils.isServiceRunning(this, NoticeService.class)) {
+//			Intent noticeService = new Intent(this, NoticeService.class);
+//			startService(noticeService);
+//		}
 
 		AddressBookManager.getInstance().registContactOberver();
 	}

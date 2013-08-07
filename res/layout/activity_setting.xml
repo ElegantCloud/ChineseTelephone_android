@@ -17,7 +17,7 @@
             android:orientation="vertical"
             android:paddingBottom="10.0dp" >
 
-            <include layout="@layout/setting_activity_content_zero_layout" />
+            <!-- <include layout="@layout/setting_activity_content_zero_layout" /> -->
 
             <include layout="@layout/setting_activity_content_first_layout" />
 

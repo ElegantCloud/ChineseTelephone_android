@@ -99,6 +99,7 @@
                 android:background="@android:drawable/btn_default"
                 android:clickable="true"
                 android:gravity="center"
+                android:visibility="gone"
                 android:onClick="onDialServicePhone"
                 android:orientation="horizontal" >
 
