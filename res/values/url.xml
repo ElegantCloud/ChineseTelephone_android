@@ -31,8 +31,8 @@
     <string name="alipay_wap_charge_url" translatable="false">/alipayWapCharge</string>
     <string name="callback_url" translatable="false">/callop/callback</string>
     <string name="card_charge_url" translatable="false">/cardCharge</string>
-    <string name="app_download_url" translatable="false">/downloadapp/4/android</string>
-    <string name="app_version_url" translatable="false">/version/4/android</string>
+    <string name="app_download_url" translatable="false">/downloadapp/9/android</string>
+    <string name="app_version_url" translatable="false">/version/9/android</string>
     <string name="getNewNotice_url" translatable="false">/getNewNotice</string>
     <string name="share_to_qzone_url" translatable="false">/share_assist/share_to_qzone</string> 
     <string name="appvcenter_url" translatable="false">http://www.uu-talk.com/appvcenter</string>
