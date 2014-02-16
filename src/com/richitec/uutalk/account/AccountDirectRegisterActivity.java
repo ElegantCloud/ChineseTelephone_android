@@ -138,6 +138,7 @@ public class AccountDirectRegisterActivity extends Activity {
 		params.put("countryCode", countryCode);
 		params.put("phoneNumber", phoneNumber);
 		params.put("password", pwd);
+		params.put("source", getString(R.string.client_source));
 		HttpUtils.postRequest(getString(R.string.server_url)
 				+ getString(R.string.direct_reg_url),
 				PostRequestFormat.URLENCODED, params, null,
